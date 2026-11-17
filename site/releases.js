@@ -23,7 +23,7 @@
         if (!asset) continue;
         document.querySelectorAll("[data-release-version]").forEach(node => { node.textContent = `${release.prerelease ? "Beta " : ""}${version}`; });
         document.querySelectorAll("[data-release-download]").forEach(node => { node.href = asset.browser_download_url; });
-        document.querySelectorAll("[data-release-page]").forEach(node => { node.href = release.html_url; });
+        document.querySelectorAll("[data-release-page]").forEach(node => { node.href = release.html_url; node.textContent = `${document.documentElement.lang.startsWith("it") ? "Novità" : "What\'s new in"} ${version}`; });
         break;
       }
     }).catch(() => { /* Keep the working static version and links on network/rate-limit errors. */ })
