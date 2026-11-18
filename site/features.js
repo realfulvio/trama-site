@@ -10,6 +10,13 @@
     id: f.dataset.id, icon: f.querySelector(".fam-ico").innerHTML, title: f.querySelector("h3").textContent,
     items: [...f.querySelectorAll("li")].map(li => ({ t: li.textContent, s: li.dataset.s }))
   }));
+  const counts = { ok: 0, plan: 0 };
+  for (const family of fams) {
+    for (const item of family.items) counts[item.s] += 1;
+  }
+  for (const counter of document.querySelectorAll("[data-feature-count]")) {
+    counter.textContent = counts[counter.dataset.featureCount];
+  }
   let k = 0;
   rows.innerHTML = fams.map(f => {
     const ok = f.items.filter(i => i.s === "ok").length, plan = f.items.length - ok;
