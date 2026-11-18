@@ -1,6 +1,6 @@
 # Sito di Trama
 
-Pagina di presentazione di Trama, servita con GitHub Pages da questo ramo `main`.
+Pagina di presentazione di Trama, servita con GitHub Pages da questo ramo `main` sul dominio https://tramastat.org (file `CNAME`; DNS su Cloudflare, record solo DNS senza proxy).
 
 - `index.html`: versione italiana; `en/index.html`: versione inglese.
 - `site/`: foglio di stile, logo e font Bricolage Grotesque (licenza OFL in `site/fonts/`).
@@ -14,4 +14,4 @@ HTML e CSS statici, nessun JavaScript, nessuna risorsa esterna.
 - `sitemap.xml` elenca le quattro pagine con le alternative di lingua. Aggiornare `lastmod` quando cambiano i contenuti.
 - Con una nuova versione aggiornare anche `softwareVersion`, `downloadUrl` e `releaseNotes` nel JSON-LD delle due home (il testo visibile si aggiorna da `site/releases.js`, il JSON-LD no).
 - Le immagini di anteprima social sono in `media/og/` (1200 × 630).
-- Un `robots.txt` in questa cartella non verrebbe letto: i crawler lo cercano solo alla radice del dominio `realfulvio.github.io`. Senza file tutto è consentito.
+- `robots.txt` alla radice consente tutto e indica la sitemap. Con il dominio personalizzato i crawler lo leggono su https://tramastat.org/robots.txt.
