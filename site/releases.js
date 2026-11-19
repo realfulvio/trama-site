@@ -6,6 +6,10 @@
     try { const url = new URL(value); return url.protocol === "https:" && url.hostname === host && url.pathname.startsWith("/realfulvio/Trama/"); }
     catch { return false; }
   };
+  const versionCore = version => version.replace(/^v/, "").split(/[+-]/, 1)[0].split(".").map(Number);
+  const staticTag = document.querySelector("[data-release-page]")?.getAttribute("href")
+    ?.match(/\/releases\/tag\/(v?\d+\.\d+\.\d+)/)?.[1];
+  const minimum = staticTag ? versionCore(staticTag) : null;
   fetch("https://api.github.com/repos/realfulvio/Trama/releases?per_page=30", {
     signal: controller.signal, credentials: "omit", referrerPolicy: "no-referrer",
     headers: { Accept: "application/vnd.github+json" }
@@ -18,6 +22,12 @@
         .sort((a, b) => Date.parse(b.published_at) - Date.parse(a.published_at));
       for (const release of published) {
         const version = release.tag_name.replace(/^v/, "");
+        // Cached API results can lag behind the deployed static download.
+        if (minimum) {
+          const candidate = versionCore(version);
+          const firstDifference = candidate.findIndex((value, index) => value !== minimum[index]);
+          if (firstDifference >= 0 && candidate[firstDifference] < minimum[firstDifference]) continue;
+        }
         const asset = (Array.isArray(release.assets) ? release.assets : []).find(item =>
           item.name === `Trama-${version}-Windows-x64.zip` && safeURL(item.browser_download_url, "github.com"));
         if (!asset) continue;
