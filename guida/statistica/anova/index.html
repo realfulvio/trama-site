@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="it" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../../site/lang.js"></script>
+<title>Confrontare più condizioni con ANOVA · Guida di Trama</title>
+<meta name="description" content="ANOVA a una via e confronti di Tukey–Kramer in Trama su un controllo e due trattamenti sintetici, con il controllo di Welch e un caso limite sulle repliche tecniche.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<link rel="canonical" href="https://tramastat.org/guida/statistica/anova/">
+<link rel="alternate" hreflang="it" href="https://tramastat.org/guida/statistica/anova/">
+<link rel="alternate" hreflang="en" href="https://tramastat.org/en/guide/statistics/anova/">
+<link rel="alternate" hreflang="x-default" href="https://tramastat.org/en/guide/statistics/anova/">
+<link rel="icon" type="image/svg+xml" href="../../../site/trama.svg">
+<link rel="preload" href="../../../site/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../../site/style.css">
+<link rel="stylesheet" href="../../../site/guide.css">
+<meta property="og:site_name" content="Trama">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tramastat.org/guida/statistica/anova/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Confrontare più condizioni con ANOVA · Guida di Trama">
+<meta property="og:description" content="ANOVA a una via e confronti di Tukey–Kramer in Trama su un controllo e due trattamenti sintetici, con il controllo di Welch e un caso limite sulle repliche tecniche.">
+<meta property="og:image" content="https://tramastat.org/guida/allegati/anova/figure/condizioni-box.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="960">
+<meta property="og:image:height" content="600">
+<meta property="og:image:alt" content="Grafico a scatola della risposta nelle tre condizioni, con le osservazioni e la media.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Confrontare più condizioni con ANOVA · Guida di Trama">
+<meta name="twitter:description" content="ANOVA a una via e confronti di Tukey–Kramer in Trama su un controllo e due trattamenti sintetici, con il controllo di Welch e un caso limite sulle repliche tecniche.">
+<meta name="twitter:image" content="https://tramastat.org/guida/allegati/anova/figure/condizioni-box.png">
+<meta name="twitter:image:alt" content="Grafico a scatola della risposta nelle tre condizioni, con le osservazioni e la media.">
+<meta name="theme-color" content="#08232f">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://tramastat.org/guida/statistica/anova/#webpage","url":"https://tramastat.org/guida/statistica/anova/","name":"Confrontare più condizioni con ANOVA · Guida di Trama","description":"ANOVA a una via e confronti di Tukey–Kramer in Trama su un controllo e due trattamenti sintetici, con il controllo di Welch e un caso limite sulle repliche tecniche.","inLanguage":"it","isPartOf":{"@id":"https://tramastat.org/#website"},"about":{"@id":"https://tramastat.org/#software"},"headline":"Confrontare più condizioni con ANOVA","dateModified":"2026-11-20","primaryImageOfPage":{"@type":"ImageObject","url":"https://tramastat.org/guida/allegati/anova/figure/condizioni-box.png","width":960,"height":600}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trama","item":"https://tramastat.org/"},{"@type":"ListItem","position":2,"name":"Guida","item":"https://tramastat.org/guida/"},{"@type":"ListItem","position":3,"name":"Statistica","item":"https://tramastat.org/guida/statistica/"},{"@type":"ListItem","position":4,"name":"ANOVA","item":"https://tramastat.org/guida/statistica/anova/"}]}]}</script>
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../../../site/guide.js"></script>
+</head>
+<body>
+<a class="skip" href="#contenuto">Vai al contenuto</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../../"><img src="../../../site/trama.svg" alt="" width="34" height="34">Trama</a>
+<nav aria-label="Sito"><a href="../../../">Home</a><a href="../../../funzionalita/">Funzionalità</a><a href="../../../guida/" aria-current="true">Guida</a></nav>
+<div class="langs" role="group" aria-label="Lingua"><span class="on" aria-current="true" lang="it" title="Italiano">IT</span><a href="../../../en/guide/statistics/anova/" hreflang="en" lang="en" title="English" aria-label="English">EN</a></div>
+<a class="btn" data-release-download href="https://github.com/realfulvio/Trama/releases/download/v0.95.0/Trama-0.95.0-Windows-x64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Scarica</a></div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Indice della guida">
+<details class="gnav" open><summary>Indice della guida</summary>
+<form class="search" role="search" action="../../../guida/" method="get">
+<label for="q">Cerca nella guida</label>
+<div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" name="q" type="search" placeholder="es. numero di gruppi, curva standard" autocomplete="off"><button class="go" type="submit">Cerca</button></div>
+</form>
+<p class="gl"><a href="../../../guida/">Tutte le guide</a></p>
+<h2 class="gname"><a href="../../../guida/statistica/"><svg class="gico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-8M12 20V6M19 20v-5"/><path d="M3 12h4M10 6h4M17 15h4"/><path d="M3 20h18"/></svg>Statistica</a></h2>
+<ul class="gtree"><li class="draft"><span>Descrivere un campione</span></li><li class="plan"><span>Interpretare un intervallo di confidenza</span></li><li class="draft"><span>Confrontare gruppi indipendenti e appaiati</span></li><li class="plan"><span>Confrontare con i ranghi</span></li><li><a href="./" aria-current="page">Confrontare più condizioni con ANOVA</a></li><li class="plan"><span>Separare effetti e interazioni</span></li><li class="plan"><span>Analizzare misure ripetute</span></li><li class="plan"><span>Interpretare frequenze e proporzioni</span></li><li class="plan"><span>Valutare una correlazione</span></li><li class="plan"><span>Leggere punteggi e loadings della PCA</span></li><li><a href="../../../guida/statistica/k-means/">Scegliere il numero di gruppi con K-means</a></li><li class="plan"><span>Leggere un dendrogramma</span></li><li class="plan"><span>Leggere una curva di sopravvivenza</span></li><li class="plan"><span>Interpretare un modello di Cox</span></li><li class="plan"><span>Progettare numerosità e potenza</span></li></ul>
+<h2 class="gname sub">Altre guide</h2>
+<ul class="gtree"><li><a href="../../../guida/curve/">Curve e calibrazione</a></li><li><a href="../../../guida/dati/">Dati e formule</a></li><li><a href="../../../guida/grafici/">Grafici e report</a></li></ul>
+</details>
+</aside>
+<aside class="rail" aria-label="In questo capitolo">
+<details class="toc" open><summary>In questo capitolo</summary><ol><li><a href="#quando">Quando usarlo</a></li><li><a href="#dati">I dati</a></li><li><a href="#percorso">In Trama</a></li><li><a href="#risultato">Leggi il risultato</a></li><li><a href="#caso-limite">Caso limite</a></li><li><a href="#riportare">Cosa riportare</a></li><li><a href="#fonti">Fonti</a></li></ol></details>
+<details class="card proof" open><summary><h2>Scheda di prova e file</h2></summary>
+<dl><div><dt>Trama</dt><dd>0.95.0 beta</dd></div><div><dt>Commit</dt><dd><code>4c07db6</code></dd></div><div><dt>Dati</dt><dd>sintetici, 18 righe</dd></div><div><dt>Seme</dt><dd>7</dd></div></dl>
+<ul class="dl"><li><a href="../../../guida/allegati/anova/dati/esempio-anova.alab" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Progetto .alab</a></li><li><a href="../../../guida/allegati/anova/dati/tre-condizioni.csv" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Dati .csv</a></li><li><a href="../../../guida/allegati/anova/dati/risultati.json" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Risultati .json</a></li></ul>
+<a class="tofonti" href="#fonti">5 fonti primarie ↓</a></details>
+</aside>
+<main id="contenuto" class="doc">
+<article><header class="chap-head" id="inizio">
+<p class="crumbs" aria-label="Percorso"><a href="../../../guida/">Guida</a><span aria-hidden="true">›</span><a href="../../../guida/statistica/">Statistica</a><span aria-hidden="true">›</span><span aria-current="page">ANOVA</span></p>
+<h1>Confrontare più condizioni con ANOVA</h1>
+<p class="ask">Hai misurato una risposta su sei unità per ciascuna di tre condizioni: un controllo e due trattamenti. Le medie sono davvero diverse? E quali coppie lo sono?</p>
+<ul class="facts" aria-label="Scheda di prova e file"><li><b>Verificato</b> Trama 0.95.0 beta</li><li><b>Dati</b> 18 unità sintetiche</li><li><b>Seme</b> 7</li><li><b>Lettura</b> 8 minuti</li></ul>
+</header>
+<section id="quando" aria-labelledby="h-quando">
+<h2 id="h-quando">Quando usarlo</h2>
+<p>L’ANOVA a una via confronta le medie di tre o più gruppi indipendenti. Il test F risponde a una sola domanda: <i>almeno una</i> media è diversa dalle altre? Per sapere <i>quali</i> coppie differiscono servono i confronti post hoc, che correggono la soglia per il numero di confronti fatti.</p>
+<ul class="checks">
+<li><b>Confronti da fare.</b> Tutte le coppie: Tukey (con gruppi di numerosità diversa diventa Tukey–Kramer). Solo ogni trattamento contro il controllo: Dunnett, che con meno confronti ha più potenza.</li>
+<li><b>Unità indipendenti.</b> Ogni riga deve essere un’unità sperimentale distinta: un animale, un pozzetto seminato a parte, un esperimento ripetuto in un altro giorno. Le repliche tecniche della stessa unità non contano come unità. Il <a href="#caso-limite">caso limite</a> mostra perché.</li>
+<li><b>Dispersioni simili.</b> L’ANOVA ordinaria assume la stessa varianza nei gruppi. Se le deviazioni standard sono molto diverse, scegli <span class="ui">Welch</span> e i confronti <span class="ui">Games–Howell</span>.</li>
+<li><b>Residui senza asimmetrie forti.</b> Con sei unità per gruppo il test regge scostamenti moderati dalla normalità, non code lunghe o valori anomali.</li>
+</ul>
+</section>
+
+<section id="dati" aria-labelledby="h-dati">
+<h2 id="h-dati">I dati</h2>
+<p>Una tabella con una riga per unità e due colonne: <code>Condizione</code>, il testo che dice a quale gruppo appartiene la riga, e <code>Risposta (u.a.)</code>, la misura. Sei unità per condizione, nessun valore mancante. Le deviazioni standard sono 0,50, 0,72 e 0,74: la più grande è 1,5 volte la più piccola.</p>
+<div class="files" role="group" aria-label="File da scaricare">
+<a class="file" href="../../../guida/allegati/anova/dati/esempio-anova.alab" download><span class="ext">.alab</span><span><b>Progetto Trama</b><small>tabella, ANOVA e grafico pronti · 1,2 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/anova/dati/tre-condizioni.csv" download><span class="ext">.csv</span><span><b>Dati sintetici</b><small>18 righe, 2 colonne · 0,3 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/anova/dati/risultati.json" download><span class="ext">.json</span><span><b>Risultati di prova</b><small>F, confronti e Welch a piena precisione</small></span></a>
+</div>
+<div class="table-wrap"><table class="peek">
+<caption>Prime righe del CSV</caption>
+<thead><tr><th scope="col">Condizione</th><th scope="col">Risposta (u.a.)</th></tr></thead>
+<tbody><tr><td class="l">Controllo</td><td>10,00</td></tr><tr><td class="l">Controllo</td><td>10,30</td></tr><tr><td class="l">Controllo</td><td>9,73</td></tr><tr><td colspan="2" class="more">… 15 righe in più</td></tr></tbody>
+</table></div>
+</section>
+
+<section id="percorso" aria-labelledby="h-percorso">
+<h2 id="h-percorso">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Apri il progetto</b> con <span class="ui">File → Apri…</span>, oppure porta il CSV con <span class="ui">File → Importa nel progetto…</span>.</li>
+<li><b>Seleziona la tabella</b> <span class="ui">Tre condizioni</span> e scegli <span class="ui">Analisi → Analizza…</span> (<kbd>Ctrl</kbd>+<kbd>Maiusc</kbd>+<kbd>A</kbd>).</li>
+<li><b>Nell’elenco delle analisi</b> apri <span class="ui">Confronto tra gruppi → ANOVA a una via</span>. Nella scheda <span class="ui">Variabili</span> scegli <span class="ui">Risposta</span> = <code>Risposta (u.a.)</code> e <span class="ui">Gruppo</span> = <code>Condizione</code>.</li>
+<li><b>Nella scheda <span class="ui">Opzioni</span></b> imposta i valori qui sotto e premi <span class="ui">Esegui analisi</span>.</li>
+<li><b>Per il grafico</b> usa <span class="ui">Grafici → Grafico a scatola / violino</span> con <span class="ui">Risposta singola</span>, <span class="ui">Mostra media</span> e <span class="ui">Sovrapponi osservazioni</span>. Nel progetto allegato è già pronto.</li>
+</ol>
+<div class="table-wrap"><table class="settings">
+<caption>Impostazioni che decidono il risultato</caption>
+<tbody>
+<tr><th scope="row">Distribuzione</th><td>Normale</td></tr>
+<tr><th scope="row">Metodo</th><td>Ordinaria</td></tr>
+<tr><th scope="row">Confronti post hoc</th><td>Tukey</td></tr>
+<tr><th scope="row">Famiglia di confronti</th><td>Tutte le coppie</td></tr>
+<tr><th scope="row">Livello di confidenza (%)</th><td>95</td></tr>
+</tbody></table></div>
+<details class="shot">
+<summary>Mostra la schermata della scheda Opzioni</summary>
+<figure><img src="../../../guida/allegati/anova/app/dialogo-opzioni.png" width="796" height="680" loading="lazy" alt="Finestra ANOVA a una via, scheda Opzioni: Distribuzione Normale, Metodo Ordinaria, Confronti post hoc Tukey, Famiglia di confronti Tutte le coppie, Livello di confidenza 95. A sinistra l’elenco delle analisi con Confronto tra gruppi aperto.">
+<figcaption><span class="tag app">Schermata dell’app</span> Trama 0.95.0 beta, interfaccia italiana, tema chiaro, progetto allegato.</figcaption></figure>
+</details>
+</section>
+
+<section id="risultato" aria-labelledby="h-risultato">
+<h2 id="h-risultato">Leggi il risultato</h2>
+<p>Il foglio dei risultati ha due schede, <span class="ui">ANOVA</span> e <span class="ui">Multiple comparisons</span>. Nella 0.95.0 i nomi delle schede e delle colonne restano in inglese anche con l’interfaccia italiana.</p>
+<div class="pair wide-first">
+<figure><a class="zoom" href="../../../guida/allegati/anova/figure/condizioni-box.svg" title="Apri la figura vettoriale"><img src="../../../guida/allegati/anova/figure/condizioni-box.png" width="960" height="600" loading="lazy" alt="Grafico a scatola della risposta per Controllo, Trattamento A e Trattamento B, con le sei osservazioni di ogni gruppo e la media indicata da un rombo. Trattamento A è più alto degli altri due; Trattamento B è poco sopra il controllo."></a>
+<figcaption><span class="tag fig">Figura esportata</span> Scatola dal primo al terzo quartile, linea alla mediana, rombo alla media, punti per le singole unità. <a href="../../../guida/allegati/anova/figure/condizioni-box.svg">SVG</a></figcaption></figure>
+<div>
+<div class="table-wrap"><table class="metrics">
+<caption>Scheda ANOVA</caption>
+<thead><tr><th scope="col">Termine</th><th scope="col">gl</th><th scope="col">F</th><th scope="col">p</th></tr></thead>
+<tbody><tr><th scope="row">Condizione</th><td>2</td><td>31,53</td><td>4,2 × 10⁻⁶</td></tr><tr><th scope="row">Residuo</th><td>15</td><td></td><td></td></tr></tbody>
+</table></div>
+<p class="note-s">Medie: controllo 9,62, trattamento A 12,59, trattamento B 10,58 u.a. Il quadrato medio residuo è 0,438.</p>
+</div>
+</div>
+<p>Con F(2, 15) = 31,53 e p &lt; 0,0001 almeno una media differisce dalle altre. Quali, lo dicono i confronti di Tukey–Kramer:</p>
+<div class="table-wrap"><table class="metrics wide">
+<caption>Scheda Multiple comparisons, arrotondata</caption>
+<thead><tr><th scope="col">Confronto</th><th scope="col">Differenza</th><th scope="col">IC 95%</th><th scope="col">p aggiustato</th></tr></thead>
+<tbody>
+<tr><th scope="row">Controllo − Trattamento A</th><td>−2,97</td><td>−3,97 · −1,98</td><td>&lt; 0,0001</td></tr>
+<tr><th scope="row">Controllo − Trattamento B</th><td>−0,96</td><td>−1,95 · 0,03</td><td>0,059</td></tr>
+<tr><th scope="row">Trattamento A − Trattamento B</th><td>2,02</td><td>1,02 · 3,01</td><td>0,0003</td></tr>
+</tbody>
+</table></div>
+<p>Il trattamento A alza la risposta di circa 3 u.a. rispetto al controllo e di 2 rispetto a B, con intervalli lontani dallo zero. Per B contro il controllo l’intervallo va da −1,95 a 0,03: include lo zero, ma anche differenze di quasi 2 u.a. <b>Il risultato non è conclusivo, il che non significa che B non abbia effetto.</b> Riporta l’intervallo, non solo il p.</p>
+<aside class="callout ok"><b>Controllo con Welch.</b> Con <span class="ui">Metodo</span> = <span class="ui">Welch</span>, che non assume varianze uguali, F(2; 9,65) = 32,36 e p = 5,3 × 10⁻⁵: la conclusione non cambia. Se le due versioni dessero risposte diverse, varrebbe quella di Welch.</aside>
+<details class="shot">
+<summary>Mostra la schermata della scheda Multiple comparisons</summary>
+<figure><img src="../../../guida/allegati/anova/app/risultati.png" width="1280" height="800" loading="lazy" alt="Trama con i risultati di ANOVA a una via: scheda Multiple comparisons con tre righe di confronti Tukey–Kramer e le colonne First, Second, Difference, SE, df, Method, Adjusted p.">
+<figcaption><span class="tag app">Schermata dell’app</span> Gli intervalli di confidenza sono nelle colonne più a destra.</figcaption></figure>
+</details>
+</section>
+
+<section id="caso-limite" class="edge" aria-labelledby="h-caso">
+<h2 id="h-caso" data-tag="Caso limite" data-toc="Caso limite">Le repliche tecniche contate come unità</h2>
+<p>Supponi di aver letto ogni unità tre volte e di mettere in tabella tutte le 54 letture, come se fossero 54 unità indipendenti. Le medie dei gruppi restano le stesse, ma Trama non può sapere che le tre letture vengono dalla stessa unità: i gradi di libertà residui passano da 15 a 51 e l’errore standard di ogni differenza da 0,382 a 0,218.</p>
+<div class="table-wrap"><table class="metrics">
+<caption>Stessi dati, due modi di contarli</caption>
+<thead><tr><th scope="col"></th><th scope="col">18 unità</th><th scope="col">54 letture</th></tr></thead>
+<tbody>
+<tr><th scope="row">F (gl)</th><td>31,53 (2; 15)</td><td>97,02 (2; 51)</td></tr>
+<tr><th scope="row">Controllo − B: differenza</th><td>−0,96</td><td>−0,96</td></tr>
+<tr><th scope="row">Controllo − B: errore standard</th><td>0,382</td><td>0,218</td></tr>
+<tr><th scope="row">Controllo − B: p aggiustato</th><td>0,059</td><td>0,00016</td></tr>
+</tbody>
+</table></div>
+<p>La differenza fra controllo e B sembra ora netta, ma è un effetto del conteggio, non dei dati. È la <i>pseudoreplicazione</i>. <b>Come rimediare:</b> fai la media delle repliche di ogni unità e analizza una riga per unità. In questo esempio le medie per unità ridanno esattamente la tabella principale. In alternativa, Trama ha l’<span class="ui">ANOVA a una via annidata</span>, che però vuole i dati in una tabella <span class="ui">Annidata</span>.</p>
+<p><b>Come accorgersene.</b> I gradi di libertà residui superano il numero di unità meno il numero di gruppi; la tabella ha una colonna che identifica l’unità e valori che si ripetono a gruppi di tre.</p>
+<div class="files" role="group" aria-label="File del caso limite">
+<a class="file" href="../../../guida/allegati/anova/dati/caso-limite-repliche.alab" download><span class="ext">.alab</span><span><b>Progetto del caso limite</b><small>54 letture analizzate come unità · 2,1 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/anova/dati/repliche-tecniche.csv" download><span class="ext">.csv</span><span><b>Letture con unità e replica</b><small>54 righe, 4 colonne · 1,3 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/anova/dati/caso-limite-repliche.json" download><span class="ext">.json</span><span><b>Risultati del caso limite</b><small>piena precisione</small></span></a>
+</div>
+</section>
+
+<section id="riportare" aria-labelledby="h-riportare">
+<h2 id="h-riportare">Cosa riportare</h2>
+<ul class="checks">
+<li>Che cos’è un’unità e quante ce ne sono per condizione; se ci sono repliche tecniche, come sono state riassunte.</li>
+<li>Il tipo di ANOVA (ordinaria o Welch) e il metodo dei confronti, con la famiglia di confronti corretta.</li>
+<li>F con i due gradi di libertà, le differenze con l’intervallo di confidenza e il p aggiustato.</li>
+<li>Versione di Trama e progetto <code>.alab</code> che ripete il calcolo.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>La risposta di sei unità per condizione è stata confrontata con un’ANOVA a una via (F(2, 15) = 31,53, p &lt; 0,001) seguita dai confronti di Tukey–Kramer fra tutte le coppie, in Trama 0.95.0 beta. Il trattamento A ha aumentato la risposta rispetto al controllo (differenza 2,97 u.a.; IC 95% 1,98–3,97) e al trattamento B (2,02 u.a.; IC 95% 1,02–3,01). La differenza fra trattamento B e controllo non è stata conclusiva (0,96 u.a.; IC 95% −0,03–1,95; p aggiustato = 0,059).</p></blockquote>
+<figcaption>Esempio di frase per la sezione Metodi e Risultati. <button type="button" class="copy" data-copy="#frase" hidden>Copia la frase</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti">Fonti</h2>
+<ol class="refs">
+<li>Tukey J. W. (1949). Comparing individual means in the analysis of variance. <i>Biometrics</i>, 5(2), 99–114. <a href="https://doi.org/10.2307/3001913">doi:10.2307/3001913</a></li>
+<li>Kramer C. Y. (1956). Extension of multiple range tests to group means with unequal numbers of replications. <i>Biometrics</i>, 12(3), 307–310. <a href="https://doi.org/10.2307/3001469">doi:10.2307/3001469</a></li>
+<li>Welch B. L. (1951). On the comparison of several mean values: an alternative approach. <i>Biometrika</i>, 38(3–4), 330–336. <a href="https://doi.org/10.1093/biomet/38.3-4.330">doi:10.1093/biomet/38.3-4.330</a></li>
+<li>Hurlbert S. H. (1984). Pseudoreplication and the design of ecological field experiments. <i>Ecological Monographs</i>, 54(2), 187–211. <a href="https://doi.org/10.2307/1942661">doi:10.2307/1942661</a></li>
+<li>Lazic S. E. (2010). The problem of pseudoreplication in neuroscientific studies: is it affecting your analysis? <i>BMC Neuroscience</i>, 11, 5. <a href="https://doi.org/10.1186/1471-2202-11-5">doi:10.1186/1471-2202-11-5</a></li>
+</ol>
+<p class="ver">Verificato con Trama 0.95.0 beta (tag <a href="https://github.com/realfulvio/Trama/tree/v0.95.0">v0.95.0</a>, commit 4c07db6) il 20 novembre 2026. Calcolo in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/inference.py">analisi/inference.py</a>.</p>
+</section>
+<nav class="pager" aria-label="Capitoli vicini"><a href="../../../guida/"><small>Indice</small>Torna all’indice della guida</a><a href="../../../guida/statistica/k-means/"><small>Avanti</small>Scegliere il numero di gruppi con K-means</a></nav></article>
+</main>
+</div>
+<footer><div class="wrap"><div class="brand"><img src="../../../site/trama.svg" alt="" width="34" height="34">Trama</div><p>Guida di Trama. Esempi con dati sintetici, numeri verificati nella versione indicata in ogni capitolo.</p><nav aria-label="Collegamenti"><a href="../../../guida/">Indice della guida</a><a href="../../../">Home</a><a href="../../../funzionalita/">Funzionalità</a><a data-release-page href="https://github.com/realfulvio/Trama/releases/tag/v0.95.0">Novità 0.95</a><a href="https://github.com/realfulvio/Trama/blob/main/LICENSE">Licenza MIT</a></nav><p>Trama è un progetto indipendente in fase beta. Non viene dichiarata una validazione clinica o una certificazione regolatoria.</p></div></footer>
+<script src="../../../site/releases.js" defer></script>
+</body>
+</html>

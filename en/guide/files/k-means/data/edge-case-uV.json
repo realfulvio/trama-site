@@ -1,0 +1,13 @@
+{
+  "trama": "0.95.0",
+  "amplitude_unit": "µV",
+  "standardize": false,
+  "suggested_k": 2,
+  "silhouette": {
+    "2": 0.8443644403851602,
+    "3": 0.7866324928896739,
+    "4": 0.6898122108840428
+  },
+  "misassigned_with_k3": 3,
+  "suggested_k_standardized": 3
+}

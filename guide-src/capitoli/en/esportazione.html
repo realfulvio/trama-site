@@ -1,0 +1,120 @@
+<!--
+{"title": "Export a vector figure",
+ "short": "Vector export",
+ "description": "A two-panel layout exported from Trama as SVG and PDF at 170 mm: text or paths, what to check in the file, and why the default font sizes end up at 4 points.",
+ "ask": "The journal wants figure 1 in a vector format, 170 mm wide, with panels A and B. How do you export it from Trama so that it stays sharp at any zoom, with text that is still readable once printed?",
+ "facts": [["Checked on", "Trama {{V}}"], ["Data", "the synthetic standard curve"], ["Width", "170 mm"], ["Reading", "7 minutes"]],
+ "proof": [["Data", "synthetic, 12 rows"], ["Width", "170 mm"]],
+ "downloads": [["alab", ".alab project"], ["pdf", ".pdf figure"], ["svg_text", ".svg figure"], ["json", ".json checks"]],
+ "image": "png", "image_alt": "Figure 1 with two panels: A, the calibration line with its confidence band; B, the residuals against the fitted values."}
+-->
+<section id="when" aria-labelledby="h-when">
+<h2 id="h-when">When to use it</h2>
+<p>A <b>vector</b> file (SVG, PDF) describes lines, points and text as geometry: it scales without losing sharpness and the text stays text. A <b>raster</b> file (PNG, TIFF) is a grid of pixels fixed at export time: beyond its resolution you see the steps.</p>
+<ul class="checks">
+<li><b>Graphs, curves, diagrams:</b> vector. That covers almost everything that comes out of Trama.</li>
+<li><b>Photographs and microscope images:</b> raster, at the resolution the journal asks for.</li>
+<li><b>Decide the final width</b> first: many journals use one column (about 85 mm) or two (about 170 mm). Check the instructions for authors, which also give the minimum text size.</li>
+<li><b>Check the font size</b> at the final width, not on screen. That is this chapter’s <a href="#edge-case">edge case</a>.</li>
+</ul>
+</section>
+
+<section id="data" aria-labelledby="h-data">
+<h2 id="h-data">The data</h2>
+<p>The synthetic standards from the <a href="../../curves/standard-curve/">Standard curve</a> chapter: concentration and absorbance. The project contains two <span class="ui">Linear regression</span> graphs, the line with its confidence band and the residuals against the fitted values, and the layout <span class="ui">Figure 1</span> that places them side by side as panels A and B. Both graphs already have larger font sizes set in <span class="ui">Format Graph</span>; the edge case explains why.</p>
+<div class="files" role="group" aria-label="Files to download">
+<a class="file" href="{{href:alab}}" download><span class="ext">.alab</span><span><b>Trama project</b><small>table, two graphs and the layout · {{kb:alab}}</small></span></a>
+<a class="file" href="{{href:pdf}}" download><span class="ext">.pdf</span><span><b>Figure 1 as PDF</b><small>170 mm, exported from Trama · {{kb:pdf}}</small></span></a>
+<a class="file" href="{{href:svg_text}}" download><span class="ext">.svg</span><span><b>Figure 1 as SVG, text</b><small>editable text · {{kb:svg_text}}</small></span></a>
+<a class="file" href="{{href:svg_paths}}" download><span class="ext">.svg</span><span><b>Figure 1 as SVG, paths</b><small>text converted to shapes · {{kb:svg_paths}}</small></span></a>
+</div>
+</section>
+
+<section id="in-trama" aria-labelledby="h-in-trama">
+<h2 id="h-in-trama">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Open the project</b> with <span class="ui">File → Open…</span> and select the layout <span class="ui">Figure 1</span> in the left panel, under <span class="ui">Layouts</span>.</li>
+<li><b>Choose <span class="ui">File → Export with options…</span></b>. The same command is on the <span class="ui">Graph</span> tab.</li>
+<li><b>Set the format and width</b> as in the table below. The <span class="ui">Final size</span> line immediately shows the page size: 170.0 × 72.9 mm.</li>
+<li><b>Press <span class="ui">OK</span></b> and choose the file name and folder.</li>
+<li><b>For the PDF</b> repeat with <span class="ui">Format</span> = PDF. The <span class="ui">Vector</span> preset sets up an 85 mm PDF, that is one column.</li>
+</ol>
+<div class="pair wide-first">
+<details class="shot" open>
+<summary>Show the layout in the app</summary>
+<figure><img src="{{href:app_layout}}" {{wh:app_layout}} loading="lazy" alt="Trama with the Figure 1 layout open: panel A with the calibration line, panel B with the residuals. On the left, the navigator with the Standard curve table, two graphs and the layout.">
+<figcaption><span class="tag app">App screenshot</span> The layout as it appears in Trama.</figcaption></figure>
+</details>
+<figure class="solo"><img src="{{href:app_export}}" {{wh:app_export}} loading="lazy" alt="Export with options window: Preset Custom, Format SVG, Width 170 mm, SVG text Text, Transparent background unchecked, Final size 170.0 × 72.9 mm.">
+<figcaption><span class="tag app">App screenshot</span> The window with the settings of this example.</figcaption></figure>
+</div>
+<div class="table-wrap"><table class="settings">
+<caption>Settings that decide the file</caption>
+<tbody>
+<tr><th scope="row">Format</th><td>SVG (then PDF)</td></tr>
+<tr><th scope="row">Width (mm)</th><td>170</td></tr>
+<tr><th scope="row">SVG text</th><td>Text</td></tr>
+<tr><th scope="row">Transparent background</th><td>no</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="result" aria-labelledby="h-result">
+<h2 id="h-result">Check the file</h2>
+<p>Do not trust the extension: open the file and check that it really is vector. On the files of this example:</p>
+<figure class="solo"><a class="zoom" href="{{href:svg_text}}" title="Open the SVG"><img src="{{href:png}}" {{wh:png}} loading="lazy" alt="Figure 1: title at the top, panel A with the calibration line of absorbance on concentration and its confidence band, panel B with the residuals scattered around zero."></a>
+<figcaption><span class="tag fig">Exported figure</span> PNG preview of the figure; the link opens the real SVG, to zoom in the browser.</figcaption></figure>
+<div class="table-wrap"><table class="metrics wide">
+<caption>What the three files contain</caption>
+<thead><tr><th scope="col"></th><th scope="col">SVG, Text</th><th scope="col">SVG, Paths</th><th scope="col">PDF</th></tr></thead>
+<tbody>
+<tr><th scope="row">Page</th><td>170 × 72.9 mm</td><td>170 × 72.9 mm</td><td>170 × 72.9 mm, 1 page</td></tr>
+<tr><th scope="row">Text as text</th><td>33 elements</td><td>none</td><td>yes, searchable</td></tr>
+<tr><th scope="row">Embedded images</th><td>none</td><td>none</td><td>none</td></tr>
+<tr><th scope="row">Size</th><td>{{kb:svg_text}}</td><td>{{kb:svg_paths}}</td><td>{{kb:pdf}}</td></tr>
+</tbody>
+</table></div>
+<p><b>Text or paths.</b> With <span class="ui">Text</span> the labels stay text: you can correct them in a vector editor and search for them in the file. The file names a font family, though, and on a computer that does not have it the program substitutes another, with different widths. With <span class="ui">Paths</span> every letter becomes a shape: the figure looks identical everywhere, but the text can no longer be edited and the file is about twice as large. Use Text while the figure is still changing, and Paths for the final version if the journal asks for fonts to be converted.</p>
+<aside class="callout ok"><b>How to check it yourself.</b> Open the SVG in the browser and zoom to 800%: lines and letters stay crisp. Search for an axis word with <kbd>Ctrl</kbd>+<kbd>F</kbd>: you find it in the Text file, not in the Paths one. In the PDF the text can be selected.</aside>
+</section>
+
+<section id="edge-case" class="edge" aria-labelledby="h-edge">
+<h2 id="h-edge" data-tag="Edge case" data-toc="Edge case">Default font sizes end up at 4 points</h2>
+<p>The same layout, with the graphs’ default font sizes, exported at 170 mm. The file is vector and sharp, but the text inside the panels is tiny: <b>4.0 points</b> for tick labels and axis titles, 4.8 for the panel title. This happens because the layout scales each graph down to fit two in a row, and the 170 mm width scales the whole page down again. The layout title and the letters A and B, which sit on the page, stay at 9.6 and 11.2 points.</p>
+<div class="pair">
+<figure><a class="zoom" href="{{href:svg_small}}"><img src="{{href:png_small}}" {{wh:png_small}} loading="lazy" alt="Figure 1 with the default font sizes: the axis and tick labels are very small compared with the letters A and B."></a>
+<figcaption><span class="tag fig">Exported figure</span> <b>Default font sizes</b>: panel text from 4.0 to 4.8 pt.</figcaption></figure>
+<figure><a class="zoom" href="{{href:svg_text}}"><img src="{{href:png}}" {{wh:png}} loading="lazy" alt="Figure 1 with larger font sizes: the axis labels are easy to read."></a>
+<figcaption><span class="tag fig">Exported figure</span> <b>Title 22, axes 20, ticks 18</b>: panel text from 7.2 to 8.9 pt.</figcaption></figure>
+</div>
+<p><b>How to fix it.</b> Select each graph in the layout, open <span class="ui">Graph → Format Graph</span> and, under <span class="ui">Font sizes in points</span>, increase <span class="ui">Title</span>, <span class="ui">Axis titles</span> and <span class="ui">Tick labels</span>. The values refer to the graph on its own: in this two-column layout at 170 mm they are multiplied by about 0.4. With 22, 20 and 18 the final text ranges from 7.2 to 8.9 points.</p>
+<p><b>How to notice.</b> Print the page at 100% or open the PDF at actual size: if the axis labels are smaller than footnote text, they are too small. The <a href="{{href:json}}">checks JSON</a> lists the effective size of every piece of text in both cases.</p>
+<div class="files" role="group" aria-label="Edge case files">
+<a class="file" href="{{href:alab_small}}" download><span class="ext">.alab</span><span><b>Edge case project</b><small>same layout, default font sizes · {{kb:alab_small}}</small></span></a>
+<a class="file" href="{{href:svg_small}}" download><span class="ext">.svg</span><span><b>Figure with 4 pt text</b><small>170 mm, text · {{kb:svg_small}}</small></span></a>
+</div>
+</section>
+
+<section id="report" aria-labelledby="h-report">
+<h2 id="h-report">What to check before submitting</h2>
+<ul class="checks">
+<li>The format and width the journal asks for, and the <span class="ui">Final size</span> line that confirms them.</li>
+<li>Text size at the final width, inside the panels and not just in the title.</li>
+<li>Text or paths, as the instructions for authors require.</li>
+<li>No hidden raster images: a layout imported with panels embedded as images stays raster even in SVG and PDF, and Trama says so in the export window.</li>
+<li>The <code>.alab</code> project from which the figure can be exported again, if it needs changing.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>Figures were prepared in Trama {{V}} and exported as vector PDF at a final width of 170 mm.</p></blockquote>
+<figcaption>Example sentence for the Methods section or the cover letter. <button type="button" class="copy" data-copy="#frase" hidden>Copy the sentence</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti" data-toc="Sources">Sources</h2>
+<ol class="refs">
+<li>Rougier N. P., Droettboom M., Bourne P. E. (2014). Ten simple rules for better figures. <i>PLoS Computational Biology</i>, 10(9), e1003833. <a href="https://doi.org/10.1371/journal.pcbi.1003833">doi:10.1371/journal.pcbi.1003833</a></li>
+<li>W3C (2011). <i>Scalable Vector Graphics (SVG) 1.1 (Second Edition)</i>. W3C Recommendation. <a href="https://www.w3.org/TR/SVG11/">w3.org/TR/SVG11</a></li>
+<li>ISO 32000-2:2020. <i>Document management — Portable document format — Part 2: PDF 2.0</i>. International Organization for Standardization.</li>
+</ol>
+<p class="ver">Checked with Trama {{V}} (tag <a href="https://github.com/realfulvio/Trama/tree/{{TAG}}">{{TAG}}</a>, commit {{COMMIT}}) on 20 November 2026. Export in <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/layout_svg.py">analisi/layout_svg.py</a> and <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/figure_export.py">analisi/figure_export.py</a>.</p>
+</section>

@@ -1,0 +1,92 @@
+<!--
+{"title": "Create a calculated column",
+ "short": "Calculated column",
+ "description": "A formula in a Trama sheet that normalises the signal to the protein loaded: the coefficient of variation drops from 19.4% to 2.4%, and the formula is saved in the project and updates itself.",
+ "ask": "In eight wells you measured a signal and the amount of protein loaded. You want the signal per µg without copying numbers by hand, and you want the result to update if you correct a value.",
+ "facts": [["Checked on", "Trama {{V}}"], ["Data", "8 synthetic wells"], ["Seed", "5"], ["Reading", "5 minutes"]],
+ "proof": [["Data", "synthetic, 8 rows"], ["Seed", "5"]],
+ "downloads": [["alab", ".alab project"], ["csv", ".csv data"], ["json", ".json results"]],
+ "image": "app_sheet", "image_alt": "Wells sheet in Trama with the calculated column Signal per µg next to Signal and Protein."}
+-->
+<section id="when" aria-labelledby="h-when">
+<h2 id="h-when">When to use it</h2>
+<p>A calculated column holds a formula that Trama applies row by row to the other columns of the same table. It does not copy numbers: if you change a source value, the result is recalculated, and the project stores the formula, not the values.</p>
+<p>Use it to normalise to a reference quantity, convert units, or take differences or ratios between measurements in the same row. Before dividing, check one assumption:</p>
+<ul class="checks">
+<li><b>The signal is proportional to the reference.</b> The signal/protein ratio makes sense if twice the protein gives twice the signal and the line passes through zero. If a background remains at zero protein, the ratio changes with the amount loaded and introduces an effect that is not there. In that case subtract the background first, or use protein as a covariate rather than a divisor.</li>
+<li><b>The units.</b> The name of the new column should state the unit of the result, here “a.u. per µg”.</li>
+</ul>
+</section>
+
+<section id="data" aria-labelledby="h-data">
+<h2 id="h-data">The data</h2>
+<p>A <span class="ui">Multiple variables</span> table with one row per well: <code>Well</code> (P1–P8), <code>Signal (a.u.)</code> and <code>Protein (µg)</code>. The protein loaded ranges from 6.9 to 12.1 µg, so the raw signal varies mostly because of that.</p>
+<div class="files" role="group" aria-label="Files to download">
+<a class="file" href="{{href:alab}}" download><span class="ext">.alab</span><span><b>Trama project</b><small>table, formula and descriptive statistics · {{kb:alab}}</small></span></a>
+<a class="file" href="{{href:csv}}" download><span class="ext">.csv</span><span><b>Synthetic data</b><small>8 rows, 3 columns, without the formula · {{kb:csv}}</small></span></a>
+<a class="file" href="{{href:json}}" download><span class="ext">.json</span><span><b>Proof results</b><small>means, SDs and CVs at full precision</small></span></a>
+</div>
+</section>
+
+<section id="in-trama" aria-labelledby="h-in-trama">
+<h2 id="h-in-trama">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Open the project</b> with <span class="ui">File → Open…</span>, or import the CSV with <span class="ui">File → Import into project…</span> and add the formula yourself.</li>
+<li><b>Select the table</b> <span class="ui">Wells</span> and, on the <span class="ui">Home</span> tab, press <span class="ui">Formula</span>.</li>
+<li><b>In <span class="ui">Calculated column</span></b> type the name of the new column, <code>Signal per µg</code>.</li>
+<li><b>In <span class="ui">Formula</span></b> type <code>=COL("Signal (a.u.)") / COL("Protein (µg)")</code> and press <span class="ui">OK</span>. Trama tries the formula on the whole table before accepting it; if a column name is wrong, the error appears in the window.</li>
+<li><b>To change it</b> select a cell of the calculated column and press <span class="ui">Formula</span> again: the window opens with the current expression.</li>
+</ol>
+<figure class="solo narrow"><img src="{{href:app_formula}}" {{wh:app_formula}} loading="lazy" alt="Calculated column window with the name Signal per µg and the formula =COL(&quot;Signal (a.u.)&quot;) / COL(&quot;Protein (µg)&quot;). Below, three example formulas: arithmetic, group mean, running total.">
+<figcaption><span class="tag app">App screenshot</span> The formula window, with the examples Trama shows below the field.</figcaption></figure>
+<p class="note-s"><code>COL("…")</code> is needed when the column name contains spaces or brackets. Other functions include <code>ABS</code>, <code>SQRT</code>, <code>LN</code>, <code>LOG10</code>, <code>ROUND</code>, <code>IF</code> and <code>MEAN</code>.</p>
+</section>
+
+<section id="result" aria-labelledby="h-result">
+<h2 id="h-result">Read the result</h2>
+<p>The <span class="ui">Signal per µg</span> column appears to the right of the source columns, with its numbers in green to set it apart from data entered by hand.</p>
+<details class="shot" open>
+<summary>Show the sheet with the calculated column</summary>
+<figure><img src="{{href:app_sheet}}" {{wh:app_sheet}} loading="lazy" alt="Wells sheet in Trama: columns Well, Signal (a.u.), Protein (µg) and, in green, Signal per µg with values between 39.8 and 42.9.">
+<figcaption><span class="tag app">App screenshot</span> Trama {{V}}, attached project just opened.</figcaption></figure>
+</details>
+<div class="table-wrap"><table class="metrics">
+<caption>Before and after normalisation</caption>
+<thead><tr><th scope="col"></th><th scope="col">Mean</th><th scope="col">Standard deviation</th><th scope="col">Coefficient of variation</th></tr></thead>
+<tbody>
+<tr><th scope="row">Signal (a.u.)</th><td>390.7</td><td>75.8</td><td>19.4%</td></tr>
+<tr><th scope="row">Signal per µg</th><td>41.18</td><td>0.98</td><td>2.4%</td></tr>
+</tbody>
+</table></div>
+<p>The variability between wells drops from 19.4% to 2.4%: almost all of it came from the amount of protein loaded. Mean and standard deviation come from <span class="ui">Descriptive statistics</span>, already in the project; the coefficient of variation is the standard deviation divided by the mean.</p>
+<aside class="callout ok"><b>It reopens the same.</b> Saved and reopened, the project has the same formula, character for character, and the same eight values. If you change the signal of P1 from 332.1 to 400, the calculated cell immediately goes from 40.50 to 48.78.</aside>
+</section>
+
+<section id="edge-case" class="edge" aria-labelledby="h-edge">
+<h2 id="h-edge" data-tag="Edge case" data-toc="Edge case">An excluded cell in a source column</h2>
+<p>Exclude the protein of well P3: select it and press <span class="ui">Home → Exclude / include cell</span>. The calculated cell for P3 becomes empty, because a ratio with an excluded value has no result. The calculated column is left with 7 values and the mean becomes 41.18 (41.1798 against 41.1808 with all eight).</p>
+<p>This is the correct behaviour, but if you do not notice it you think you have eight wells and analyse seven. <b>How to notice:</b> the calculated column has an empty cell where the source columns have a number; in <span class="ui">Descriptive statistics</span> the N row reads 7 and Missing reads 1. To restore it, select the cell again and press the same command.</p>
+</section>
+
+<section id="report" aria-labelledby="h-report">
+<h2 id="h-report">What to report</h2>
+<ul class="checks">
+<li>The exact formula and the units of the result.</li>
+<li>Why the ratio is justified: proportionality and no background, or how the background was removed.</li>
+<li>Excluded cells and the number of values used.</li>
+<li>Trama version and the <code>.alab</code> project with the formula.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>The signal of each well was divided by the amount of protein loaded with a calculated column in Trama {{V}} (formula <code>=COL("Signal (a.u.)") / COL("Protein (µg)")</code>). Normalisation reduced the coefficient of variation between wells from 19.4% to 2.4% (n = 8).</p></blockquote>
+<figcaption>Example sentence for the Methods section. <button type="button" class="copy" data-copy="#frase" hidden>Copy the sentence</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti" data-toc="Sources">Sources</h2>
+<ol class="refs">
+<li>Curran-Everett D. (2013). Explorations in statistics: the analysis of ratios and normalized data. <i>Advances in Physiology Education</i>, 37(3), 213–219. <a href="https://doi.org/10.1152/advan.00053.2013">doi:10.1152/advan.00053.2013</a></li>
+<li>Kronmal R. A. (1993). Spurious correlation and the fallacy of the ratio standard revisited. <i>Journal of the Royal Statistical Society A</i>, 156(3), 379–392. <a href="https://doi.org/10.2307/2983064">doi:10.2307/2983064</a></li>
+</ol>
+<p class="ver">Checked with Trama {{V}} (tag <a href="https://github.com/realfulvio/Trama/tree/{{TAG}}">{{TAG}}</a>, commit {{COMMIT}}) on 20 November 2026. Formulas in <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/data.py">analisi/data.py</a>, window in <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/trama_qt/formula.py">trama_qt/formula.py</a>.</p>
+</section>

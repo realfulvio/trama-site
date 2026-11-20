@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../../../site/lang.js"></script>
+<title>Export a vector figure · Trama guide</title>
+<meta name="description" content="A two-panel layout exported from Trama as SVG and PDF at 170 mm: text or paths, what to check in the file, and why the default font sizes end up at 4 points.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<link rel="canonical" href="https://tramastat.org/en/guide/graphs/vector-export/">
+<link rel="alternate" hreflang="it" href="https://tramastat.org/guida/grafici/esportazione/">
+<link rel="alternate" hreflang="en" href="https://tramastat.org/en/guide/graphs/vector-export/">
+<link rel="alternate" hreflang="x-default" href="https://tramastat.org/en/guide/graphs/vector-export/">
+<link rel="icon" type="image/svg+xml" href="../../../../site/trama.svg">
+<link rel="preload" href="../../../../site/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../../../site/style.css">
+<link rel="stylesheet" href="../../../../site/guide.css">
+<meta property="og:site_name" content="Trama">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tramastat.org/en/guide/graphs/vector-export/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:title" content="Export a vector figure · Trama guide">
+<meta property="og:description" content="A two-panel layout exported from Trama as SVG and PDF at 170 mm: text or paths, what to check in the file, and why the default font sizes end up at 4 points.">
+<meta property="og:image" content="https://tramastat.org/en/guide/files/vector-export/figures/figure-1-preview.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="736">
+<meta property="og:image:height" content="316">
+<meta property="og:image:alt" content="Figure 1 with two panels: A, the calibration line with its confidence band; B, the residuals against the fitted values.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Export a vector figure · Trama guide">
+<meta name="twitter:description" content="A two-panel layout exported from Trama as SVG and PDF at 170 mm: text or paths, what to check in the file, and why the default font sizes end up at 4 points.">
+<meta name="twitter:image" content="https://tramastat.org/en/guide/files/vector-export/figures/figure-1-preview.png">
+<meta name="twitter:image:alt" content="Figure 1 with two panels: A, the calibration line with its confidence band; B, the residuals against the fitted values.">
+<meta name="theme-color" content="#08232f">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://tramastat.org/en/guide/graphs/vector-export/#webpage","url":"https://tramastat.org/en/guide/graphs/vector-export/","name":"Export a vector figure · Trama guide","description":"A two-panel layout exported from Trama as SVG and PDF at 170 mm: text or paths, what to check in the file, and why the default font sizes end up at 4 points.","inLanguage":"en","isPartOf":{"@id":"https://tramastat.org/#website"},"about":{"@id":"https://tramastat.org/#software"},"headline":"Export a vector figure","dateModified":"2026-11-20","primaryImageOfPage":{"@type":"ImageObject","url":"https://tramastat.org/en/guide/files/vector-export/figures/figure-1-preview.png","width":736,"height":316}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trama","item":"https://tramastat.org/en/"},{"@type":"ListItem","position":2,"name":"Guide","item":"https://tramastat.org/en/guide/"},{"@type":"ListItem","position":3,"name":"Graphs and reports","item":"https://tramastat.org/en/guide/graphs/"},{"@type":"ListItem","position":4,"name":"Vector export","item":"https://tramastat.org/en/guide/graphs/vector-export/"}]}]}</script>
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../../../../site/guide.js"></script>
+</head>
+<body>
+<a class="skip" href="#contenuto">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../../../en/"><img src="../../../../site/trama.svg" alt="" width="34" height="34">Trama</a>
+<nav aria-label="Site"><a href="../../../../en/">Home</a><a href="../../../../en/features/">Features</a><a href="../../../../en/guide/" aria-current="true">Guide</a></nav>
+<div class="langs" role="group" aria-label="Language"><a href="../../../../guida/grafici/esportazione/" hreflang="it" lang="it" title="Italiano" aria-label="Italiano">IT</a><span class="on" aria-current="true" lang="en" title="English">EN</span></div>
+<a class="btn" data-release-download href="https://github.com/realfulvio/Trama/releases/download/v0.95.0/Trama-0.95.0-Windows-x64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download</a></div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Guide contents">
+<details class="gnav" open><summary>Guide contents</summary>
+<form class="search" role="search" action="../../../../en/guide/" method="get">
+<label for="q">Search the guide</label>
+<div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" name="q" type="search" placeholder="e.g. number of clusters, standard curve" autocomplete="off"><button class="go" type="submit">Search</button></div>
+</form>
+<p class="gl"><a href="../../../../en/guide/">All guides</a></p>
+<h2 class="gname"><a href="../../../../en/guide/graphs/"><svg class="gico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="18" height="8" rx="1.5"/></svg>Graphs and reports</a></h2>
+<ul class="gtree"><li class="plan"><span>Choose the graph for the result</span></li><li class="draft"><span>Show uncertainty in a figure</span></li><li class="plan"><span>Make a heat map readable</span></li><li class="plan"><span>Format axes and annotations</span></li><li class="plan"><span>Compose a multi-panel layout</span></li><li><a href="./" aria-current="page">Export a vector figure</a></li></ul>
+<h2 class="gname sub">Other guides</h2>
+<ul class="gtree"><li><a href="../../../../en/guide/statistics/">Statistics</a></li><li><a href="../../../../en/guide/curves/">Curves and calibration</a></li><li><a href="../../../../en/guide/data/">Data and formulas</a></li></ul>
+</details>
+</aside>
+<aside class="rail" aria-label="In this chapter">
+<details class="toc" open><summary>In this chapter</summary><ol><li><a href="#when">When to use it</a></li><li><a href="#data">The data</a></li><li><a href="#in-trama">In Trama</a></li><li><a href="#result">Check the file</a></li><li><a href="#edge-case">Edge case</a></li><li><a href="#report">What to check before submitting</a></li><li><a href="#fonti">Sources</a></li></ol></details>
+<details class="card proof" open><summary><h2>Proof sheet and files</h2></summary>
+<dl><div><dt>Trama</dt><dd>0.95.0 beta</dd></div><div><dt>Commit</dt><dd><code>4c07db6</code></dd></div><div><dt>Data</dt><dd>synthetic, 12 rows</dd></div><div><dt>Width</dt><dd>170 mm</dd></div></dl>
+<ul class="dl"><li><a href="../../../../en/guide/files/vector-export/data/layout-example.alab" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.alab project</a></li><li><a href="../../../../en/guide/files/vector-export/figures/figure-1.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.pdf figure</a></li><li><a href="../../../../en/guide/files/vector-export/figures/figure-1-text.svg" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.svg figure</a></li><li><a href="../../../../en/guide/files/vector-export/data/results.json" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.json checks</a></li></ul>
+<a class="tofonti" href="#fonti">3 primary sources ↓</a></details>
+</aside>
+<main id="contenuto" class="doc">
+<article><header class="chap-head" id="inizio">
+<p class="crumbs" aria-label="Breadcrumb"><a href="../../../../en/guide/">Guide</a><span aria-hidden="true">›</span><a href="../../../../en/guide/graphs/">Graphs and reports</a><span aria-hidden="true">›</span><span aria-current="page">Vector export</span></p>
+<h1>Export a vector figure</h1>
+<p class="ask">The journal wants figure 1 in a vector format, 170 mm wide, with panels A and B. How do you export it from Trama so that it stays sharp at any zoom, with text that is still readable once printed?</p>
+<ul class="facts" aria-label="Proof sheet and files"><li><b>Checked on</b> Trama 0.95.0 beta</li><li><b>Data</b> the synthetic standard curve</li><li><b>Width</b> 170 mm</li><li><b>Reading</b> 7 minutes</li></ul>
+</header>
+<section id="when" aria-labelledby="h-when">
+<h2 id="h-when">When to use it</h2>
+<p>A <b>vector</b> file (SVG, PDF) describes lines, points and text as geometry: it scales without losing sharpness and the text stays text. A <b>raster</b> file (PNG, TIFF) is a grid of pixels fixed at export time: beyond its resolution you see the steps.</p>
+<ul class="checks">
+<li><b>Graphs, curves, diagrams:</b> vector. That covers almost everything that comes out of Trama.</li>
+<li><b>Photographs and microscope images:</b> raster, at the resolution the journal asks for.</li>
+<li><b>Decide the final width</b> first: many journals use one column (about 85 mm) or two (about 170 mm). Check the instructions for authors, which also give the minimum text size.</li>
+<li><b>Check the font size</b> at the final width, not on screen. That is this chapter’s <a href="#edge-case">edge case</a>.</li>
+</ul>
+</section>
+
+<section id="data" aria-labelledby="h-data">
+<h2 id="h-data">The data</h2>
+<p>The synthetic standards from the <a href="../../curves/standard-curve/">Standard curve</a> chapter: concentration and absorbance. The project contains two <span class="ui">Linear regression</span> graphs, the line with its confidence band and the residuals against the fitted values, and the layout <span class="ui">Figure 1</span> that places them side by side as panels A and B. Both graphs already have larger font sizes set in <span class="ui">Format Graph</span>; the edge case explains why.</p>
+<div class="files" role="group" aria-label="Files to download">
+<a class="file" href="../../../../en/guide/files/vector-export/data/layout-example.alab" download><span class="ext">.alab</span><span><b>Trama project</b><small>table, two graphs and the layout · 1.1 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/vector-export/figures/figure-1.pdf" download><span class="ext">.pdf</span><span><b>Figure 1 as PDF</b><small>170 mm, exported from Trama · 24.3 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/vector-export/figures/figure-1-text.svg" download><span class="ext">.svg</span><span><b>Figure 1 as SVG, text</b><small>editable text · 25.2 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/vector-export/figures/figure-1-paths.svg" download><span class="ext">.svg</span><span><b>Figure 1 as SVG, paths</b><small>text converted to shapes · 51.3 kB</small></span></a>
+</div>
+</section>
+
+<section id="in-trama" aria-labelledby="h-in-trama">
+<h2 id="h-in-trama">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Open the project</b> with <span class="ui">File → Open…</span> and select the layout <span class="ui">Figure 1</span> in the left panel, under <span class="ui">Layouts</span>.</li>
+<li><b>Choose <span class="ui">File → Export with options…</span></b>. The same command is on the <span class="ui">Graph</span> tab.</li>
+<li><b>Set the format and width</b> as in the table below. The <span class="ui">Final size</span> line immediately shows the page size: 170.0 × 72.9 mm.</li>
+<li><b>Press <span class="ui">OK</span></b> and choose the file name and folder.</li>
+<li><b>For the PDF</b> repeat with <span class="ui">Format</span> = PDF. The <span class="ui">Vector</span> preset sets up an 85 mm PDF, that is one column.</li>
+</ol>
+<div class="pair wide-first">
+<details class="shot" open>
+<summary>Show the layout in the app</summary>
+<figure><img src="../../../../en/guide/files/vector-export/app/layout.png" width="1280" height="800" loading="lazy" alt="Trama with the Figure 1 layout open: panel A with the calibration line, panel B with the residuals. On the left, the navigator with the Standard curve table, two graphs and the layout.">
+<figcaption><span class="tag app">App screenshot</span> The layout as it appears in Trama.</figcaption></figure>
+</details>
+<figure class="solo"><img src="../../../../en/guide/files/vector-export/app/export-dialog.png" width="310" height="299" loading="lazy" alt="Export with options window: Preset Custom, Format SVG, Width 170 mm, SVG text Text, Transparent background unchecked, Final size 170.0 × 72.9 mm.">
+<figcaption><span class="tag app">App screenshot</span> The window with the settings of this example.</figcaption></figure>
+</div>
+<div class="table-wrap"><table class="settings">
+<caption>Settings that decide the file</caption>
+<tbody>
+<tr><th scope="row">Format</th><td>SVG (then PDF)</td></tr>
+<tr><th scope="row">Width (mm)</th><td>170</td></tr>
+<tr><th scope="row">SVG text</th><td>Text</td></tr>
+<tr><th scope="row">Transparent background</th><td>no</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="result" aria-labelledby="h-result">
+<h2 id="h-result">Check the file</h2>
+<p>Do not trust the extension: open the file and check that it really is vector. On the files of this example:</p>
+<figure class="solo"><a class="zoom" href="../../../../en/guide/files/vector-export/figures/figure-1-text.svg" title="Open the SVG"><img src="../../../../en/guide/files/vector-export/figures/figure-1-preview.png" width="736" height="316" loading="lazy" alt="Figure 1: title at the top, panel A with the calibration line of absorbance on concentration and its confidence band, panel B with the residuals scattered around zero."></a>
+<figcaption><span class="tag fig">Exported figure</span> PNG preview of the figure; the link opens the real SVG, to zoom in the browser.</figcaption></figure>
+<div class="table-wrap"><table class="metrics wide">
+<caption>What the three files contain</caption>
+<thead><tr><th scope="col"></th><th scope="col">SVG, Text</th><th scope="col">SVG, Paths</th><th scope="col">PDF</th></tr></thead>
+<tbody>
+<tr><th scope="row">Page</th><td>170 × 72.9 mm</td><td>170 × 72.9 mm</td><td>170 × 72.9 mm, 1 page</td></tr>
+<tr><th scope="row">Text as text</th><td>33 elements</td><td>none</td><td>yes, searchable</td></tr>
+<tr><th scope="row">Embedded images</th><td>none</td><td>none</td><td>none</td></tr>
+<tr><th scope="row">Size</th><td>25.2 kB</td><td>51.3 kB</td><td>24.3 kB</td></tr>
+</tbody>
+</table></div>
+<p><b>Text or paths.</b> With <span class="ui">Text</span> the labels stay text: you can correct them in a vector editor and search for them in the file. The file names a font family, though, and on a computer that does not have it the program substitutes another, with different widths. With <span class="ui">Paths</span> every letter becomes a shape: the figure looks identical everywhere, but the text can no longer be edited and the file is about twice as large. Use Text while the figure is still changing, and Paths for the final version if the journal asks for fonts to be converted.</p>
+<aside class="callout ok"><b>How to check it yourself.</b> Open the SVG in the browser and zoom to 800%: lines and letters stay crisp. Search for an axis word with <kbd>Ctrl</kbd>+<kbd>F</kbd>: you find it in the Text file, not in the Paths one. In the PDF the text can be selected.</aside>
+</section>
+
+<section id="edge-case" class="edge" aria-labelledby="h-edge">
+<h2 id="h-edge" data-tag="Edge case" data-toc="Edge case">Default font sizes end up at 4 points</h2>
+<p>The same layout, with the graphs’ default font sizes, exported at 170 mm. The file is vector and sharp, but the text inside the panels is tiny: <b>4.0 points</b> for tick labels and axis titles, 4.8 for the panel title. This happens because the layout scales each graph down to fit two in a row, and the 170 mm width scales the whole page down again. The layout title and the letters A and B, which sit on the page, stay at 9.6 and 11.2 points.</p>
+<div class="pair">
+<figure><a class="zoom" href="../../../../en/guide/files/vector-export/figures/edge-case-default-fonts.svg"><img src="../../../../en/guide/files/vector-export/figures/edge-case-default-fonts.png" width="736" height="316" loading="lazy" alt="Figure 1 with the default font sizes: the axis and tick labels are very small compared with the letters A and B."></a>
+<figcaption><span class="tag fig">Exported figure</span> <b>Default font sizes</b>: panel text from 4.0 to 4.8 pt.</figcaption></figure>
+<figure><a class="zoom" href="../../../../en/guide/files/vector-export/figures/figure-1-text.svg"><img src="../../../../en/guide/files/vector-export/figures/figure-1-preview.png" width="736" height="316" loading="lazy" alt="Figure 1 with larger font sizes: the axis labels are easy to read."></a>
+<figcaption><span class="tag fig">Exported figure</span> <b>Title 22, axes 20, ticks 18</b>: panel text from 7.2 to 8.9 pt.</figcaption></figure>
+</div>
+<p><b>How to fix it.</b> Select each graph in the layout, open <span class="ui">Graph → Format Graph</span> and, under <span class="ui">Font sizes in points</span>, increase <span class="ui">Title</span>, <span class="ui">Axis titles</span> and <span class="ui">Tick labels</span>. The values refer to the graph on its own: in this two-column layout at 170 mm they are multiplied by about 0.4. With 22, 20 and 18 the final text ranges from 7.2 to 8.9 points.</p>
+<p><b>How to notice.</b> Print the page at 100% or open the PDF at actual size: if the axis labels are smaller than footnote text, they are too small. The <a href="../../../../en/guide/files/vector-export/data/results.json">checks JSON</a> lists the effective size of every piece of text in both cases.</p>
+<div class="files" role="group" aria-label="Edge case files">
+<a class="file" href="../../../../en/guide/files/vector-export/data/edge-case-default-fonts.alab" download><span class="ext">.alab</span><span><b>Edge case project</b><small>same layout, default font sizes · 1.0 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/vector-export/figures/edge-case-default-fonts.svg" download><span class="ext">.svg</span><span><b>Figure with 4 pt text</b><small>170 mm, text · 28.0 kB</small></span></a>
+</div>
+</section>
+
+<section id="report" aria-labelledby="h-report">
+<h2 id="h-report">What to check before submitting</h2>
+<ul class="checks">
+<li>The format and width the journal asks for, and the <span class="ui">Final size</span> line that confirms them.</li>
+<li>Text size at the final width, inside the panels and not just in the title.</li>
+<li>Text or paths, as the instructions for authors require.</li>
+<li>No hidden raster images: a layout imported with panels embedded as images stays raster even in SVG and PDF, and Trama says so in the export window.</li>
+<li>The <code>.alab</code> project from which the figure can be exported again, if it needs changing.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>Figures were prepared in Trama 0.95.0 beta and exported as vector PDF at a final width of 170 mm.</p></blockquote>
+<figcaption>Example sentence for the Methods section or the cover letter. <button type="button" class="copy" data-copy="#frase" hidden>Copy the sentence</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti" data-toc="Sources">Sources</h2>
+<ol class="refs">
+<li>Rougier N. P., Droettboom M., Bourne P. E. (2014). Ten simple rules for better figures. <i>PLoS Computational Biology</i>, 10(9), e1003833. <a href="https://doi.org/10.1371/journal.pcbi.1003833">doi:10.1371/journal.pcbi.1003833</a></li>
+<li>W3C (2011). <i>Scalable Vector Graphics (SVG) 1.1 (Second Edition)</i>. W3C Recommendation. <a href="https://www.w3.org/TR/SVG11/">w3.org/TR/SVG11</a></li>
+<li>ISO 32000-2:2020. <i>Document management — Portable document format — Part 2: PDF 2.0</i>. International Organization for Standardization.</li>
+</ol>
+<p class="ver">Checked with Trama 0.95.0 beta (tag <a href="https://github.com/realfulvio/Trama/tree/v0.95.0">v0.95.0</a>, commit 4c07db6) on 20 November 2026. Export in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/layout_svg.py">analisi/layout_svg.py</a> and <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/figure_export.py">analisi/figure_export.py</a>.</p>
+</section>
+<nav class="pager" aria-label="Nearby chapters"><a href="../../../../en/guide/data/calculated-columns/"><small>Previous</small>Create a calculated column</a><a href="../../../../en/guide/"><small>Contents</small>Back to the guide contents</a></nav></article>
+</main>
+</div>
+<footer><div class="wrap"><div class="brand"><img src="../../../../site/trama.svg" alt="" width="34" height="34">Trama</div><p>Trama guide. Examples use synthetic data; every chapter states the version its numbers were checked on.</p><nav aria-label="Links"><a href="../../../../en/guide/">Guide contents</a><a href="../../../../en/">Home</a><a href="../../../../en/features/">Features</a><a data-release-page href="https://github.com/realfulvio/Trama/releases/tag/v0.95.0">What’s new in 0.95</a><a href="https://github.com/realfulvio/Trama/blob/main/LICENSE">MIT licence</a></nav><p>Trama is an independent project in beta. No clinical validation or regulatory certification is claimed.</p></div></footer>
+<script src="../../../../site/releases.js" defer></script>
+</body>
+</html>

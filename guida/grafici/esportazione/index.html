@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="it" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../../site/lang.js"></script>
+<title>Esportare una figura vettoriale · Guida di Trama</title>
+<meta name="description" content="Un layout a due pannelli esportato da Trama in SVG e PDF a 170 mm: testo o tracciati, che cosa controllare nel file e perché i caratteri predefiniti diventano di 4 punti.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<link rel="canonical" href="https://tramastat.org/guida/grafici/esportazione/">
+<link rel="alternate" hreflang="it" href="https://tramastat.org/guida/grafici/esportazione/">
+<link rel="alternate" hreflang="en" href="https://tramastat.org/en/guide/graphs/vector-export/">
+<link rel="alternate" hreflang="x-default" href="https://tramastat.org/en/guide/graphs/vector-export/">
+<link rel="icon" type="image/svg+xml" href="../../../site/trama.svg">
+<link rel="preload" href="../../../site/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../../site/style.css">
+<link rel="stylesheet" href="../../../site/guide.css">
+<meta property="og:site_name" content="Trama">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tramastat.org/guida/grafici/esportazione/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Esportare una figura vettoriale · Guida di Trama">
+<meta property="og:description" content="Un layout a due pannelli esportato da Trama in SVG e PDF a 170 mm: testo o tracciati, che cosa controllare nel file e perché i caratteri predefiniti diventano di 4 punti.">
+<meta property="og:image" content="https://tramastat.org/guida/allegati/esportazione/figure/figura-1-anteprima.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="736">
+<meta property="og:image:height" content="316">
+<meta property="og:image:alt" content="Figura 1 con due pannelli: A, la retta di calibrazione con la banda di confidenza; B, i residui contro i valori stimati.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Esportare una figura vettoriale · Guida di Trama">
+<meta name="twitter:description" content="Un layout a due pannelli esportato da Trama in SVG e PDF a 170 mm: testo o tracciati, che cosa controllare nel file e perché i caratteri predefiniti diventano di 4 punti.">
+<meta name="twitter:image" content="https://tramastat.org/guida/allegati/esportazione/figure/figura-1-anteprima.png">
+<meta name="twitter:image:alt" content="Figura 1 con due pannelli: A, la retta di calibrazione con la banda di confidenza; B, i residui contro i valori stimati.">
+<meta name="theme-color" content="#08232f">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://tramastat.org/guida/grafici/esportazione/#webpage","url":"https://tramastat.org/guida/grafici/esportazione/","name":"Esportare una figura vettoriale · Guida di Trama","description":"Un layout a due pannelli esportato da Trama in SVG e PDF a 170 mm: testo o tracciati, che cosa controllare nel file e perché i caratteri predefiniti diventano di 4 punti.","inLanguage":"it","isPartOf":{"@id":"https://tramastat.org/#website"},"about":{"@id":"https://tramastat.org/#software"},"headline":"Esportare una figura vettoriale","dateModified":"2026-11-20","primaryImageOfPage":{"@type":"ImageObject","url":"https://tramastat.org/guida/allegati/esportazione/figure/figura-1-anteprima.png","width":736,"height":316}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trama","item":"https://tramastat.org/"},{"@type":"ListItem","position":2,"name":"Guida","item":"https://tramastat.org/guida/"},{"@type":"ListItem","position":3,"name":"Grafici e report","item":"https://tramastat.org/guida/grafici/"},{"@type":"ListItem","position":4,"name":"Export vettoriale","item":"https://tramastat.org/guida/grafici/esportazione/"}]}]}</script>
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../../../site/guide.js"></script>
+</head>
+<body>
+<a class="skip" href="#contenuto">Vai al contenuto</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../../"><img src="../../../site/trama.svg" alt="" width="34" height="34">Trama</a>
+<nav aria-label="Sito"><a href="../../../">Home</a><a href="../../../funzionalita/">Funzionalità</a><a href="../../../guida/" aria-current="true">Guida</a></nav>
+<div class="langs" role="group" aria-label="Lingua"><span class="on" aria-current="true" lang="it" title="Italiano">IT</span><a href="../../../en/guide/graphs/vector-export/" hreflang="en" lang="en" title="English" aria-label="English">EN</a></div>
+<a class="btn" data-release-download href="https://github.com/realfulvio/Trama/releases/download/v0.95.0/Trama-0.95.0-Windows-x64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Scarica</a></div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Indice della guida">
+<details class="gnav" open><summary>Indice della guida</summary>
+<form class="search" role="search" action="../../../guida/" method="get">
+<label for="q">Cerca nella guida</label>
+<div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" name="q" type="search" placeholder="es. numero di gruppi, curva standard" autocomplete="off"><button class="go" type="submit">Cerca</button></div>
+</form>
+<p class="gl"><a href="../../../guida/">Tutte le guide</a></p>
+<h2 class="gname"><a href="../../../guida/grafici/"><svg class="gico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="18" height="8" rx="1.5"/></svg>Grafici e report</a></h2>
+<ul class="gtree"><li class="plan"><span>Scegliere il grafico per il risultato</span></li><li class="draft"><span>Mostrare l’incertezza in una figura</span></li><li class="plan"><span>Rendere leggibile una heatmap</span></li><li class="plan"><span>Formattare assi e annotazioni</span></li><li class="plan"><span>Comporre un layout a più pannelli</span></li><li><a href="./" aria-current="page">Esportare una figura vettoriale</a></li></ul>
+<h2 class="gname sub">Altre guide</h2>
+<ul class="gtree"><li><a href="../../../guida/statistica/">Statistica</a></li><li><a href="../../../guida/curve/">Curve e calibrazione</a></li><li><a href="../../../guida/dati/">Dati e formule</a></li></ul>
+</details>
+</aside>
+<aside class="rail" aria-label="In questo capitolo">
+<details class="toc" open><summary>In questo capitolo</summary><ol><li><a href="#quando">Quando usarlo</a></li><li><a href="#dati">I dati</a></li><li><a href="#percorso">In Trama</a></li><li><a href="#risultato">Controlla il file</a></li><li><a href="#caso-limite">Caso limite</a></li><li><a href="#riportare">Cosa controllare prima di inviare</a></li><li><a href="#fonti">Fonti</a></li></ol></details>
+<details class="card proof" open><summary><h2>Scheda di prova e file</h2></summary>
+<dl><div><dt>Trama</dt><dd>0.95.0 beta</dd></div><div><dt>Commit</dt><dd><code>4c07db6</code></dd></div><div><dt>Dati</dt><dd>sintetici, 12 righe</dd></div><div><dt>Larghezza</dt><dd>170 mm</dd></div></dl>
+<ul class="dl"><li><a href="../../../guida/allegati/esportazione/dati/esempio-layout.alab" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Progetto .alab</a></li><li><a href="../../../guida/allegati/esportazione/figure/figura-1.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Figura .pdf</a></li><li><a href="../../../guida/allegati/esportazione/figure/figura-1-testo.svg" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Figura .svg</a></li><li><a href="../../../guida/allegati/esportazione/dati/risultati.json" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Controlli .json</a></li></ul>
+<a class="tofonti" href="#fonti">3 fonti primarie ↓</a></details>
+</aside>
+<main id="contenuto" class="doc">
+<article><header class="chap-head" id="inizio">
+<p class="crumbs" aria-label="Percorso"><a href="../../../guida/">Guida</a><span aria-hidden="true">›</span><a href="../../../guida/grafici/">Grafici e report</a><span aria-hidden="true">›</span><span aria-current="page">Export vettoriale</span></p>
+<h1>Esportare una figura vettoriale</h1>
+<p class="ask">La rivista vuole la figura 1 in formato vettoriale, larga 170 mm, con i pannelli A e B. Come la esporti da Trama perché resti nitida a ogni ingrandimento, con un testo che si legge ancora una volta stampata?</p>
+<ul class="facts" aria-label="Scheda di prova e file"><li><b>Verificato</b> Trama 0.95.0 beta</li><li><b>Dati</b> la curva standard sintetica</li><li><b>Larghezza</b> 170 mm</li><li><b>Lettura</b> 7 minuti</li></ul>
+</header>
+<section id="quando" aria-labelledby="h-quando">
+<h2 id="h-quando">Quando usarlo</h2>
+<p>Un file <b>vettoriale</b> (SVG, PDF) descrive linee, punti e testo come geometria: si ingrandisce senza perdere nitidezza e il testo resta testo. Un file <b>raster</b> (PNG, TIFF) è una griglia di pixel fissata al momento dell’esportazione: oltre la sua risoluzione si vedono gli scalini.</p>
+<ul class="checks">
+<li><b>Grafici, curve, schemi:</b> vettoriale. È il caso di quasi tutto quello che esce da Trama.</li>
+<li><b>Fotografie e immagini al microscopio:</b> raster, alla risoluzione chiesta dalla rivista.</li>
+<li><b>La larghezza finale</b> si decide prima: molte riviste usano una colonna (circa 85 mm) o due (circa 170 mm). Controlla le istruzioni per gli autori, che indicano anche il corpo minimo del testo.</li>
+<li><b>Il corpo dei caratteri</b> si controlla alla larghezza finale, non sullo schermo. È il <a href="#caso-limite">caso limite</a> di questo capitolo.</li>
+</ul>
+</section>
+
+<section id="dati" aria-labelledby="h-dati">
+<h2 id="h-dati">I dati</h2>
+<p>Gli standard sintetici del capitolo <a href="../../curve/curva-standard/">Curva standard</a>: concentrazione e assorbanza. Il progetto contiene due grafici di <span class="ui">Regressione lineare</span>, la retta con la banda di confidenza e i residui contro i valori stimati, e il layout <span class="ui">Figura 1</span> che li mette affiancati come pannelli A e B. I due grafici hanno già i caratteri ingranditi in <span class="ui">Formato grafico</span>; il perché è nel caso limite.</p>
+<div class="files" role="group" aria-label="File da scaricare">
+<a class="file" href="../../../guida/allegati/esportazione/dati/esempio-layout.alab" download><span class="ext">.alab</span><span><b>Progetto Trama</b><small>tabella, due grafici e il layout · 1,1 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/esportazione/figure/figura-1.pdf" download><span class="ext">.pdf</span><span><b>Figura 1 in PDF</b><small>170 mm, esportata da Trama · 24,5 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/esportazione/figure/figura-1-testo.svg" download><span class="ext">.svg</span><span><b>Figura 1 in SVG, testo</b><small>testo modificabile · 25,2 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/esportazione/figure/figura-1-tracciati.svg" download><span class="ext">.svg</span><span><b>Figura 1 in SVG, tracciati</b><small>testo convertito in forme · 51,8 kB</small></span></a>
+</div>
+</section>
+
+<section id="percorso" aria-labelledby="h-percorso">
+<h2 id="h-percorso">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Apri il progetto</b> con <span class="ui">File → Apri…</span> e seleziona il layout <span class="ui">Figura 1</span> nel pannello a sinistra, sotto <span class="ui">Layout</span>.</li>
+<li><b>Scegli <span class="ui">File → Esporta con opzioni…</span></b>. Lo stesso comando è nella scheda <span class="ui">Grafico</span>.</li>
+<li><b>Imposta il formato e la larghezza</b> come nella tabella qui sotto. La riga <span class="ui">Dimensione finale</span> mostra subito le misure della pagina: 170,0 × 72,9 mm.</li>
+<li><b>Premi <span class="ui">OK</span></b> e scegli nome e cartella del file.</li>
+<li><b>Per il PDF</b> ripeti con <span class="ui">Formato</span> = PDF. Il predefinito <span class="ui">Vettoriale</span> imposta un PDF da 85 mm, cioè una colonna.</li>
+</ol>
+<div class="pair wide-first">
+<details class="shot" open>
+<summary>Mostra il layout nell’app</summary>
+<figure><img src="../../../guida/allegati/esportazione/app/layout.png" width="1280" height="800" loading="lazy" alt="Trama con il layout Figura 1 aperto: pannello A con la retta di calibrazione, pannello B con i residui. A sinistra il navigatore con la tabella Curva standard, due grafici e il layout.">
+<figcaption><span class="tag app">Schermata dell’app</span> Il layout come appare in Trama.</figcaption></figure>
+</details>
+<figure class="solo"><img src="../../../guida/allegati/esportazione/app/dialogo-esporta.png" width="419" height="283" loading="lazy" alt="Finestra Esporta con opzioni: Predefinito Personalizzato, Formato SVG, Larghezza 170 mm, Testo SVG Testo, Sfondo trasparente non spuntato, Dimensione finale 170,0 × 72,9 mm.">
+<figcaption><span class="tag app">Schermata dell’app</span> La finestra con le impostazioni di questo esempio.</figcaption></figure>
+</div>
+<div class="table-wrap"><table class="settings">
+<caption>Impostazioni che decidono il file</caption>
+<tbody>
+<tr><th scope="row">Formato</th><td>SVG (poi PDF)</td></tr>
+<tr><th scope="row">Larghezza (mm)</th><td>170</td></tr>
+<tr><th scope="row">Testo SVG</th><td>Testo</td></tr>
+<tr><th scope="row">Sfondo trasparente</th><td>no</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="risultato" aria-labelledby="h-risultato">
+<h2 id="h-risultato">Controlla il file</h2>
+<p>Non fidarti dell’estensione: apri il file e controlla che sia davvero vettoriale. Sui file di questo esempio:</p>
+<figure class="solo"><a class="zoom" href="../../../guida/allegati/esportazione/figure/figura-1-testo.svg" title="Apri l’SVG"><img src="../../../guida/allegati/esportazione/figure/figura-1-anteprima.png" width="736" height="316" loading="lazy" alt="Figura 1: titolo in alto, pannello A con la retta di calibrazione dell’assorbanza sulla concentrazione e la banda di confidenza, pannello B con i residui sparsi attorno allo zero."></a>
+<figcaption><span class="tag fig">Figura esportata</span> Anteprima PNG della figura; il collegamento apre l’SVG vero, da ingrandire nel browser.</figcaption></figure>
+<div class="table-wrap"><table class="metrics wide">
+<caption>Che cosa contengono i tre file</caption>
+<thead><tr><th scope="col"></th><th scope="col">SVG, Testo</th><th scope="col">SVG, Tracciati</th><th scope="col">PDF</th></tr></thead>
+<tbody>
+<tr><th scope="row">Pagina</th><td>170 × 72,9 mm</td><td>170 × 72,9 mm</td><td>170 × 72,9 mm, 1 pagina</td></tr>
+<tr><th scope="row">Testo come testo</th><td>33 elementi</td><td>nessuno</td><td>sì, cercabile</td></tr>
+<tr><th scope="row">Immagini incorporate</th><td>nessuna</td><td>nessuna</td><td>nessuna</td></tr>
+<tr><th scope="row">Dimensione</th><td>25,2 kB</td><td>51,8 kB</td><td>24,5 kB</td></tr>
+</tbody>
+</table></div>
+<p><b>Testo o tracciati.</b> Con <span class="ui">Testo</span> le etichette restano testo: puoi correggerle in un editor vettoriale e cercarle nel file. Il file però indica una famiglia di caratteri, e su un computer che non la ha il programma ne sostituisce un’altra, con larghezze diverse. Con <span class="ui">Tracciati</span> ogni lettera diventa una forma: la figura è identica ovunque, ma il testo non si corregge più e il file pesa circa il doppio. Usa Testo finché la figura cambia, Tracciati per la versione finale se la rivista chiede di convertire i caratteri.</p>
+<aside class="callout ok"><b>Come controllare da solo.</b> Apri l’SVG nel browser e ingrandisci all’800%: linee e lettere restano nette. Cerca una parola dell’asse con <kbd>Ctrl</kbd>+<kbd>F</kbd>: nel file con Testo la trovi, in quello con Tracciati no. Nel PDF il testo si seleziona.</aside>
+</section>
+
+<section id="caso-limite" class="edge" aria-labelledby="h-caso">
+<h2 id="h-caso" data-tag="Caso limite" data-toc="Caso limite">I caratteri predefiniti diventano di 4 punti</h2>
+<p>Lo stesso layout, con i caratteri predefiniti dei grafici, esportato a 170 mm. Il file è vettoriale e nitido, ma il testo dentro i pannelli è minuscolo: <b>4,0 punti</b> per le etichette delle tacche e i titoli degli assi, 4,8 per il titolo del pannello. Succede perché il layout rimpicciolisce ogni grafico per farne stare due in una riga, e la larghezza di 170 mm rimpicciolisce di nuovo la pagina intera. Il titolo del layout e le lettere A e B, che stanno sulla pagina, restano a 9,6 e 11,2 punti.</p>
+<div class="pair">
+<figure><a class="zoom" href="../../../guida/allegati/esportazione/figure/caso-limite-caratteri-predefiniti.svg"><img src="../../../guida/allegati/esportazione/figure/caso-limite-caratteri-predefiniti.png" width="736" height="316" loading="lazy" alt="Figura 1 con i caratteri predefiniti: le etichette degli assi e delle tacche sono molto piccole rispetto alle lettere A e B."></a>
+<figcaption><span class="tag fig">Figura esportata</span> <b>Caratteri predefiniti</b>: testo dei pannelli da 4,0 a 4,8 pt.</figcaption></figure>
+<figure><a class="zoom" href="../../../guida/allegati/esportazione/figure/figura-1-testo.svg"><img src="../../../guida/allegati/esportazione/figure/figura-1-anteprima.png" width="736" height="316" loading="lazy" alt="Figura 1 con i caratteri ingranditi: le etichette degli assi si leggono bene."></a>
+<figcaption><span class="tag fig">Figura esportata</span> <b>Titolo 22, assi 20, tacche 18</b>: testo dei pannelli da 7,2 a 8,9 pt.</figcaption></figure>
+</div>
+<p><b>Come rimediare.</b> Seleziona ogni grafico del layout, apri <span class="ui">Grafico → Formato grafico</span> e, in <span class="ui">Dimensioni dei caratteri in punti</span>, aumenta <span class="ui">Titolo</span>, <span class="ui">Titoli assi</span> ed <span class="ui">Etichette tacche</span>. I valori sono riferiti al grafico da solo: in questo layout a due colonne e a 170 mm vengono moltiplicati per circa 0,4. Con 22, 20 e 18 il testo finale va da 7,2 a 8,9 punti.</p>
+<p><b>Come accorgersene.</b> Stampa la pagina al 100% o apri il PDF alla dimensione reale: se le etichette degli assi sono più piccole del testo di una nota a piè di pagina, sono troppo piccole. Il <a href="../../../guida/allegati/esportazione/dati/risultati.json">JSON dei controlli</a> riporta il corpo effettivo di ogni testo nei due casi.</p>
+<div class="files" role="group" aria-label="File del caso limite">
+<a class="file" href="../../../guida/allegati/esportazione/dati/caso-limite-caratteri-predefiniti.alab" download><span class="ext">.alab</span><span><b>Progetto del caso limite</b><small>stesso layout, caratteri predefiniti · 1,0 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/esportazione/figure/caso-limite-caratteri-predefiniti.svg" download><span class="ext">.svg</span><span><b>Figura con caratteri da 4 pt</b><small>170 mm, testo · 28,0 kB</small></span></a>
+</div>
+</section>
+
+<section id="riportare" aria-labelledby="h-riportare">
+<h2 id="h-riportare">Cosa controllare prima di inviare</h2>
+<ul class="checks">
+<li>Formato e larghezza richiesti dalla rivista, e la riga <span class="ui">Dimensione finale</span> che li conferma.</li>
+<li>Corpo del testo alla larghezza finale, nei pannelli e non solo nel titolo.</li>
+<li>Testo o tracciati, secondo le istruzioni per gli autori.</li>
+<li>Nessuna immagine raster nascosta: un layout importato con pannelli incorporati come immagini resta raster anche in SVG e PDF, e Trama lo dice nella finestra di esportazione.</li>
+<li>Il progetto <code>.alab</code> da cui la figura si riesporta, se serve cambiarla.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>Le figure sono state preparate in Trama 0.95.0 beta ed esportate in PDF vettoriale alla larghezza finale di 170 mm.</p></blockquote>
+<figcaption>Esempio di frase per la sezione Metodi o per la lettera all’editore. <button type="button" class="copy" data-copy="#frase" hidden>Copia la frase</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti">Fonti</h2>
+<ol class="refs">
+<li>Rougier N. P., Droettboom M., Bourne P. E. (2014). Ten simple rules for better figures. <i>PLoS Computational Biology</i>, 10(9), e1003833. <a href="https://doi.org/10.1371/journal.pcbi.1003833">doi:10.1371/journal.pcbi.1003833</a></li>
+<li>W3C (2011). <i>Scalable Vector Graphics (SVG) 1.1 (Second Edition)</i>. Raccomandazione W3C. <a href="https://www.w3.org/TR/SVG11/">w3.org/TR/SVG11</a></li>
+<li>ISO 32000-2:2020. <i>Document management — Portable document format — Part 2: PDF 2.0</i>. Organizzazione internazionale per la normazione.</li>
+</ol>
+<p class="ver">Verificato con Trama 0.95.0 beta (tag <a href="https://github.com/realfulvio/Trama/tree/v0.95.0">v0.95.0</a>, commit 4c07db6) il 20 novembre 2026. Esportazione in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/layout_svg.py">analisi/layout_svg.py</a> e <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/figure_export.py">analisi/figure_export.py</a>.</p>
+</section>
+<nav class="pager" aria-label="Capitoli vicini"><a href="../../../guida/dati/colonne-calcolate/"><small>Indietro</small>Creare una colonna calcolata</a><a href="../../../guida/"><small>Indice</small>Torna all’indice della guida</a></nav></article>
+</main>
+</div>
+<footer><div class="wrap"><div class="brand"><img src="../../../site/trama.svg" alt="" width="34" height="34">Trama</div><p>Guida di Trama. Esempi con dati sintetici, numeri verificati nella versione indicata in ogni capitolo.</p><nav aria-label="Collegamenti"><a href="../../../guida/">Indice della guida</a><a href="../../../">Home</a><a href="../../../funzionalita/">Funzionalità</a><a data-release-page href="https://github.com/realfulvio/Trama/releases/tag/v0.95.0">Novità 0.95</a><a href="https://github.com/realfulvio/Trama/blob/main/LICENSE">Licenza MIT</a></nav><p>Trama è un progetto indipendente in fase beta. Non viene dichiarata una validazione clinica o una certificazione regolatoria.</p></div></footer>
+<script src="../../../site/releases.js" defer></script>
+</body>
+</html>

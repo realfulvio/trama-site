@@ -1,0 +1,119 @@
+<!--
+{"title": "Risalire alla concentrazione dalla risposta",
+ "short": "Curva standard",
+ "description": "Interpolazione inversa su una curva standard lineare in Trama: concentrazioni dei campioni ignoti con intervallo di predizione, differenza dall’intervallo della media e un campione fuori campo.",
+ "ask": "Hai sei standard a concentrazione nota, letti in doppio, e quattro campioni di cui conosci solo l’assorbanza. Che concentrazione hanno, con quale incertezza, e che cosa fai con un campione che esce dalla curva?",
+ "facts": [["Verificato", "Trama {{V}}"], ["Dati", "12 standard e 4 ignoti sintetici"], ["Seme", "11"], ["Lettura", "8 minuti"]],
+ "proof": [["Dati", "sintetici, 12 standard"], ["Seme", "11"]],
+ "downloads": [["alab", "Progetto .alab"], ["csv", "Dati .csv"], ["json", "Risultati .json"]],
+ "image": "curve", "image_alt": "Retta di calibrazione dell’assorbanza contro la concentrazione, con gli standard in blu e i campioni ignoti come croci arancioni; l’ultimo ignoto sta oltre lo standard più alto."}
+-->
+<section id="quando" aria-labelledby="h-quando">
+<h2 id="h-quando">Quando usarlo</h2>
+<p>Con una curva standard misuri la risposta di campioni a concentrazione nota, adatti una curva e poi la leggi al contrario: dalla risposta di un campione ignoto risali alla sua concentrazione. È l’<i>interpolazione inversa</i>, o calibrazione. In Trama la fa <span class="ui">Interpola una curva di calibrazione</span> con <span class="ui">Direzione</span> = <span class="ui">X da Y</span>.</p>
+<ul class="checks">
+<li><b>Il campo degli standard copre gli ignoti.</b> La curva vale solo fra lo standard più basso e il più alto. Fuori da quel campo è un’estrapolazione: il <a href="#caso-limite">caso limite</a> mostra come Trama la segnala.</li>
+<li><b>La forma è giusta.</b> Qui la risposta è lineare. Se la curva si appiattisce alle concentrazioni alte, scegli <span class="ui">Curva</span> = <span class="ui">Non lineare</span> e un modello sigmoide invece di accorciare la retta a occhio.</li>
+<li><b>Il bianco è uno standard.</b> La concentrazione zero entra nel fit come gli altri punti e fissa l’intercetta.</li>
+<li><b>L’incertezza giusta.</b> Un campione letto una volta porta con sé il rumore di quella lettura. Serve l’intervallo di <span class="ui">Previsione</span>, non quello della <span class="ui">Risposta media</span>: la differenza è nel <a href="#risultato">risultato</a>.</li>
+</ul>
+</section>
+
+<section id="dati" aria-labelledby="h-dati">
+<h2 id="h-dati">I dati</h2>
+<p>Una sola tabella con tre colonne. <code>Concentrazione (µg/mL)</code> e <code>Assorbanza</code> contengono i 12 standard: 0, 5, 10, 20, 40 e 80 µg/mL, ciascuno in doppio. <code>Campioni ignoti (assorbanza)</code> contiene le quattro letture da convertire; le celle sotto restano vuote.</p>
+<div class="files" role="group" aria-label="File da scaricare">
+<a class="file" href="{{href:alab}}" download><span class="ext">.alab</span><span><b>Progetto Trama</b><small>tabella e due interpolazioni pronte · {{kb:alab}}</small></span></a>
+<a class="file" href="{{href:csv}}" download><span class="ext">.csv</span><span><b>Dati sintetici</b><small>12 righe, 3 colonne · {{kb:csv}}</small></span></a>
+<a class="file" href="{{href:json}}" download><span class="ext">.json</span><span><b>Risultati di prova</b><small>retta e intervalli a piena precisione</small></span></a>
+</div>
+<div class="table-wrap"><table class="peek">
+<caption>Prime righe del CSV</caption>
+<thead><tr><th scope="col">Concentrazione (µg/mL)</th><th scope="col">Assorbanza</th><th scope="col">Campioni ignoti (assorbanza)</th></tr></thead>
+<tbody><tr><td>0</td><td>0,052</td><td>0,231</td></tr><tr><td>0</td><td>0,068</td><td>0,478</td></tr><tr><td>5</td><td>0,126</td><td>0,702</td></tr><tr><td>5</td><td>0,105</td><td>1,120</td></tr><tr><td colspan="3" class="more">… 8 righe in più, la terza colonna vuota</td></tr></tbody>
+</table></div>
+</section>
+
+<section id="percorso" aria-labelledby="h-percorso">
+<h2 id="h-percorso">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Apri il progetto</b> con <span class="ui">File → Apri…</span>, oppure porta il CSV con <span class="ui">File → Importa nel progetto…</span>.</li>
+<li><b>Seleziona la tabella</b> <span class="ui">Curva standard</span> e scegli <span class="ui">Analisi → Analizza…</span> (<kbd>Ctrl</kbd>+<kbd>Maiusc</kbd>+<kbd>A</kbd>).</li>
+<li><b>Nell’elenco delle analisi</b> apri <span class="ui">Regressione e curve → Interpola una curva di calibrazione</span>. Nella scheda <span class="ui">Variabili</span> scegli <span class="ui">X</span> = <code>Concentrazione (µg/mL)</code>, <span class="ui">Y</span> = <code>Assorbanza</code> e <span class="ui">Risposte incognite</span> = <code>Campioni ignoti (assorbanza)</code>.</li>
+<li><b>Nella scheda <span class="ui">Opzioni</span></b> imposta i valori qui sotto e premi <span class="ui">Esegui analisi</span>.</li>
+<li><b>Per il confronto</b> il progetto allegato contiene la stessa interpolazione con <span class="ui">Incertezza</span> = <span class="ui">Risposta media</span>.</li>
+</ol>
+<div class="table-wrap"><table class="settings">
+<caption>Impostazioni che decidono il risultato</caption>
+<tbody>
+<tr><th scope="row">Direzione</th><td>X da Y</td></tr>
+<tr><th scope="row">Curva</th><td>Lineare</td></tr>
+<tr><th scope="row">Incertezza</th><td>Previsione</td></tr>
+<tr><th scope="row">Livello di confidenza (%)</th><td>95</td></tr>
+</tbody></table></div>
+<p class="note-s">Il campo <span class="ui">Modello</span> conta solo con la curva non lineare.</p>
+<details class="shot">
+<summary>Mostra la schermata della scheda Opzioni</summary>
+<figure><img src="{{href:app_dialog}}" {{wh:app_dialog}} loading="lazy" alt="Finestra Interpola una curva di calibrazione, scheda Opzioni: Direzione X da Y, Curva Lineare, Incertezza Previsione, Livello di confidenza 95. A sinistra l’elenco delle analisi con Regressione e curve aperto.">
+<figcaption><span class="tag app">Schermata dell’app</span> Trama {{V}}, interfaccia italiana, tema chiaro, progetto allegato.</figcaption></figure>
+</details>
+</section>
+
+<section id="risultato" aria-labelledby="h-risultato">
+<h2 id="h-risultato">Leggi il risultato</h2>
+<p>La scheda <span class="ui">Linear calibration</span> riporta la retta: pendenza 0,011835 unità di assorbanza per µg/mL (errore standard 0,000128), intercetta 0,0533, R² = 0,9988. La scheda <span class="ui">Interpolated values</span> riporta una riga per campione ignoto. Nella 0.95.0 i nomi delle schede e delle colonne restano in inglese anche con l’interfaccia italiana.</p>
+<figure class="solo"><a class="zoom" href="{{href:curve_svg}}" title="Apri la figura vettoriale"><img src="{{href:curve}}" {{wh:curve}} loading="lazy" alt="Retta di calibrazione dell’assorbanza contro la concentrazione da 0 a 80 µg/mL. Gli standard in doppio sono punti blu sulla retta; tre campioni ignoti sono croci arancioni sulla retta fra 15 e 55 µg/mL; il quarto è a destra, oltre lo standard da 80."></a>
+<figcaption><span class="tag fig">Figura esportata</span> Standard (punti) e campioni ignoti (croci) sulla retta adattata. La legenda resta in inglese anche con l’interfaccia italiana. <a href="{{href:curve_svg}}">SVG</a></figcaption></figure>
+<div class="table-wrap"><table class="metrics wide">
+<caption>Concentrazioni stimate (µg/mL), arrotondate</caption>
+<thead><tr><th scope="col">Assorbanza</th><th scope="col">Concentrazione</th><th scope="col">Intervallo di predizione 95%</th><th scope="col">Intervallo della risposta media 95%</th></tr></thead>
+<tbody>
+<tr><th scope="row">0,231</th><td>15,02</td><td>12,61 – 17,41</td><td>14,30 – 15,72</td></tr>
+<tr><th scope="row">0,478</th><td>35,89</td><td>33,50 – 38,29</td><td>35,19 – 36,60</td></tr>
+<tr><th scope="row">0,702</th><td>54,82</td><td>52,35 – 57,32</td><td>53,87 – 55,79</td></tr>
+<tr><th scope="row">1,120</th><td>fuori campo</td><td>—</td><td>—</td></tr>
+</tbody>
+</table></div>
+<p>I due intervalli rispondono a domande diverse. Quello della <b>risposta media</b> dice quanto è incerta la retta: è stretto, circa ±0,7 µg/mL, perché 12 standard la fissano bene. Quello di <b>predizione</b> aggiunge il rumore di una singola nuova lettura, cioè proprio quello che succede quando leggi un campione ignoto una volta: circa ±2,4 µg/mL. <b>Per un campione letto una volta riporta l’intervallo di predizione.</b> Usare quello della media fa sembrare la misura tre volte più precisa di quanto sia.</p>
+<details class="shot">
+<summary>Mostra la schermata della scheda Interpolated values</summary>
+<figure><img src="{{href:app_results}}" {{wh:app_results}} loading="lazy" alt="Trama con i risultati dell’interpolazione: scheda Interpolated values con quattro righe e le colonne Response, Interpolated X, Outside calibration, X lower, X upper, Interval status. L’ultima riga ha Outside calibration True e Interval status Outside calibration.">
+<figcaption><span class="tag app">Schermata dell’app</span> X lower e X upper sono i limiti dell’intervallo di predizione.</figcaption></figure>
+</details>
+</section>
+
+<section id="caso-limite" class="edge" aria-labelledby="h-caso">
+<h2 id="h-caso" data-tag="Caso limite" data-toc="Caso limite">Un campione oltre lo standard più alto</h2>
+<p>Il quarto campione ha assorbanza 1,120. Lo standard più alto, 80 µg/mL, è stato letto 1,015 e 0,995. Prolungando la retta Trama calcola 90,1 µg/mL, ma nella stessa riga mette <span class="ui">Outside calibration</span> = True, lascia vuoti i limiti e scrive <span class="ui">Interval status</span> = Outside calibration. Nel grafico la croce sta a destra dell’ultimo standard, dove la retta non arriva.</p>
+<p>Quel 90,1 non è una misura: nessuno standard dice se a 90 µg/mL la risposta è ancora lineare. <b>Che cosa fare:</b> diluisci il campione in modo che cada dentro la curva e rileggilo, moltiplicando poi per il fattore di diluizione; se non puoi, riportalo come «&gt; 80 µg/mL». Non riportare 90,1.</p>
+<details class="shot">
+<summary>Mostra il grafico nell’app</summary>
+<figure><img src="{{href:app_graph}}" {{wh:app_graph}} loading="lazy" alt="Trama con il grafico Linear calibration: gli standard sulla retta fino a 80 µg/mL e una croce arancione isolata oltre la fine della retta, a circa 90 µg/mL.">
+<figcaption><span class="tag app">Schermata dell’app</span> L’ignoto fuori campo resta visibile, senza intervallo.</figcaption></figure>
+</details>
+<p><b>Come accorgersene.</b> La colonna <span class="ui">Outside calibration</span> vale True: Trama la accende quando la concentrazione stimata cade fuori dal campo degli standard, qui da 0 a 80 µg/mL. Nel grafico il punto sta oltre l’ultimo standard o prima del bianco.</p>
+</section>
+
+<section id="riportare" aria-labelledby="h-riportare">
+<h2 id="h-riportare">Cosa riportare</h2>
+<ul class="checks">
+<li>Concentrazioni e repliche degli standard, bianco compreso, e il campo di validità della curva.</li>
+<li>Modello (lineare o quale non lineare), pendenza, intercetta e R².</li>
+<li>Per ogni campione la concentrazione con l’intervallo di predizione, e quali campioni erano fuori campo e come sono stati trattati.</li>
+<li>Versione di Trama e progetto <code>.alab</code> che ripete il calcolo.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>Le concentrazioni sono state ricavate per interpolazione inversa da una retta di calibrazione su sei standard in doppio (0–80 µg/mL; pendenza 0,01183 unità di assorbanza per µg/mL, R² = 0,999) in Trama {{V}}, con intervalli di predizione al 95%. Un campione con assorbanza superiore allo standard più alto è stato riportato come &gt; 80 µg/mL.</p></blockquote>
+<figcaption>Esempio di frase per la sezione Metodi. <button type="button" class="copy" data-copy="#frase" hidden>Copia la frase</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti">Fonti</h2>
+<ol class="refs">
+<li>Osborne C. (1991). Statistical calibration: a review. <i>International Statistical Review</i>, 59(3), 309–336. <a href="https://doi.org/10.2307/1403690">doi:10.2307/1403690</a></li>
+<li>Draper N. R., Smith H. (1998). <i>Applied Regression Analysis</i>, 3ª ed. Wiley. <a href="https://doi.org/10.1002/9781118625590">doi:10.1002/9781118625590</a></li>
+<li>ICH (2022). <i>M10: Bioanalytical method validation and study sample analysis</i>. Linea guida scientifica, Agenzia europea per i medicinali. <a href="https://www.ema.europa.eu/en/scientific-guidelines/ich-m10-bioanalytical-method-validation">ema.europa.eu</a></li>
+</ol>
+<p class="ver">Verificato con Trama {{V}} (tag <a href="https://github.com/realfulvio/Trama/tree/{{TAG}}">{{TAG}}</a>, commit {{COMMIT}}) il 20 novembre 2026. Calcolo in <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/exploration.py">analisi/exploration.py</a>, grafico e intervalli in <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/additional.py">analisi/additional.py</a>.</p>
+</section>

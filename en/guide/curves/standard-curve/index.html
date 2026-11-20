@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../../../site/lang.js"></script>
+<title>Read concentrations off a standard curve · Trama guide</title>
+<meta name="description" content="Inverse interpolation on a linear standard curve in Trama: concentrations of unknown samples with a prediction interval, how it differs from the mean-response interval, and a sample outside the range.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<link rel="canonical" href="https://tramastat.org/en/guide/curves/standard-curve/">
+<link rel="alternate" hreflang="it" href="https://tramastat.org/guida/curve/curva-standard/">
+<link rel="alternate" hreflang="en" href="https://tramastat.org/en/guide/curves/standard-curve/">
+<link rel="alternate" hreflang="x-default" href="https://tramastat.org/en/guide/curves/standard-curve/">
+<link rel="icon" type="image/svg+xml" href="../../../../site/trama.svg">
+<link rel="preload" href="../../../../site/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../../../site/style.css">
+<link rel="stylesheet" href="../../../../site/guide.css">
+<meta property="og:site_name" content="Trama">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tramastat.org/en/guide/curves/standard-curve/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:title" content="Read concentrations off a standard curve · Trama guide">
+<meta property="og:description" content="Inverse interpolation on a linear standard curve in Trama: concentrations of unknown samples with a prediction interval, how it differs from the mean-response interval, and a sample outside the range.">
+<meta property="og:image" content="https://tramastat.org/en/guide/files/standard-curve/figures/standard-curve.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="960">
+<meta property="og:image:height" content="600">
+<meta property="og:image:alt" content="Calibration line of absorbance against concentration, with the standards in blue and the unknown samples as orange crosses; the last unknown lies beyond the highest standard.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Read concentrations off a standard curve · Trama guide">
+<meta name="twitter:description" content="Inverse interpolation on a linear standard curve in Trama: concentrations of unknown samples with a prediction interval, how it differs from the mean-response interval, and a sample outside the range.">
+<meta name="twitter:image" content="https://tramastat.org/en/guide/files/standard-curve/figures/standard-curve.png">
+<meta name="twitter:image:alt" content="Calibration line of absorbance against concentration, with the standards in blue and the unknown samples as orange crosses; the last unknown lies beyond the highest standard.">
+<meta name="theme-color" content="#08232f">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://tramastat.org/en/guide/curves/standard-curve/#webpage","url":"https://tramastat.org/en/guide/curves/standard-curve/","name":"Read concentrations off a standard curve · Trama guide","description":"Inverse interpolation on a linear standard curve in Trama: concentrations of unknown samples with a prediction interval, how it differs from the mean-response interval, and a sample outside the range.","inLanguage":"en","isPartOf":{"@id":"https://tramastat.org/#website"},"about":{"@id":"https://tramastat.org/#software"},"headline":"Read concentrations off a standard curve","dateModified":"2026-11-20","primaryImageOfPage":{"@type":"ImageObject","url":"https://tramastat.org/en/guide/files/standard-curve/figures/standard-curve.png","width":960,"height":600}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trama","item":"https://tramastat.org/en/"},{"@type":"ListItem","position":2,"name":"Guide","item":"https://tramastat.org/en/guide/"},{"@type":"ListItem","position":3,"name":"Curves and calibration","item":"https://tramastat.org/en/guide/curves/"},{"@type":"ListItem","position":4,"name":"Standard curve","item":"https://tramastat.org/en/guide/curves/standard-curve/"}]}]}</script>
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../../../../site/guide.js"></script>
+</head>
+<body>
+<a class="skip" href="#contenuto">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../../../en/"><img src="../../../../site/trama.svg" alt="" width="34" height="34">Trama</a>
+<nav aria-label="Site"><a href="../../../../en/">Home</a><a href="../../../../en/features/">Features</a><a href="../../../../en/guide/" aria-current="true">Guide</a></nav>
+<div class="langs" role="group" aria-label="Language"><a href="../../../../guida/curve/curva-standard/" hreflang="it" lang="it" title="Italiano" aria-label="Italiano">IT</a><span class="on" aria-current="true" lang="en" title="English">EN</span></div>
+<a class="btn" data-release-download href="https://github.com/realfulvio/Trama/releases/download/v0.95.0/Trama-0.95.0-Windows-x64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download</a></div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Guide contents">
+<details class="gnav" open><summary>Guide contents</summary>
+<form class="search" role="search" action="../../../../en/guide/" method="get">
+<label for="q">Search the guide</label>
+<div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" name="q" type="search" placeholder="e.g. number of clusters, standard curve" autocomplete="off"><button class="go" type="submit">Search</button></div>
+</form>
+<p class="gl"><a href="../../../../en/guide/">All guides</a></p>
+<h2 class="gname"><a href="../../../../en/guide/curves/"><svg class="gico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19c5 0 6-12 10-12s4 6 8 6"/><circle cx="6" cy="17" r="1"/><circle cx="11" cy="9" r="1"/><circle cx="17" cy="11" r="1"/></svg>Curves and calibration</a></h2>
+<ul class="gtree"><li class="plan"><span>Fit a line and check the residuals</span></li><li class="plan"><span>Fit a nonlinear curve</span></li><li class="draft"><span>Use weights and check the fit</span></li><li class="plan"><span>Understand the effect of outliers</span></li><li class="plan"><span>Define your own equation</span></li><li class="plan"><span>Share parameters across series</span></li><li class="plan"><span>Compare alternative models</span></li><li><a href="./" aria-current="page">Read concentrations off a standard curve</a></li><li class="draft"><span>Choose between mean and prediction intervals</span></li></ul>
+<h2 class="gname sub">Other guides</h2>
+<ul class="gtree"><li><a href="../../../../en/guide/statistics/">Statistics</a></li><li><a href="../../../../en/guide/data/">Data and formulas</a></li><li><a href="../../../../en/guide/graphs/">Graphs and reports</a></li></ul>
+</details>
+</aside>
+<aside class="rail" aria-label="In this chapter">
+<details class="toc" open><summary>In this chapter</summary><ol><li><a href="#when">When to use it</a></li><li><a href="#data">The data</a></li><li><a href="#in-trama">In Trama</a></li><li><a href="#result">Read the result</a></li><li><a href="#edge-case">Edge case</a></li><li><a href="#report">What to report</a></li><li><a href="#fonti">Sources</a></li></ol></details>
+<details class="card proof" open><summary><h2>Proof sheet and files</h2></summary>
+<dl><div><dt>Trama</dt><dd>0.95.0 beta</dd></div><div><dt>Commit</dt><dd><code>4c07db6</code></dd></div><div><dt>Data</dt><dd>synthetic, 12 standards</dd></div><div><dt>Seed</dt><dd>11</dd></div></dl>
+<ul class="dl"><li><a href="../../../../en/guide/files/standard-curve/data/standard-curve-example.alab" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.alab project</a></li><li><a href="../../../../en/guide/files/standard-curve/data/standard-curve.csv" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.csv data</a></li><li><a href="../../../../en/guide/files/standard-curve/data/results.json" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.json results</a></li></ul>
+<a class="tofonti" href="#fonti">3 primary sources ↓</a></details>
+</aside>
+<main id="contenuto" class="doc">
+<article><header class="chap-head" id="inizio">
+<p class="crumbs" aria-label="Breadcrumb"><a href="../../../../en/guide/">Guide</a><span aria-hidden="true">›</span><a href="../../../../en/guide/curves/">Curves and calibration</a><span aria-hidden="true">›</span><span aria-current="page">Standard curve</span></p>
+<h1>Read concentrations off a standard curve</h1>
+<p class="ask">You have six standards of known concentration, read in duplicate, and four samples of which you only know the absorbance. What concentration do they have, with what uncertainty, and what do you do with a sample that falls off the curve?</p>
+<ul class="facts" aria-label="Proof sheet and files"><li><b>Checked on</b> Trama 0.95.0 beta</li><li><b>Data</b> 12 standards and 4 unknowns, synthetic</li><li><b>Seed</b> 11</li><li><b>Reading</b> 8 minutes</li></ul>
+</header>
+<section id="when" aria-labelledby="h-when">
+<h2 id="h-when">When to use it</h2>
+<p>With a standard curve you measure the response of samples of known concentration, fit a curve, and then read it backwards: from the response of an unknown sample you work out its concentration. This is <i>inverse interpolation</i>, or calibration. In Trama it is done by <span class="ui">Interpolate a standard curve</span> with <span class="ui">Direction</span> = <span class="ui">X from Y</span>.</p>
+<ul class="checks">
+<li><b>The standards cover the unknowns.</b> The curve is only valid between the lowest and the highest standard. Outside that range it is an extrapolation: the <a href="#edge-case">edge case</a> shows how Trama flags it.</li>
+<li><b>The shape is right.</b> Here the response is linear. If the curve flattens at high concentrations, choose <span class="ui">Curve</span> = <span class="ui">Nonlinear</span> and a sigmoidal model rather than trimming the line by eye.</li>
+<li><b>The blank is a standard.</b> Zero concentration enters the fit like the other points and pins down the intercept.</li>
+<li><b>The right uncertainty.</b> A sample read once carries the noise of that reading. You need the <span class="ui">Prediction</span> interval, not the <span class="ui">Mean response</span> one: the difference is shown in the <a href="#result">result</a>.</li>
+</ul>
+</section>
+
+<section id="data" aria-labelledby="h-data">
+<h2 id="h-data">The data</h2>
+<p>A single table with three columns. <code>Concentration (µg/mL)</code> and <code>Absorbance</code> hold the 12 standards: 0, 5, 10, 20, 40 and 80 µg/mL, each in duplicate. <code>Unknown samples (absorbance)</code> holds the four readings to convert; the cells below them stay empty.</p>
+<div class="files" role="group" aria-label="Files to download">
+<a class="file" href="../../../../en/guide/files/standard-curve/data/standard-curve-example.alab" download><span class="ext">.alab</span><span><b>Trama project</b><small>table and two interpolations ready · 1.0 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/standard-curve/data/standard-curve.csv" download><span class="ext">.csv</span><span><b>Synthetic data</b><small>12 rows, 3 columns · 0.2 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/standard-curve/data/results.json" download><span class="ext">.json</span><span><b>Proof results</b><small>line and intervals at full precision</small></span></a>
+</div>
+<div class="table-wrap"><table class="peek">
+<caption>First rows of the CSV</caption>
+<thead><tr><th scope="col">Concentration (µg/mL)</th><th scope="col">Absorbance</th><th scope="col">Unknown samples (absorbance)</th></tr></thead>
+<tbody><tr><td>0</td><td>0.052</td><td>0.231</td></tr><tr><td>0</td><td>0.068</td><td>0.478</td></tr><tr><td>5</td><td>0.126</td><td>0.702</td></tr><tr><td>5</td><td>0.105</td><td>1.120</td></tr><tr><td colspan="3" class="more">… 8 more rows, third column empty</td></tr></tbody>
+</table></div>
+</section>
+
+<section id="in-trama" aria-labelledby="h-in-trama">
+<h2 id="h-in-trama">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Open the project</b> with <span class="ui">File → Open…</span>, or bring in the CSV with <span class="ui">File → Import into project…</span>.</li>
+<li><b>Select the table</b> <span class="ui">Standard curve</span> and choose <span class="ui">Analyze → Analyze…</span> (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>).</li>
+<li><b>In the list of analyses</b> open <span class="ui">Regression and Curves → Interpolate a standard curve</span>. On the <span class="ui">Variables</span> tab set <span class="ui">X</span> = <code>Concentration (µg/mL)</code>, <span class="ui">Y</span> = <code>Absorbance</code> and <span class="ui">Unknown responses</span> = <code>Unknown samples (absorbance)</code>.</li>
+<li><b>On the <span class="ui">Options</span> tab</b> set the values below and press <span class="ui">Run analysis</span>.</li>
+<li><b>For comparison</b> the attached project contains the same interpolation with <span class="ui">Uncertainty</span> = <span class="ui">Mean response</span>.</li>
+</ol>
+<div class="table-wrap"><table class="settings">
+<caption>Settings that decide the result</caption>
+<tbody>
+<tr><th scope="row">Direction</th><td>X from Y</td></tr>
+<tr><th scope="row">Curve</th><td>Linear</td></tr>
+<tr><th scope="row">Uncertainty</th><td>Prediction</td></tr>
+<tr><th scope="row">Confidence level (%)</th><td>95</td></tr>
+</tbody></table></div>
+<p class="note-s">The <span class="ui">Model</span> field only matters with the nonlinear curve.</p>
+<details class="shot">
+<summary>Show the Options tab screenshot</summary>
+<figure><img src="../../../../en/guide/files/standard-curve/app/options-dialog.png" width="796" height="680" loading="lazy" alt="Interpolate a standard curve window, Options tab: Direction X from Y, Curve Linear, Uncertainty Prediction, Confidence level 95. On the left, the list of analyses with Regression and Curves expanded.">
+<figcaption><span class="tag app">App screenshot</span> Trama 0.95.0 beta, English interface, light theme, attached project.</figcaption></figure>
+</details>
+</section>
+
+<section id="result" aria-labelledby="h-result">
+<h2 id="h-result">Read the result</h2>
+<p>The <span class="ui">Linear calibration</span> tab reports the line: slope 0.011835 absorbance units per µg/mL (standard error 0.000128), intercept 0.0533, R² = 0.9988. The <span class="ui">Interpolated values</span> tab has one row per unknown sample.</p>
+<figure class="solo"><a class="zoom" href="../../../../en/guide/files/standard-curve/figures/standard-curve.svg" title="Open the vector figure"><img src="../../../../en/guide/files/standard-curve/figures/standard-curve.png" width="960" height="600" loading="lazy" alt="Calibration line of absorbance against concentration from 0 to 80 µg/mL. The duplicate standards are blue dots on the line; three unknown samples are orange crosses on the line between 15 and 55 µg/mL; the fourth is to the right, beyond the 80 standard."></a>
+<figcaption><span class="tag fig">Exported figure</span> Standards (dots) and unknown samples (crosses) on the fitted line. <a href="../../../../en/guide/files/standard-curve/figures/standard-curve.svg">SVG</a></figcaption></figure>
+<div class="table-wrap"><table class="metrics wide">
+<caption>Estimated concentrations (µg/mL), rounded</caption>
+<thead><tr><th scope="col">Absorbance</th><th scope="col">Concentration</th><th scope="col">95% prediction interval</th><th scope="col">95% mean-response interval</th></tr></thead>
+<tbody>
+<tr><th scope="row">0.231</th><td>15.02</td><td>12.61 – 17.41</td><td>14.30 – 15.72</td></tr>
+<tr><th scope="row">0.478</th><td>35.89</td><td>33.50 – 38.29</td><td>35.19 – 36.60</td></tr>
+<tr><th scope="row">0.702</th><td>54.82</td><td>52.35 – 57.32</td><td>53.87 – 55.79</td></tr>
+<tr><th scope="row">1.120</th><td>out of range</td><td>—</td><td>—</td></tr>
+</tbody>
+</table></div>
+<p>The two intervals answer different questions. The <b>mean-response</b> interval says how uncertain the line is: it is narrow, about ±0.7 µg/mL, because 12 standards pin it down well. The <b>prediction</b> interval adds the noise of a single new reading, which is exactly what happens when you read an unknown sample once: about ±2.4 µg/mL. <b>For a sample read once, report the prediction interval.</b> Using the mean-response one makes the measurement look three times more precise than it is.</p>
+<details class="shot">
+<summary>Show the Interpolated values tab screenshot</summary>
+<figure><img src="../../../../en/guide/files/standard-curve/app/results.png" width="1280" height="800" loading="lazy" alt="Trama showing the interpolation results: Interpolated values tab with four rows and the columns Response, Interpolated X, Outside calibration, X lower, X upper, Interval status. The last row has Outside calibration True and Interval status Outside calibration.">
+<figcaption><span class="tag app">App screenshot</span> X lower and X upper are the limits of the prediction interval.</figcaption></figure>
+</details>
+</section>
+
+<section id="edge-case" class="edge" aria-labelledby="h-edge">
+<h2 id="h-edge" data-tag="Edge case" data-toc="Edge case">A sample beyond the highest standard</h2>
+<p>The fourth sample has an absorbance of 1.120. The highest standard, 80 µg/mL, read 1.015 and 0.995. Extending the line, Trama computes 90.1 µg/mL, but in the same row it sets <span class="ui">Outside calibration</span> = True, leaves the limits empty and writes <span class="ui">Interval status</span> = Outside calibration. In the graph the cross sits to the right of the last standard, where the line does not reach.</p>
+<p>That 90.1 is not a measurement: no standard tells you whether the response is still linear at 90 µg/mL. <b>What to do:</b> dilute the sample so that it falls inside the curve and read it again, then multiply by the dilution factor; if you cannot, report it as “&gt; 80 µg/mL”. Do not report 90.1.</p>
+<details class="shot">
+<summary>Show the graph in the app</summary>
+<figure><img src="../../../../en/guide/files/standard-curve/app/graph.png" width="1280" height="800" loading="lazy" alt="Trama showing the Linear calibration graph: the standards on the line up to 80 µg/mL and an isolated orange cross past the end of the line, at about 90 µg/mL.">
+<figcaption><span class="tag app">App screenshot</span> The out-of-range unknown stays visible, with no interval.</figcaption></figure>
+</details>
+<p><b>How to notice.</b> The <span class="ui">Outside calibration</span> column is True: Trama sets it when the estimated concentration falls outside the range of the standards, here 0 to 80 µg/mL. In the graph the point lies past the last standard or before the blank.</p>
+</section>
+
+<section id="report" aria-labelledby="h-report">
+<h2 id="h-report">What to report</h2>
+<ul class="checks">
+<li>Concentrations and replicates of the standards, blank included, and the valid range of the curve.</li>
+<li>The model (linear, or which nonlinear one), slope, intercept and R².</li>
+<li>For each sample, the concentration with its prediction interval, and which samples were out of range and how they were handled.</li>
+<li>Trama version and the <code>.alab</code> project that repeats the calculation.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>Concentrations were obtained by inverse interpolation from a calibration line fitted to six standards in duplicate (0–80 µg/mL; slope 0.01183 absorbance units per µg/mL, R² = 0.999) in Trama 0.95.0 beta, with 95% prediction intervals. One sample with an absorbance above the highest standard was reported as &gt; 80 µg/mL.</p></blockquote>
+<figcaption>Example sentence for the Methods section. <button type="button" class="copy" data-copy="#frase" hidden>Copy the sentence</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti" data-toc="Sources">Sources</h2>
+<ol class="refs">
+<li>Osborne C. (1991). Statistical calibration: a review. <i>International Statistical Review</i>, 59(3), 309–336. <a href="https://doi.org/10.2307/1403690">doi:10.2307/1403690</a></li>
+<li>Draper N. R., Smith H. (1998). <i>Applied Regression Analysis</i>, 3rd ed. Wiley. <a href="https://doi.org/10.1002/9781118625590">doi:10.1002/9781118625590</a></li>
+<li>ICH (2022). <i>M10: Bioanalytical method validation and study sample analysis</i>. Scientific guideline, European Medicines Agency. <a href="https://www.ema.europa.eu/en/scientific-guidelines/ich-m10-bioanalytical-method-validation">ema.europa.eu</a></li>
+</ol>
+<p class="ver">Checked with Trama 0.95.0 beta (tag <a href="https://github.com/realfulvio/Trama/tree/v0.95.0">v0.95.0</a>, commit 4c07db6) on 20 November 2026. Calculation in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/exploration.py">analisi/exploration.py</a>, graph and intervals in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/additional.py">analisi/additional.py</a>.</p>
+</section>
+<nav class="pager" aria-label="Nearby chapters"><a href="../../../../en/guide/statistics/k-means/"><small>Previous</small>Choose the number of clusters with K-means</a><a href="../../../../en/guide/data/calculated-columns/"><small>Next</small>Create a calculated column</a></nav></article>
+</main>
+</div>
+<footer><div class="wrap"><div class="brand"><img src="../../../../site/trama.svg" alt="" width="34" height="34">Trama</div><p>Trama guide. Examples use synthetic data; every chapter states the version its numbers were checked on.</p><nav aria-label="Links"><a href="../../../../en/guide/">Guide contents</a><a href="../../../../en/">Home</a><a href="../../../../en/features/">Features</a><a data-release-page href="https://github.com/realfulvio/Trama/releases/tag/v0.95.0">What’s new in 0.95</a><a href="https://github.com/realfulvio/Trama/blob/main/LICENSE">MIT licence</a></nav><p>Trama is an independent project in beta. No clinical validation or regulatory certification is claimed.</p></div></footer>
+<script src="../../../../site/releases.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{
+  "trama": "0.95.0",
+  "layout": "Figure 1",
+  "columns": 2,
+  "panels": 2,
+  "width_mm": 170.0,
+  "svg_text": {
+    "bytes": 25790,
+    "text_elements": 33,
+    "embedded_images": 0,
+    "page_mm": [
+      170.0,
+      72.9
+    ]
+  },
+  "svg_paths": {
+    "bytes": 52517,
+    "text_elements": 0,
+    "embedded_images": 0
+  },
+  "pdf": {
+    "bytes": 24884,
+    "pages": 1,
+    "page_mm": [
+      170.0,
+      72.9
+    ],
+    "embedded_images": 0,
+    "searchable_text": true,
+    "panel_letters_in_text": [
+      "A",
+      "B"
+    ]
+  },
+  "graph_font_sizes": {
+    "title_size": 22,
+    "label_size": 20,
+    "tick_size": 18
+  },
+  "effective_text_pt": {
+    "page": [
+      9.56,
+      11.15
+    ],
+    "panels": [
+      7.24,
+      8.85
+    ]
+  },
+  "edge_default_fonts": {
+    "effective_text_pt": {
+      "page": [
+        9.56,
+        11.15
+      ],
+      "panels": [
+        4.02,
+        4.83
+      ]
+    }
+  }
+}

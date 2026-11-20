@@ -1,0 +1,37 @@
+{
+  "trama": "0.95.0",
+  "data": "synthetic",
+  "seed": 5,
+  "rows": 8,
+  "formula": "=COL(\"Segnale (u.a.)\") / COL(\"Proteina (µg)\")",
+  "signal": {
+    "mean": 390.67499999999995,
+    "sd": 75.76525306120591,
+    "cv_percent": 19.39342242559824
+  },
+  "normalized": {
+    "mean": 41.180837826853484,
+    "sd": 0.9803565678273949,
+    "cv_percent": 2.3806134589814425,
+    "values": [
+      40.50000000000001,
+      39.84761904761905,
+      41.188405797101446,
+      42.02479338842976,
+      42.91489361702127,
+      41.63157894736842,
+      40.81415929203539,
+      40.525252525252526
+    ]
+  },
+  "after_excluding_protein_P3": {
+    "n": 7,
+    "mean": 41.179756688246634
+  },
+  "after_editing_signal_P1_to_400": 48.78048780487805,
+  "reopened_formula_identical": true,
+  "descriptive_rows": [
+    "Segnale (u.a.)",
+    "Segnale per µg"
+  ]
+}

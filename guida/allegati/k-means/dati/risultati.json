@@ -1,0 +1,30 @@
+{
+  "trama": "0.95.0",
+  "data": "synthetic",
+  "rows": 45,
+  "seed": 42,
+  "standardize": true,
+  "starts": "10 k-means++ (Lloyd)",
+  "metrics": {
+    "2": {
+      "wss": 36.17482370521825,
+      "silhouette": 0.6204974295100698
+    },
+    "3": {
+      "wss": 2.678388924024927,
+      "silhouette": 0.8555585957524268
+    },
+    "4": {
+      "wss": 2.0363623166135474,
+      "silhouette": 0.7326367441605375
+    }
+  },
+  "wss_k1": 88.0,
+  "suggested_k": 3,
+  "same_k_with_seeds": [
+    1,
+    7,
+    123,
+    2026
+  ]
+}

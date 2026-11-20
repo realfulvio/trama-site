@@ -1,0 +1,150 @@
+<!--
+{"title": "Scegliere il numero di gruppi con K-means",
+ "short": "K-means",
+ "description": "Confronta 2, 3 e 4 gruppi con WSS e silhouette su 45 segnali sintetici in Trama, con un caso limite sulle unità di misura e la frase per i metodi.",
+ "ask": "Hai misurato ampiezza e deriva di 45 segnali e sospetti che appartengano a poche famiglie. Quanti gruppi sostengono davvero i dati, e quanto puoi fidarti della risposta?",
+ "facts": [["Verificato", "Trama {{V}}"], ["Dati", "45 segnali sintetici"], ["Seme", "42"], ["Lettura", "7 minuti"]],
+ "proof": [["Dati", "sintetici, 45 righe"], ["Seme", "42"]],
+ "downloads": [["alab", "Progetto .alab"], ["csv", "Dati .csv"], ["json", "Metriche .json"]],
+ "image": "groups_3", "image_alt": "Grafico a dispersione di deriva contro ampiezza con tre gruppi di 15 segnali ciascuno.",
+ "feature_tag": "Capitolo pilota · Statistica",
+ "feature": "45 segnali sintetici, tre soluzioni a confronto, un caso limite sulle unità di misura."}
+-->
+<section id="quando" aria-labelledby="h-quando">
+<h2 id="h-quando">Quando usarlo</h2>
+<p>K-means assegna ogni osservazione a uno di <i>k</i> gruppi e sposta i centri finché la somma dei quadrati delle distanze dal proprio centro, la <abbr title="somma dei quadrati entro i gruppi">WSS</abbr>, non scende più. Funziona bene con misure numeriche e gruppi compatti, di forma e dimensione simili.</p>
+<p>Prima di leggere i gruppi controlla tre cose, perché ognuna può cambiare la risposta:</p>
+<ul class="checks">
+<li><b>La scala delle variabili.</b> Le distanze sommano le variabili così come sono: quella con i numeri più grandi comanda. Con unità diverse attiva <span class="ui">Standardizza</span>. Il <a href="#caso-limite">caso limite</a> più sotto mostra che cosa succede altrimenti.</li>
+<li><b>I valori anomali.</b> Un punto molto lontano può prendersi un gruppo tutto suo.</li>
+<li><b>L’inizializzazione.</b> In Trama l’algoritmo di Lloyd parte 10 volte da centri scelti con k-means++ e tiene la soluzione con la WSS più bassa. Il <span class="ui">Seme casuale</span> rende ripetibile la sequenza.</li>
+</ul>
+<p>K-means restituisce sempre <i>k</i> gruppi, anche quando nei dati non ce ne sono. Il confronto fra più valori di <i>k</i> serve proprio a capire se la struttura c’è.</p>
+</section>
+
+<section id="dati" aria-labelledby="h-dati">
+<h2 id="h-dati">I dati</h2>
+<p>Una tabella <span class="ui">Variabili multiple</span> con una riga per segnale e due colonne numeriche: <code>Ampiezza (mV)</code> e <code>Deriva (mV/min)</code>. Nessun valore mancante. Se una riga ha un vuoto in una delle variabili scelte, Trama la esclude dal calcolo.</p>
+<div class="files" role="group" aria-label="File da scaricare">
+<a class="file" href="{{href:alab}}" download><span class="ext">.alab</span><span><b>Progetto Trama</b><small>tabella e due analisi pronte · {{kb:alab}}</small></span></a>
+<a class="file" href="{{href:csv}}" download><span class="ext">.csv</span><span><b>Dati sintetici</b><small>45 righe, 2 colonne · {{kb:csv}}</small></span></a>
+<a class="file" href="{{href:json}}" download><span class="ext">.json</span><span><b>Metriche di prova</b><small>WSS e silhouette a piena precisione</small></span></a>
+</div>
+<div class="table-wrap"><table class="peek">
+<caption>Prime righe del CSV</caption>
+<thead><tr><th scope="col">Ampiezza (mV)</th><th scope="col">Deriva (mV/min)</th></tr></thead>
+<tbody><tr><td>−1,5351</td><td>0,4488</td></tr><tr><td>−1,3544</td><td>0,1264</td></tr><tr><td>−1,2954</td><td>−0,0400</td></tr><tr><td colspan="2" class="more">… 42 righe in più</td></tr></tbody>
+</table></div>
+</section>
+
+<section id="percorso" aria-labelledby="h-percorso">
+<h2 id="h-percorso">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Apri il progetto</b> con <span class="ui">File → Apri…</span>, oppure porta il CSV con <span class="ui">File → Importa nel progetto…</span>.</li>
+<li><b>Seleziona la tabella</b> <span class="ui">Segnali sintetici</span> e scegli <span class="ui">Analisi → Analizza…</span> (<kbd>Ctrl</kbd>+<kbd>Maiusc</kbd>+<kbd>A</kbd>).</li>
+<li><b>Nell’elenco delle analisi</b> apri <span class="ui">Raggruppamento → Selezione del modello k-means</span>. Nella scheda <span class="ui">Variabili</span> spunta entrambe le colonne.</li>
+<li><b>Nella scheda <span class="ui">Opzioni</span></b> imposta i valori della tabella qui sotto e premi <span class="ui">Esegui analisi</span>.</li>
+<li><b>Per vedere la partizione</b> ripeti con <span class="ui">Raggruppamento k-means</span>, 3 gruppi, stesse variabili, scala e seme. Nel progetto allegato le due analisi sono già pronte.</li>
+</ol>
+<div class="table-wrap"><table class="settings">
+<caption>Impostazioni che decidono il risultato</caption>
+<tbody>
+<tr><th scope="row">k minimo · k massimo</th><td>2 · 4</td></tr>
+<tr><th scope="row">Standardizza</th><td>attivo</td></tr>
+<tr><th scope="row">Seme casuale</th><td>42</td></tr>
+<tr><th scope="row">Criterio</th><td>Silhouette</td></tr>
+<tr><th scope="row">Algoritmo k-means</th><td>Lloyd (predefinito)</td></tr>
+</tbody></table></div>
+<details class="shot">
+<summary>Mostra la schermata della scheda Opzioni</summary>
+<figure><img src="{{href:app_dialog}}" {{wh:app_dialog}} loading="lazy" alt="Finestra Selezione del modello k-means, scheda Opzioni: k minimo 2, k massimo 4, Standardizza spuntato, Seme casuale 42, Criterio Silhouette, Algoritmo k-means Lloyd. A sinistra l’elenco delle analisi con Raggruppamento aperto.">
+<figcaption><span class="tag app">Schermata dell’app</span> Trama {{V}}, interfaccia italiana, tema chiaro, progetto allegato.</figcaption></figure>
+</details>
+</section>
+
+<section id="risultato" aria-labelledby="h-risultato">
+<h2 id="h-risultato">Leggi il risultato</h2>
+<p>Le metriche sono nella scheda <span class="ui">Model metrics</span> dei risultati e la scelta nella scheda <span class="ui">Selection</span>, alla riga <span class="ui">Suggested k</span>. Nella 0.95.0 i nomi di queste schede restano in inglese anche con l’interfaccia italiana.</p>
+<div class="kcmp">
+<fieldset class="kpick"><legend>Confronta le soluzioni</legend><label><input type="radio" name="k" value="2"><span>2 gruppi</span></label><label><input type="radio" name="k" value="3" checked><span>3 gruppi</span></label><label><input type="radio" name="k" value="4"><span>4 gruppi</span></label></fieldset>
+<div class="kgrid">
+<div class="kfigs">
+<figure class="kfig" data-k="2">
+<a class="zoom" href="{{href:groups_2_svg}}" title="Apri la figura vettoriale"><img src="{{href:groups_2}}" {{wh:groups_2}} loading="lazy" alt="Grafico a dispersione di deriva contro ampiezza con 2 gruppi colorati: due famiglie su tre sono unite in un solo gruppo."></a>
+<figcaption><span class="tag fig">Figura esportata</span> <b>k = 2</b> · WSS 36,17 · silhouette 0,620. Due famiglie su tre vengono unite in un solo gruppo. <a href="{{href:groups_2_svg}}">SVG</a></figcaption>
+</figure>
+<figure class="kfig" data-k="3">
+<a class="zoom" href="{{href:groups_3_svg}}" title="Apri la figura vettoriale"><img src="{{href:groups_3}}" {{wh:groups_3}} loading="lazy" alt="Grafico a dispersione di deriva contro ampiezza con 3 gruppi colorati: ogni famiglia di segnali ha il suo gruppo."></a>
+<figcaption><span class="tag fig">Figura esportata</span> <b>k = 3</b> · WSS 2,68 · silhouette 0,856. Ogni famiglia di segnali ha il suo gruppo: 15, 15 e 15 segnali. <a href="{{href:groups_3_svg}}">SVG</a></figcaption>
+</figure>
+<figure class="kfig" data-k="4">
+<a class="zoom" href="{{href:groups_4_svg}}" title="Apri la figura vettoriale"><img src="{{href:groups_4}}" {{wh:groups_4}} loading="lazy" alt="Grafico a dispersione di deriva contro ampiezza con 4 gruppi colorati: una famiglia compatta è divisa in due."></a>
+<figcaption><span class="tag fig">Figura esportata</span> <b>k = 4</b> · WSS 2,04 · silhouette 0,733. Il quarto centro divide una famiglia compatta in due parti. <a href="{{href:groups_4_svg}}">SVG</a></figcaption>
+</figure>
+</div>
+<div class="kside">
+<div class="table-wrap"><table class="metrics">
+<caption>Metriche per numero di gruppi, arrotondate</caption>
+<thead><tr><th scope="col">k</th><th scope="col">WSS</th><th scope="col">Rispetto a k − 1</th><th scope="col">Silhouette media</th></tr></thead>
+<tbody>
+<tr data-k="2"><th scope="row">2</th><td>36,17</td><td>−58,9 %</td><td><span class="silbar" style="--v:0.620"><span>0,620</span></span></td></tr>
+<tr data-k="3"><th scope="row">3</th><td>2,68</td><td>−92,6 %</td><td><span class="silbar" style="--v:0.856"><span>0,856</span></span></td></tr>
+<tr data-k="4"><th scope="row">4</th><td>2,04</td><td>−24,0 %</td><td><span class="silbar" style="--v:0.733"><span>0,733</span></span></td></tr>
+</tbody>
+</table></div>
+<p class="note-s">Con un solo gruppo la WSS vale 88,00: con due variabili standardizzate e 45 righe è 2 × 44. I valori a piena precisione sono nel <a href="{{href:json}}">JSON di prova</a>.</p>
+</div>
+</div>
+</div>
+<p>Da due a tre gruppi la WSS crolla da 36,17 a 2,68: il terzo centro separa due famiglie che con <i>k</i> = 2 restavano unite. Da tre a quattro scende solo a 2,04 e la silhouette media cala da 0,856 a 0,733, perché il quarto centro taglia in due una famiglia compatta. <b>Su questi dati Trama suggerisce <i>k</i> = 3.</b></p>
+<p>La silhouette di un segnale confronta <i>a</i>, la distanza media dagli altri membri del suo gruppo, con <i>b</i>, la distanza media dai membri del gruppo vicino più prossimo: <i>s</i> = (<i>b</i> − <i>a</i>) / max(<i>a</i>, <i>b</i>). Va da −1 a 1. Una media vicina a 1 indica gruppi compatti e ben separati. Trama la calcola sulle stesse variabili standardizzate usate per il fit.</p>
+<aside class="callout ok"><b>Controllo di robustezza.</b> Con i semi 1, 7, 123 e 2026, con l’algoritmo Hartigan–Wong e con i criteri Calinski–Harabasz, Davies–Bouldin, Elbow e Gap su <i>k</i> da 1 a 8, la scelta resta 3. Qui le famiglie sono costruite ben separate: sui tuoi dati l’accordo fra criteri non è scontato.</aside>
+<details class="shot">
+<summary>Mostra la schermata della tabella Model metrics</summary>
+<figure><img src="{{href:app_results}}" {{wh:app_results}} loading="lazy" alt="Trama con i risultati di Selezione del modello k-means: scheda Model metrics con le righe k = 2, 3, 4 e le colonne WSS, Silhouette, Calinski–Harabasz, Davies–Bouldin.">
+<figcaption><span class="tag app">Schermata dell’app</span> I numeri coincidono con quelli del JSON di prova.</figcaption></figure>
+</details>
+</section>
+
+<section id="caso-limite" class="edge" aria-labelledby="h-caso">
+<h2 id="h-caso" data-tag="Caso limite" data-toc="Caso limite">L’unità di misura decide al posto tuo</h2>
+<p>Esprimi l’ampiezza in µV invece che in mV, cioè con numeri mille volte più grandi, e disattiva <span class="ui">Standardizza</span>. Le distanze dipendono quasi solo dall’ampiezza. La silhouette suggerisce 2 gruppi (0,844 contro 0,787 con <i>k</i> = 3). Con <i>k</i> = 3, tre segnali della famiglia in alto a destra finiscono insieme a quelli in basso a destra, che hanno ampiezza simile ma deriva opposta.</p>
+<div class="pair">
+<figure><a class="zoom" href="{{href:edge_raw}}"><img src="{{href:edge_raw}}" {{wh:edge_raw}} loading="lazy" alt="Partizione a tre gruppi con ampiezza in microvolt e senza standardizzazione: tre punti della famiglia in alto a destra sono colorati come la famiglia in basso a destra."></a>
+<figcaption><span class="tag fig">Figura esportata</span> µV, <b>Standardizza disattivo</b>: 3 segnali nel gruppo sbagliato.</figcaption></figure>
+<figure><a class="zoom" href="{{href:edge_std}}"><img src="{{href:edge_std}}" {{wh:edge_std}} loading="lazy" alt="Partizione a tre gruppi con ampiezza in microvolt e standardizzazione attiva: le tre famiglie sono separate correttamente."></a>
+<figcaption><span class="tag fig">Figura esportata</span> µV, <b>Standardizza attivo</b>: stesso risultato dei dati in mV.</figcaption></figure>
+</div>
+<p><b>Come accorgersene.</b> La scelta di <i>k</i> cambia quando cambi unità; i gruppi sono tagliati lungo un solo asse; le colonne hanno intervalli di ordini di grandezza diversi. Con <span class="ui">Standardizza</span> attivo i risultati tornano identici a quelli in mV.</p>
+<div class="files" role="group" aria-label="File del caso limite">
+<a class="file" href="{{href:alab_uV}}" download><span class="ext">.alab</span><span><b>Progetto del caso limite</b><small>ampiezza in µV, senza standardizzazione · {{kb:alab_uV}}</small></span></a>
+<a class="file" href="{{href:csv_uV}}" download><span class="ext">.csv</span><span><b>Dati in µV</b><small>stessi 45 segnali · {{kb:csv_uV}}</small></span></a>
+<a class="file" href="{{href:json_uV}}" download><span class="ext">.json</span><span><b>Metriche del caso limite</b><small>piena precisione</small></span></a>
+</div>
+</section>
+
+<section id="riportare" aria-labelledby="h-riportare">
+<h2 id="h-riportare">Cosa riportare</h2>
+<ul class="checks">
+<li>Variabili e unità, righe escluse e gestione dei mancanti.</li>
+<li>Standardizzazione, algoritmo e numero di inizializzazioni, seme.</li>
+<li>Intervallo di <i>k</i> provato, criterio di scelta e valore ottenuto.</li>
+<li>Versione di Trama e progetto <code>.alab</code> che ripete il calcolo.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>Ampiezza e deriva sono state standardizzate e raggruppate con K-means (algoritmo di Lloyd, 10 inizializzazioni k-means++, seme 42) per <i>k</i> da 2 a 4 in Trama {{V}}. La silhouette media è massima con <i>k</i> = 3 (0,856, contro 0,620 con <i>k</i> = 2 e 0,733 con <i>k</i> = 4).</p></blockquote>
+<figcaption>Esempio di frase per la sezione Metodi. <button type="button" class="copy" data-copy="#frase" hidden>Copia la frase</button></figcaption>
+</figure>
+<p>Una partizione esplorativa non è una classificazione. Prima di usare i gruppi per assegnare nuovi campioni cerca un riscontro indipendente: un’altra serie di misure, una variabile non usata nel raggruppamento, un altro metodo.</p>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti">Fonti</h2>
+<ol class="refs">
+<li>Lloyd S. P. (1982). Least squares quantization in PCM. <i>IEEE Transactions on Information Theory</i>, 28(2), 129–137. <a href="https://doi.org/10.1109/TIT.1982.1056489">doi:10.1109/TIT.1982.1056489</a></li>
+<li>Arthur D., Vassilvitskii S. (2007). k-means++: the advantages of careful seeding. <i>Proceedings of the 18th ACM-SIAM Symposium on Discrete Algorithms</i>, 1027–1035. <a href="https://dl.acm.org/doi/10.5555/1283383.1283494">ACM Digital Library</a></li>
+<li>Rousseeuw P. J. (1987). Silhouettes: a graphical aid to the interpretation and validation of cluster analysis. <i>Journal of Computational and Applied Mathematics</i>, 20, 53–65. <a href="https://doi.org/10.1016/0377-0427(87)90125-7">doi:10.1016/0377-0427(87)90125-7</a></li>
+<li>Tibshirani R., Walther G., Hastie T. (2001). Estimating the number of clusters in a data set via the gap statistic. <i>Journal of the Royal Statistical Society B</i>, 63(2), 411–423. <a href="https://doi.org/10.1111/1467-9868.00293">doi:10.1111/1467-9868.00293</a></li>
+</ol>
+<p class="ver">Verificato con Trama {{V}} (tag <a href="https://github.com/realfulvio/Trama/tree/{{TAG}}">{{TAG}}</a>, commit {{COMMIT}}) il 20 novembre 2026. Calcolo in <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/stats.py">analisi/stats.py</a> e <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/advanced.py">analisi/advanced.py</a>.</p>
+</section>

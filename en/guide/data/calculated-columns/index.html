@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../../../site/lang.js"></script>
+<title>Create a calculated column · Trama guide</title>
+<meta name="description" content="A formula in a Trama sheet that normalises the signal to the protein loaded: the coefficient of variation drops from 19.4% to 2.4%, and the formula is saved in the project and updates itself.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<link rel="canonical" href="https://tramastat.org/en/guide/data/calculated-columns/">
+<link rel="alternate" hreflang="it" href="https://tramastat.org/guida/dati/colonne-calcolate/">
+<link rel="alternate" hreflang="en" href="https://tramastat.org/en/guide/data/calculated-columns/">
+<link rel="alternate" hreflang="x-default" href="https://tramastat.org/en/guide/data/calculated-columns/">
+<link rel="icon" type="image/svg+xml" href="../../../../site/trama.svg">
+<link rel="preload" href="../../../../site/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../../../site/style.css">
+<link rel="stylesheet" href="../../../../site/guide.css">
+<meta property="og:site_name" content="Trama">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tramastat.org/en/guide/data/calculated-columns/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:title" content="Create a calculated column · Trama guide">
+<meta property="og:description" content="A formula in a Trama sheet that normalises the signal to the protein loaded: the coefficient of variation drops from 19.4% to 2.4%, and the formula is saved in the project and updates itself.">
+<meta property="og:image" content="https://tramastat.org/en/guide/files/calculated-columns/app/sheet.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="800">
+<meta property="og:image:alt" content="Wells sheet in Trama with the calculated column Signal per µg next to Signal and Protein.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Create a calculated column · Trama guide">
+<meta name="twitter:description" content="A formula in a Trama sheet that normalises the signal to the protein loaded: the coefficient of variation drops from 19.4% to 2.4%, and the formula is saved in the project and updates itself.">
+<meta name="twitter:image" content="https://tramastat.org/en/guide/files/calculated-columns/app/sheet.png">
+<meta name="twitter:image:alt" content="Wells sheet in Trama with the calculated column Signal per µg next to Signal and Protein.">
+<meta name="theme-color" content="#08232f">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://tramastat.org/en/guide/data/calculated-columns/#webpage","url":"https://tramastat.org/en/guide/data/calculated-columns/","name":"Create a calculated column · Trama guide","description":"A formula in a Trama sheet that normalises the signal to the protein loaded: the coefficient of variation drops from 19.4% to 2.4%, and the formula is saved in the project and updates itself.","inLanguage":"en","isPartOf":{"@id":"https://tramastat.org/#website"},"about":{"@id":"https://tramastat.org/#software"},"headline":"Create a calculated column","dateModified":"2026-11-20","primaryImageOfPage":{"@type":"ImageObject","url":"https://tramastat.org/en/guide/files/calculated-columns/app/sheet.png","width":1280,"height":800}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trama","item":"https://tramastat.org/en/"},{"@type":"ListItem","position":2,"name":"Guide","item":"https://tramastat.org/en/guide/"},{"@type":"ListItem","position":3,"name":"Data and formulas","item":"https://tramastat.org/en/guide/data/"},{"@type":"ListItem","position":4,"name":"Calculated column","item":"https://tramastat.org/en/guide/data/calculated-columns/"}]}]}</script>
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../../../../site/guide.js"></script>
+</head>
+<body>
+<a class="skip" href="#contenuto">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../../../en/"><img src="../../../../site/trama.svg" alt="" width="34" height="34">Trama</a>
+<nav aria-label="Site"><a href="../../../../en/">Home</a><a href="../../../../en/features/">Features</a><a href="../../../../en/guide/" aria-current="true">Guide</a></nav>
+<div class="langs" role="group" aria-label="Language"><a href="../../../../guida/dati/colonne-calcolate/" hreflang="it" lang="it" title="Italiano" aria-label="Italiano">IT</a><span class="on" aria-current="true" lang="en" title="English">EN</span></div>
+<a class="btn" data-release-download href="https://github.com/realfulvio/Trama/releases/download/v0.95.0/Trama-0.95.0-Windows-x64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download</a></div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Guide contents">
+<details class="gnav" open><summary>Guide contents</summary>
+<form class="search" role="search" action="../../../../en/guide/" method="get">
+<label for="q">Search the guide</label>
+<div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" name="q" type="search" placeholder="e.g. number of clusters, standard curve" autocomplete="off"><button class="go" type="submit">Search</button></div>
+</form>
+<p class="gl"><a href="../../../../en/guide/">All guides</a></p>
+<h2 class="gname"><a href="../../../../en/guide/data/"><svg class="gico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 4v16M15 4v16"/></svg>Data and formulas</a></h2>
+<ul class="gtree"><li class="plan"><span>Prepare and import a sheet</span></li><li class="draft"><span>Handle empty and excluded cells</span></li><li><a href="./" aria-current="page">Create a calculated column</a></li><li class="plan"><span>Filter and transform values</span></li><li class="plan"><span>Link analyses and result sheets</span></li><li class="plan"><span>Save and reopen a project</span></li></ul>
+<h2 class="gname sub">Other guides</h2>
+<ul class="gtree"><li><a href="../../../../en/guide/statistics/">Statistics</a></li><li><a href="../../../../en/guide/curves/">Curves and calibration</a></li><li><a href="../../../../en/guide/graphs/">Graphs and reports</a></li></ul>
+</details>
+</aside>
+<aside class="rail" aria-label="In this chapter">
+<details class="toc" open><summary>In this chapter</summary><ol><li><a href="#when">When to use it</a></li><li><a href="#data">The data</a></li><li><a href="#in-trama">In Trama</a></li><li><a href="#result">Read the result</a></li><li><a href="#edge-case">Edge case</a></li><li><a href="#report">What to report</a></li><li><a href="#fonti">Sources</a></li></ol></details>
+<details class="card proof" open><summary><h2>Proof sheet and files</h2></summary>
+<dl><div><dt>Trama</dt><dd>0.95.0 beta</dd></div><div><dt>Commit</dt><dd><code>4c07db6</code></dd></div><div><dt>Data</dt><dd>synthetic, 8 rows</dd></div><div><dt>Seed</dt><dd>5</dd></div></dl>
+<ul class="dl"><li><a href="../../../../en/guide/files/calculated-columns/data/calculated-column-example.alab" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.alab project</a></li><li><a href="../../../../en/guide/files/calculated-columns/data/wells.csv" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.csv data</a></li><li><a href="../../../../en/guide/files/calculated-columns/data/results.json" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.json results</a></li></ul>
+<a class="tofonti" href="#fonti">2 primary sources ↓</a></details>
+</aside>
+<main id="contenuto" class="doc">
+<article><header class="chap-head" id="inizio">
+<p class="crumbs" aria-label="Breadcrumb"><a href="../../../../en/guide/">Guide</a><span aria-hidden="true">›</span><a href="../../../../en/guide/data/">Data and formulas</a><span aria-hidden="true">›</span><span aria-current="page">Calculated column</span></p>
+<h1>Create a calculated column</h1>
+<p class="ask">In eight wells you measured a signal and the amount of protein loaded. You want the signal per µg without copying numbers by hand, and you want the result to update if you correct a value.</p>
+<ul class="facts" aria-label="Proof sheet and files"><li><b>Checked on</b> Trama 0.95.0 beta</li><li><b>Data</b> 8 synthetic wells</li><li><b>Seed</b> 5</li><li><b>Reading</b> 5 minutes</li></ul>
+</header>
+<section id="when" aria-labelledby="h-when">
+<h2 id="h-when">When to use it</h2>
+<p>A calculated column holds a formula that Trama applies row by row to the other columns of the same table. It does not copy numbers: if you change a source value, the result is recalculated, and the project stores the formula, not the values.</p>
+<p>Use it to normalise to a reference quantity, convert units, or take differences or ratios between measurements in the same row. Before dividing, check one assumption:</p>
+<ul class="checks">
+<li><b>The signal is proportional to the reference.</b> The signal/protein ratio makes sense if twice the protein gives twice the signal and the line passes through zero. If a background remains at zero protein, the ratio changes with the amount loaded and introduces an effect that is not there. In that case subtract the background first, or use protein as a covariate rather than a divisor.</li>
+<li><b>The units.</b> The name of the new column should state the unit of the result, here “a.u. per µg”.</li>
+</ul>
+</section>
+
+<section id="data" aria-labelledby="h-data">
+<h2 id="h-data">The data</h2>
+<p>A <span class="ui">Multiple variables</span> table with one row per well: <code>Well</code> (P1–P8), <code>Signal (a.u.)</code> and <code>Protein (µg)</code>. The protein loaded ranges from 6.9 to 12.1 µg, so the raw signal varies mostly because of that.</p>
+<div class="files" role="group" aria-label="Files to download">
+<a class="file" href="../../../../en/guide/files/calculated-columns/data/calculated-column-example.alab" download><span class="ext">.alab</span><span><b>Trama project</b><small>table, formula and descriptive statistics · 0.5 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/calculated-columns/data/wells.csv" download><span class="ext">.csv</span><span><b>Synthetic data</b><small>8 rows, 3 columns, without the formula · 0.1 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/calculated-columns/data/results.json" download><span class="ext">.json</span><span><b>Proof results</b><small>means, SDs and CVs at full precision</small></span></a>
+</div>
+</section>
+
+<section id="in-trama" aria-labelledby="h-in-trama">
+<h2 id="h-in-trama">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Open the project</b> with <span class="ui">File → Open…</span>, or import the CSV with <span class="ui">File → Import into project…</span> and add the formula yourself.</li>
+<li><b>Select the table</b> <span class="ui">Wells</span> and, on the <span class="ui">Home</span> tab, press <span class="ui">Formula</span>.</li>
+<li><b>In <span class="ui">Calculated column</span></b> type the name of the new column, <code>Signal per µg</code>.</li>
+<li><b>In <span class="ui">Formula</span></b> type <code>=COL("Signal (a.u.)") / COL("Protein (µg)")</code> and press <span class="ui">OK</span>. Trama tries the formula on the whole table before accepting it; if a column name is wrong, the error appears in the window.</li>
+<li><b>To change it</b> select a cell of the calculated column and press <span class="ui">Formula</span> again: the window opens with the current expression.</li>
+</ol>
+<figure class="solo narrow"><img src="../../../../en/guide/files/calculated-columns/app/formula-dialog.png" width="560" height="303" loading="lazy" alt="Calculated column window with the name Signal per µg and the formula =COL(&quot;Signal (a.u.)&quot;) / COL(&quot;Protein (µg)&quot;). Below, three example formulas: arithmetic, group mean, running total.">
+<figcaption><span class="tag app">App screenshot</span> The formula window, with the examples Trama shows below the field.</figcaption></figure>
+<p class="note-s"><code>COL("…")</code> is needed when the column name contains spaces or brackets. Other functions include <code>ABS</code>, <code>SQRT</code>, <code>LN</code>, <code>LOG10</code>, <code>ROUND</code>, <code>IF</code> and <code>MEAN</code>.</p>
+</section>
+
+<section id="result" aria-labelledby="h-result">
+<h2 id="h-result">Read the result</h2>
+<p>The <span class="ui">Signal per µg</span> column appears to the right of the source columns, with its numbers in green to set it apart from data entered by hand.</p>
+<details class="shot" open>
+<summary>Show the sheet with the calculated column</summary>
+<figure><img src="../../../../en/guide/files/calculated-columns/app/sheet.png" width="1280" height="800" loading="lazy" alt="Wells sheet in Trama: columns Well, Signal (a.u.), Protein (µg) and, in green, Signal per µg with values between 39.8 and 42.9.">
+<figcaption><span class="tag app">App screenshot</span> Trama 0.95.0 beta, attached project just opened.</figcaption></figure>
+</details>
+<div class="table-wrap"><table class="metrics">
+<caption>Before and after normalisation</caption>
+<thead><tr><th scope="col"></th><th scope="col">Mean</th><th scope="col">Standard deviation</th><th scope="col">Coefficient of variation</th></tr></thead>
+<tbody>
+<tr><th scope="row">Signal (a.u.)</th><td>390.7</td><td>75.8</td><td>19.4%</td></tr>
+<tr><th scope="row">Signal per µg</th><td>41.18</td><td>0.98</td><td>2.4%</td></tr>
+</tbody>
+</table></div>
+<p>The variability between wells drops from 19.4% to 2.4%: almost all of it came from the amount of protein loaded. Mean and standard deviation come from <span class="ui">Descriptive statistics</span>, already in the project; the coefficient of variation is the standard deviation divided by the mean.</p>
+<aside class="callout ok"><b>It reopens the same.</b> Saved and reopened, the project has the same formula, character for character, and the same eight values. If you change the signal of P1 from 332.1 to 400, the calculated cell immediately goes from 40.50 to 48.78.</aside>
+</section>
+
+<section id="edge-case" class="edge" aria-labelledby="h-edge">
+<h2 id="h-edge" data-tag="Edge case" data-toc="Edge case">An excluded cell in a source column</h2>
+<p>Exclude the protein of well P3: select it and press <span class="ui">Home → Exclude / include cell</span>. The calculated cell for P3 becomes empty, because a ratio with an excluded value has no result. The calculated column is left with 7 values and the mean becomes 41.18 (41.1798 against 41.1808 with all eight).</p>
+<p>This is the correct behaviour, but if you do not notice it you think you have eight wells and analyse seven. <b>How to notice:</b> the calculated column has an empty cell where the source columns have a number; in <span class="ui">Descriptive statistics</span> the N row reads 7 and Missing reads 1. To restore it, select the cell again and press the same command.</p>
+</section>
+
+<section id="report" aria-labelledby="h-report">
+<h2 id="h-report">What to report</h2>
+<ul class="checks">
+<li>The exact formula and the units of the result.</li>
+<li>Why the ratio is justified: proportionality and no background, or how the background was removed.</li>
+<li>Excluded cells and the number of values used.</li>
+<li>Trama version and the <code>.alab</code> project with the formula.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>The signal of each well was divided by the amount of protein loaded with a calculated column in Trama 0.95.0 beta (formula <code>=COL("Signal (a.u.)") / COL("Protein (µg)")</code>). Normalisation reduced the coefficient of variation between wells from 19.4% to 2.4% (n = 8).</p></blockquote>
+<figcaption>Example sentence for the Methods section. <button type="button" class="copy" data-copy="#frase" hidden>Copy the sentence</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti" data-toc="Sources">Sources</h2>
+<ol class="refs">
+<li>Curran-Everett D. (2013). Explorations in statistics: the analysis of ratios and normalized data. <i>Advances in Physiology Education</i>, 37(3), 213–219. <a href="https://doi.org/10.1152/advan.00053.2013">doi:10.1152/advan.00053.2013</a></li>
+<li>Kronmal R. A. (1993). Spurious correlation and the fallacy of the ratio standard revisited. <i>Journal of the Royal Statistical Society A</i>, 156(3), 379–392. <a href="https://doi.org/10.2307/2983064">doi:10.2307/2983064</a></li>
+</ol>
+<p class="ver">Checked with Trama 0.95.0 beta (tag <a href="https://github.com/realfulvio/Trama/tree/v0.95.0">v0.95.0</a>, commit 4c07db6) on 20 November 2026. Formulas in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/data.py">analisi/data.py</a>, window in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/trama_qt/formula.py">trama_qt/formula.py</a>.</p>
+</section>
+<nav class="pager" aria-label="Nearby chapters"><a href="../../../../en/guide/curves/standard-curve/"><small>Previous</small>Read concentrations off a standard curve</a><a href="../../../../en/guide/graphs/vector-export/"><small>Next</small>Export a vector figure</a></nav></article>
+</main>
+</div>
+<footer><div class="wrap"><div class="brand"><img src="../../../../site/trama.svg" alt="" width="34" height="34">Trama</div><p>Trama guide. Examples use synthetic data; every chapter states the version its numbers were checked on.</p><nav aria-label="Links"><a href="../../../../en/guide/">Guide contents</a><a href="../../../../en/">Home</a><a href="../../../../en/features/">Features</a><a data-release-page href="https://github.com/realfulvio/Trama/releases/tag/v0.95.0">What’s new in 0.95</a><a href="https://github.com/realfulvio/Trama/blob/main/LICENSE">MIT licence</a></nav><p>Trama is an independent project in beta. No clinical validation or regulatory certification is claimed.</p></div></footer>
+<script src="../../../../site/releases.js" defer></script>
+</body>
+</html>

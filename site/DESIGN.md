@@ -78,6 +78,10 @@ Percorso critico: pulsante di download in testata, in barra, e a fine pagina; st
 
 Con riduzione del movimento la curva è già completa e i pulsanti non si muovono. Nessun'altra animazione, nessun effetto allo scorrimento.
 
+## 7b. Centro guide
+
+Impaginazione «Quaderno»: indice della guida a sinistra, capitolo al centro, indice del capitolo e scheda di prova a destra; sotto 1180 px la colonna destra sale sopra il testo, sotto 860 px le tre parti diventano pannelli richiudibili. Ogni capitolo ha la stessa struttura: domanda, quando usarlo, dati, in Trama, risultato, caso limite (riquadro corallo), cosa riportare, fonti. Le figure portano un'etichetta che dice se sono figure esportate o schermate dell'app; i numeri nel testo sono quelli verificati da `guide-src/esempi.py`. Stati dei capitoli: pronto (verde acqua), prossima tranche (corallo), in programma (grigio).
+
 ## 8. Lista di coerenza
 
 - [ ] Nessun nome di prodotto, marchio o estensione di file di altri programmi.
@@ -87,3 +91,4 @@ Con riduzione del movimento la curva è già completa e i pulsanti non si muovon
 - [ ] Ombra solo sulle finestre del programma; raggi dai token.
 - [ ] Pulsanti e collegamenti interattivi ≥ 44 px; nessuno scorrimento orizzontale a 390 px.
 - [ ] Le immagini sono catture reali con dati sintetici e provenienza in `media/homepage/PROVENANCE.md`.
+- [ ] Centro guide: pagine rigenerate con `guide-src/build.py`, numeri dei capitoli verificati con `guide-src/esempi.py` sulla versione indicata, nessun percorso locale negli allegati.
