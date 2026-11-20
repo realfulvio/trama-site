@@ -1,0 +1,142 @@
+<!--
+{"title": "Compare several conditions with ANOVA",
+ "short": "ANOVA",
+ "description": "One-way ANOVA and Tukey–Kramer comparisons in Trama on a synthetic control and two treatments, with a Welch check and an edge case on technical replicates.",
+ "ask": "You measured a response on six units in each of three conditions: a control and two treatments. Do the means really differ? And which pairs do?",
+ "facts": [["Checked on", "Trama {{V}}"], ["Data", "18 synthetic units"], ["Seed", "7"], ["Reading", "8 minutes"]],
+ "proof": [["Data", "synthetic, 18 rows"], ["Seed", "7"]],
+ "downloads": [["alab", ".alab project"], ["csv", ".csv data"], ["json", ".json results"]],
+ "image": "box", "image_alt": "Box plot of the response in the three conditions, with the observations and the mean."}
+-->
+<section id="when" aria-labelledby="h-when">
+<h2 id="h-when">When to use it</h2>
+<p>One-way ANOVA compares the means of three or more independent groups. The F test answers a single question: is <i>at least one</i> mean different from the others? To find out <i>which</i> pairs differ you need post hoc comparisons, which adjust the threshold for the number of comparisons made.</p>
+<ul class="checks">
+<li><b>Which comparisons.</b> All pairs: Tukey (with unequal group sizes it becomes Tukey–Kramer). Only each treatment against the control: Dunnett, which has more power because it makes fewer comparisons.</li>
+<li><b>Independent units.</b> Each row must be a separate experimental unit: an animal, a well seeded separately, an experiment repeated on another day. Technical replicates of the same unit do not count as units. The <a href="#edge-case">edge case</a> shows why.</li>
+<li><b>Similar spread.</b> Ordinary ANOVA assumes the same variance in every group. If the standard deviations are very different, choose <span class="ui">Welch</span> and <span class="ui">Games–Howell</span> comparisons.</li>
+<li><b>Residuals without strong skew.</b> With six units per group the test tolerates moderate departures from normality, not long tails or outliers.</li>
+</ul>
+</section>
+
+<section id="data" aria-labelledby="h-data">
+<h2 id="h-data">The data</h2>
+<p>A table with one row per unit and two columns: <code>Condition</code>, the text that says which group the row belongs to, and <code>Response (a.u.)</code>, the measurement. Six units per condition, no missing values. The standard deviations are 0.50, 0.72 and 0.74: the largest is 1.5 times the smallest.</p>
+<div class="files" role="group" aria-label="Files to download">
+<a class="file" href="{{href:alab}}" download><span class="ext">.alab</span><span><b>Trama project</b><small>table, ANOVA and graph ready · {{kb:alab}}</small></span></a>
+<a class="file" href="{{href:csv}}" download><span class="ext">.csv</span><span><b>Synthetic data</b><small>18 rows, 2 columns · {{kb:csv}}</small></span></a>
+<a class="file" href="{{href:json}}" download><span class="ext">.json</span><span><b>Proof results</b><small>F, comparisons and Welch at full precision</small></span></a>
+</div>
+<div class="table-wrap"><table class="peek">
+<caption>First rows of the CSV</caption>
+<thead><tr><th scope="col">Condition</th><th scope="col">Response (a.u.)</th></tr></thead>
+<tbody><tr><td class="l">Control</td><td>10.00</td></tr><tr><td class="l">Control</td><td>10.30</td></tr><tr><td class="l">Control</td><td>9.73</td></tr><tr><td colspan="2" class="more">… 15 more rows</td></tr></tbody>
+</table></div>
+</section>
+
+<section id="in-trama" aria-labelledby="h-in-trama">
+<h2 id="h-in-trama">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Open the project</b> with <span class="ui">File → Open…</span>, or bring in the CSV with <span class="ui">File → Import into project…</span>.</li>
+<li><b>Select the table</b> <span class="ui">Three conditions</span> and choose <span class="ui">Analyze → Analyze…</span> (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>).</li>
+<li><b>In the list of analyses</b> open <span class="ui">Group Comparison → One-way ANOVA</span>. On the <span class="ui">Variables</span> tab set <span class="ui">Response</span> = <code>Response (a.u.)</code> and <span class="ui">Group</span> = <code>Condition</code>.</li>
+<li><b>On the <span class="ui">Options</span> tab</b> set the values below and press <span class="ui">Run analysis</span>.</li>
+<li><b>For the graph</b> use <span class="ui">Graphing → Box / violin plot</span> with <span class="ui">Single response</span>, <span class="ui">Show mean</span> and <span class="ui">Overlay observations</span>. It is already set up in the attached project.</li>
+</ol>
+<div class="table-wrap"><table class="settings">
+<caption>Settings that decide the result</caption>
+<tbody>
+<tr><th scope="row">Distribution</th><td>Normal</td></tr>
+<tr><th scope="row">Method</th><td>Ordinary</td></tr>
+<tr><th scope="row">Post-hoc</th><td>Tukey</td></tr>
+<tr><th scope="row">Comparison family</th><td>All pairs</td></tr>
+<tr><th scope="row">Confidence level (%)</th><td>95</td></tr>
+</tbody></table></div>
+<details class="shot">
+<summary>Show the Options tab screenshot</summary>
+<figure><img src="{{href:app_dialog}}" {{wh:app_dialog}} loading="lazy" alt="One-way ANOVA window, Options tab: Distribution Normal, Method Ordinary, Post-hoc Tukey, Comparison family All pairs, Confidence level 95. On the left, the list of analyses with Group Comparison expanded.">
+<figcaption><span class="tag app">App screenshot</span> Trama {{V}}, English interface, light theme, attached project.</figcaption></figure>
+</details>
+</section>
+
+<section id="result" aria-labelledby="h-result">
+<h2 id="h-result">Read the result</h2>
+<p>The result sheet has two tabs, <span class="ui">ANOVA</span> and <span class="ui">Multiple comparisons</span>.</p>
+<div class="pair wide-first">
+<figure><a class="zoom" href="{{href:box_svg}}" title="Open the vector figure"><img src="{{href:box}}" {{wh:box}} loading="lazy" alt="Box plot of the response for Control, Treatment A and Treatment B, with the six observations of each group and the mean shown as a diamond. Treatment A is higher than the other two; Treatment B is slightly above the control."></a>
+<figcaption><span class="tag fig">Exported figure</span> Box from first to third quartile, line at the median, diamond at the mean, dots for the individual units. <a href="{{href:box_svg}}">SVG</a></figcaption></figure>
+<div>
+<div class="table-wrap"><table class="metrics">
+<caption>ANOVA tab</caption>
+<thead><tr><th scope="col">Term</th><th scope="col">df</th><th scope="col">F</th><th scope="col">p</th></tr></thead>
+<tbody><tr><th scope="row">Condition</th><td>2</td><td>31.53</td><td>4.2 × 10⁻⁶</td></tr><tr><th scope="row">Residual</th><td>15</td><td></td><td></td></tr></tbody>
+</table></div>
+<p class="note-s">Means: control 9.62, treatment A 12.59, treatment B 10.58 a.u. The residual mean square is 0.438.</p>
+</div>
+</div>
+<p>With F(2, 15) = 31.53 and p &lt; 0.0001, at least one mean differs from the others. The Tukey–Kramer comparisons say which:</p>
+<div class="table-wrap"><table class="metrics wide">
+<caption>Multiple comparisons tab, rounded</caption>
+<thead><tr><th scope="col">Comparison</th><th scope="col">Difference</th><th scope="col">95% CI</th><th scope="col">Adjusted p</th></tr></thead>
+<tbody>
+<tr><th scope="row">Control − Treatment A</th><td>−2.97</td><td>−3.97 to −1.98</td><td>&lt; 0.0001</td></tr>
+<tr><th scope="row">Control − Treatment B</th><td>−0.96</td><td>−1.95 to 0.03</td><td>0.059</td></tr>
+<tr><th scope="row">Treatment A − Treatment B</th><td>2.02</td><td>1.02 to 3.01</td><td>0.0003</td></tr>
+</tbody>
+</table></div>
+<p>Treatment A raises the response by about 3 a.u. over the control and by 2 over B, with intervals far from zero. For B against the control the interval runs from −1.95 to 0.03: it includes zero, but also differences of nearly 2 a.u. <b>The result is inconclusive, which does not mean that B has no effect.</b> Report the interval, not just the p value.</p>
+<aside class="callout ok"><b>Welch check.</b> With <span class="ui">Method</span> = <span class="ui">Welch</span>, which does not assume equal variances, F(2, 9.65) = 32.36 and p = 5.3 × 10⁻⁵: the conclusion does not change. If the two versions disagreed, the Welch one would be the one to trust.</aside>
+<details class="shot">
+<summary>Show the Multiple comparisons tab screenshot</summary>
+<figure><img src="{{href:app_results}}" {{wh:app_results}} loading="lazy" alt="Trama showing the One-way ANOVA results: Multiple comparisons tab with three Tukey–Kramer rows and the columns First, Second, Difference, SE, df, Method, Adjusted p.">
+<figcaption><span class="tag app">App screenshot</span> The confidence intervals are in the rightmost columns.</figcaption></figure>
+</details>
+</section>
+
+<section id="edge-case" class="edge" aria-labelledby="h-edge">
+<h2 id="h-edge" data-tag="Edge case" data-toc="Edge case">Technical replicates counted as units</h2>
+<p>Suppose you read every unit three times and put all 54 readings in the table, as if they were 54 independent units. The group means stay the same, but Trama cannot know that three readings come from the same unit: the residual degrees of freedom go from 15 to 51 and the standard error of each difference from 0.382 to 0.218.</p>
+<div class="table-wrap"><table class="metrics">
+<caption>Same data, two ways of counting it</caption>
+<thead><tr><th scope="col"></th><th scope="col">18 units</th><th scope="col">54 readings</th></tr></thead>
+<tbody>
+<tr><th scope="row">F (df)</th><td>31.53 (2, 15)</td><td>97.02 (2, 51)</td></tr>
+<tr><th scope="row">Control − B: difference</th><td>−0.96</td><td>−0.96</td></tr>
+<tr><th scope="row">Control − B: standard error</th><td>0.382</td><td>0.218</td></tr>
+<tr><th scope="row">Control − B: adjusted p</th><td>0.059</td><td>0.00016</td></tr>
+</tbody>
+</table></div>
+<p>The difference between control and B now looks clear-cut, but that comes from the counting, not from the data. This is <i>pseudoreplication</i>. <b>How to fix it:</b> average the replicates of each unit and analyse one row per unit. In this example the unit means give back the main table exactly. Alternatively, Trama has <span class="ui">Nested one-way ANOVA</span>, which needs the data in a <span class="ui">Nested</span> table.</p>
+<p><b>How to notice.</b> The residual degrees of freedom exceed the number of units minus the number of groups; the table has a column identifying the unit and values that come in blocks of three.</p>
+<div class="files" role="group" aria-label="Edge case files">
+<a class="file" href="{{href:alab_tech}}" download><span class="ext">.alab</span><span><b>Edge case project</b><small>54 readings analysed as units · {{kb:alab_tech}}</small></span></a>
+<a class="file" href="{{href:csv_tech}}" download><span class="ext">.csv</span><span><b>Readings with unit and replicate</b><small>54 rows, 4 columns · {{kb:csv_tech}}</small></span></a>
+<a class="file" href="{{href:json_tech}}" download><span class="ext">.json</span><span><b>Edge case results</b><small>full precision</small></span></a>
+</div>
+</section>
+
+<section id="report" aria-labelledby="h-report">
+<h2 id="h-report">What to report</h2>
+<ul class="checks">
+<li>What a unit is and how many there are per condition; if there are technical replicates, how they were summarised.</li>
+<li>The type of ANOVA (ordinary or Welch) and the comparison method, with the correct comparison family.</li>
+<li>F with both degrees of freedom, the differences with their confidence intervals, and the adjusted p values.</li>
+<li>Trama version and the <code>.alab</code> project that repeats the calculation.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>The response of six units per condition was compared with a one-way ANOVA (F(2, 15) = 31.53, p &lt; 0.001) followed by Tukey–Kramer comparisons between all pairs, in Trama {{V}}. Treatment A increased the response compared with the control (difference 2.97 a.u.; 95% CI 1.98 to 3.97) and with treatment B (2.02 a.u.; 95% CI 1.02 to 3.01). The difference between treatment B and the control was inconclusive (0.96 a.u.; 95% CI −0.03 to 1.95; adjusted p = 0.059).</p></blockquote>
+<figcaption>Example sentence for the Methods and Results sections. <button type="button" class="copy" data-copy="#frase" hidden>Copy the sentence</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti" data-toc="Sources">Sources</h2>
+<ol class="refs">
+<li>Tukey J. W. (1949). Comparing individual means in the analysis of variance. <i>Biometrics</i>, 5(2), 99–114. <a href="https://doi.org/10.2307/3001913">doi:10.2307/3001913</a></li>
+<li>Kramer C. Y. (1956). Extension of multiple range tests to group means with unequal numbers of replications. <i>Biometrics</i>, 12(3), 307–310. <a href="https://doi.org/10.2307/3001469">doi:10.2307/3001469</a></li>
+<li>Welch B. L. (1951). On the comparison of several mean values: an alternative approach. <i>Biometrika</i>, 38(3–4), 330–336. <a href="https://doi.org/10.1093/biomet/38.3-4.330">doi:10.1093/biomet/38.3-4.330</a></li>
+<li>Hurlbert S. H. (1984). Pseudoreplication and the design of ecological field experiments. <i>Ecological Monographs</i>, 54(2), 187–211. <a href="https://doi.org/10.2307/1942661">doi:10.2307/1942661</a></li>
+<li>Lazic S. E. (2010). The problem of pseudoreplication in neuroscientific studies: is it affecting your analysis? <i>BMC Neuroscience</i>, 11, 5. <a href="https://doi.org/10.1186/1471-2202-11-5">doi:10.1186/1471-2202-11-5</a></li>
+</ol>
+<p class="ver">Checked with Trama {{V}} (tag <a href="https://github.com/realfulvio/Trama/tree/{{TAG}}">{{TAG}}</a>, commit {{COMMIT}}) on 20 November 2026. Calculation in <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/inference.py">analisi/inference.py</a>.</p>
+</section>

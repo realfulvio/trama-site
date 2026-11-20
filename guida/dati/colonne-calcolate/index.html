@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="it" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../../site/lang.js"></script>
+<title>Creare una colonna calcolata · Guida di Trama</title>
+<meta name="description" content="Una formula nel foglio di Trama per normalizzare il segnale sulla proteina caricata: il coefficiente di variazione scende dal 19,4% al 2,4%, la formula si salva nel progetto e si aggiorna da sola.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<link rel="canonical" href="https://tramastat.org/guida/dati/colonne-calcolate/">
+<link rel="alternate" hreflang="it" href="https://tramastat.org/guida/dati/colonne-calcolate/">
+<link rel="alternate" hreflang="en" href="https://tramastat.org/en/guide/data/calculated-columns/">
+<link rel="alternate" hreflang="x-default" href="https://tramastat.org/en/guide/data/calculated-columns/">
+<link rel="icon" type="image/svg+xml" href="../../../site/trama.svg">
+<link rel="preload" href="../../../site/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../../site/style.css">
+<link rel="stylesheet" href="../../../site/guide.css">
+<meta property="og:site_name" content="Trama">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tramastat.org/guida/dati/colonne-calcolate/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Creare una colonna calcolata · Guida di Trama">
+<meta property="og:description" content="Una formula nel foglio di Trama per normalizzare il segnale sulla proteina caricata: il coefficiente di variazione scende dal 19,4% al 2,4%, la formula si salva nel progetto e si aggiorna da sola.">
+<meta property="og:image" content="https://tramastat.org/guida/allegati/colonne-calcolate/app/foglio.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="800">
+<meta property="og:image:alt" content="Foglio Pozzetti in Trama con la colonna calcolata Segnale per µg accanto a Segnale e Proteina.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Creare una colonna calcolata · Guida di Trama">
+<meta name="twitter:description" content="Una formula nel foglio di Trama per normalizzare il segnale sulla proteina caricata: il coefficiente di variazione scende dal 19,4% al 2,4%, la formula si salva nel progetto e si aggiorna da sola.">
+<meta name="twitter:image" content="https://tramastat.org/guida/allegati/colonne-calcolate/app/foglio.png">
+<meta name="twitter:image:alt" content="Foglio Pozzetti in Trama con la colonna calcolata Segnale per µg accanto a Segnale e Proteina.">
+<meta name="theme-color" content="#08232f">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://tramastat.org/guida/dati/colonne-calcolate/#webpage","url":"https://tramastat.org/guida/dati/colonne-calcolate/","name":"Creare una colonna calcolata · Guida di Trama","description":"Una formula nel foglio di Trama per normalizzare il segnale sulla proteina caricata: il coefficiente di variazione scende dal 19,4% al 2,4%, la formula si salva nel progetto e si aggiorna da sola.","inLanguage":"it","isPartOf":{"@id":"https://tramastat.org/#website"},"about":{"@id":"https://tramastat.org/#software"},"headline":"Creare una colonna calcolata","dateModified":"2026-11-20","primaryImageOfPage":{"@type":"ImageObject","url":"https://tramastat.org/guida/allegati/colonne-calcolate/app/foglio.png","width":1280,"height":800}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trama","item":"https://tramastat.org/"},{"@type":"ListItem","position":2,"name":"Guida","item":"https://tramastat.org/guida/"},{"@type":"ListItem","position":3,"name":"Dati e formule","item":"https://tramastat.org/guida/dati/"},{"@type":"ListItem","position":4,"name":"Colonna calcolata","item":"https://tramastat.org/guida/dati/colonne-calcolate/"}]}]}</script>
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../../../site/guide.js"></script>
+</head>
+<body>
+<a class="skip" href="#contenuto">Vai al contenuto</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../../"><img src="../../../site/trama.svg" alt="" width="34" height="34">Trama</a>
+<nav aria-label="Sito"><a href="../../../">Home</a><a href="../../../funzionalita/">Funzionalità</a><a href="../../../guida/" aria-current="true">Guida</a></nav>
+<div class="langs" role="group" aria-label="Lingua"><span class="on" aria-current="true" lang="it" title="Italiano">IT</span><a href="../../../en/guide/data/calculated-columns/" hreflang="en" lang="en" title="English" aria-label="English">EN</a></div>
+<a class="btn" data-release-download href="https://github.com/realfulvio/Trama/releases/download/v0.95.0/Trama-0.95.0-Windows-x64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Scarica</a></div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Indice della guida">
+<details class="gnav" open><summary>Indice della guida</summary>
+<form class="search" role="search" action="../../../guida/" method="get">
+<label for="q">Cerca nella guida</label>
+<div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" name="q" type="search" placeholder="es. numero di gruppi, curva standard" autocomplete="off"><button class="go" type="submit">Cerca</button></div>
+</form>
+<p class="gl"><a href="../../../guida/">Tutte le guide</a></p>
+<h2 class="gname"><a href="../../../guida/dati/"><svg class="gico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 4v16M15 4v16"/></svg>Dati e formule</a></h2>
+<ul class="gtree"><li class="plan"><span>Preparare e importare un foglio</span></li><li class="draft"><span>Gestire celle vuote e valori esclusi</span></li><li><a href="./" aria-current="page">Creare una colonna calcolata</a></li><li class="plan"><span>Filtrare e trasformare valori</span></li><li class="plan"><span>Collegare analisi e fogli di risultato</span></li><li class="plan"><span>Salvare e riaprire un progetto</span></li></ul>
+<h2 class="gname sub">Altre guide</h2>
+<ul class="gtree"><li><a href="../../../guida/statistica/">Statistica</a></li><li><a href="../../../guida/curve/">Curve e calibrazione</a></li><li><a href="../../../guida/grafici/">Grafici e report</a></li></ul>
+</details>
+</aside>
+<aside class="rail" aria-label="In questo capitolo">
+<details class="toc" open><summary>In questo capitolo</summary><ol><li><a href="#quando">Quando usarla</a></li><li><a href="#dati">I dati</a></li><li><a href="#percorso">In Trama</a></li><li><a href="#risultato">Leggi il risultato</a></li><li><a href="#caso-limite">Caso limite</a></li><li><a href="#riportare">Cosa riportare</a></li><li><a href="#fonti">Fonti</a></li></ol></details>
+<details class="card proof" open><summary><h2>Scheda di prova e file</h2></summary>
+<dl><div><dt>Trama</dt><dd>0.95.0 beta</dd></div><div><dt>Commit</dt><dd><code>4c07db6</code></dd></div><div><dt>Dati</dt><dd>sintetici, 8 righe</dd></div><div><dt>Seme</dt><dd>5</dd></div></dl>
+<ul class="dl"><li><a href="../../../guida/allegati/colonne-calcolate/dati/esempio-colonna-calcolata.alab" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Progetto .alab</a></li><li><a href="../../../guida/allegati/colonne-calcolate/dati/pozzetti.csv" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Dati .csv</a></li><li><a href="../../../guida/allegati/colonne-calcolate/dati/risultati.json" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Risultati .json</a></li></ul>
+<a class="tofonti" href="#fonti">2 fonti primarie ↓</a></details>
+</aside>
+<main id="contenuto" class="doc">
+<article><header class="chap-head" id="inizio">
+<p class="crumbs" aria-label="Percorso"><a href="../../../guida/">Guida</a><span aria-hidden="true">›</span><a href="../../../guida/dati/">Dati e formule</a><span aria-hidden="true">›</span><span aria-current="page">Colonna calcolata</span></p>
+<h1>Creare una colonna calcolata</h1>
+<p class="ask">In otto pozzetti hai misurato un segnale e la quantità di proteina caricata. Vuoi il segnale per µg senza ricopiare i numeri a mano, e vuoi che il conto si aggiorni se correggi un valore.</p>
+<ul class="facts" aria-label="Scheda di prova e file"><li><b>Verificato</b> Trama 0.95.0 beta</li><li><b>Dati</b> 8 pozzetti sintetici</li><li><b>Seme</b> 5</li><li><b>Lettura</b> 5 minuti</li></ul>
+</header>
+<section id="quando" aria-labelledby="h-quando">
+<h2 id="h-quando">Quando usarla</h2>
+<p>Una colonna calcolata contiene una formula che Trama applica riga per riga alle altre colonne della stessa tabella. Non copia numeri: se cambi un valore di origine, il risultato si ricalcola, e nel progetto viene salvata la formula, non i valori.</p>
+<p>Serve per normalizzare su una quantità di riferimento, convertire unità, fare differenze o rapporti fra misure della stessa riga. Prima di dividere controlla un’ipotesi:</p>
+<ul class="checks">
+<li><b>Il segnale è proporzionale al riferimento.</b> Il rapporto segnale/proteina ha senso se il doppio della proteina dà il doppio del segnale e la retta passa per lo zero. Se a proteina zero resta un fondo, il rapporto cambia con la quantità caricata e introduce un effetto che non c’è. In quel caso togli prima il fondo, oppure usa la proteina come covariata invece che come divisore.</li>
+<li><b>Le unità.</b> Il nome della colonna nuova deve dire l’unità del risultato, qui «u.a. per µg».</li>
+</ul>
+</section>
+
+<section id="dati" aria-labelledby="h-dati">
+<h2 id="h-dati">I dati</h2>
+<p>Una tabella <span class="ui">Variabili multiple</span> con una riga per pozzetto: <code>Pozzetto</code> (P1–P8), <code>Segnale (u.a.)</code> e <code>Proteina (µg)</code>. La proteina caricata va da 6,9 a 12,1 µg, quindi il segnale grezzo varia soprattutto per questo.</p>
+<div class="files" role="group" aria-label="File da scaricare">
+<a class="file" href="../../../guida/allegati/colonne-calcolate/dati/esempio-colonna-calcolata.alab" download><span class="ext">.alab</span><span><b>Progetto Trama</b><small>tabella, formula e statistica descrittiva · 0,6 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/colonne-calcolate/dati/pozzetti.csv" download><span class="ext">.csv</span><span><b>Dati sintetici</b><small>8 righe, 3 colonne, senza la formula · 0,1 kB</small></span></a>
+<a class="file" href="../../../guida/allegati/colonne-calcolate/dati/risultati.json" download><span class="ext">.json</span><span><b>Risultati di prova</b><small>medie, SD e CV a piena precisione</small></span></a>
+</div>
+</section>
+
+<section id="percorso" aria-labelledby="h-percorso">
+<h2 id="h-percorso">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Apri il progetto</b> con <span class="ui">File → Apri…</span>, oppure importa il CSV con <span class="ui">File → Importa nel progetto…</span> e aggiungi tu la formula.</li>
+<li><b>Seleziona la tabella</b> <span class="ui">Pozzetti</span> e, nella scheda <span class="ui">Home</span>, premi <span class="ui">Formula</span>.</li>
+<li><b>In <span class="ui">Colonna calcolata</span></b> scrivi il nome della colonna nuova, <code>Segnale per µg</code>.</li>
+<li><b>In <span class="ui">Formula</span></b> scrivi <code>=COL("Segnale (u.a.)") / COL("Proteina (µg)")</code> e premi <span class="ui">OK</span>. Trama prova la formula su tutta la tabella prima di accettarla; se un nome di colonna è sbagliato, l’errore compare nella finestra.</li>
+<li><b>Per cambiarla</b> seleziona una cella della colonna calcolata e premi di nuovo <span class="ui">Formula</span>: la finestra si apre con l’espressione attuale.</li>
+</ol>
+<figure class="solo narrow"><img src="../../../guida/allegati/colonne-calcolate/app/dialogo-formula.png" width="560" height="303" loading="lazy" alt="Finestra Colonna calcolata con il nome Segnale per µg e la formula =COL(&quot;Segnale (u.a.)&quot;) / COL(&quot;Proteina (µg)&quot;). Sotto, tre esempi di formule: aritmetica, media per gruppo, totale cumulato.">
+<figcaption><span class="tag app">Schermata dell’app</span> La finestra della formula, con gli esempi che Trama mostra sotto il campo.</figcaption></figure>
+<p class="note-s"><code>COL("…")</code> serve quando il nome della colonna contiene spazi o parentesi. Fra le altre funzioni ci sono <code>ABS</code>, <code>SQRT</code>, <code>LN</code>, <code>LOG10</code>, <code>ROUND</code>, <code>IF</code> e <code>MEAN</code>.</p>
+</section>
+
+<section id="risultato" aria-labelledby="h-risultato">
+<h2 id="h-risultato">Leggi il risultato</h2>
+<p>La colonna <span class="ui">Segnale per µg</span> compare a destra delle colonne di origine, con i numeri in verde per distinguerla dai dati inseriti a mano.</p>
+<details class="shot" open>
+<summary>Mostra il foglio con la colonna calcolata</summary>
+<figure><img src="../../../guida/allegati/colonne-calcolate/app/foglio.png" width="1280" height="800" loading="lazy" alt="Foglio Pozzetti in Trama: colonne Pozzetto, Segnale (u.a.), Proteina (µg) e, in verde, Segnale per µg con valori fra 39,8 e 42,9.">
+<figcaption><span class="tag app">Schermata dell’app</span> Trama 0.95.0 beta, progetto allegato appena aperto.</figcaption></figure>
+</details>
+<div class="table-wrap"><table class="metrics">
+<caption>Prima e dopo la normalizzazione</caption>
+<thead><tr><th scope="col"></th><th scope="col">Media</th><th scope="col">Deviazione standard</th><th scope="col">Coefficiente di variazione</th></tr></thead>
+<tbody>
+<tr><th scope="row">Segnale (u.a.)</th><td>390,7</td><td>75,8</td><td>19,4 %</td></tr>
+<tr><th scope="row">Segnale per µg</th><td>41,18</td><td>0,98</td><td>2,4 %</td></tr>
+</tbody>
+</table></div>
+<p>La variabilità fra pozzetti scende da 19,4% a 2,4%: quasi tutta veniva dalla quantità di proteina caricata. Media e deviazione standard vengono da <span class="ui">Statistica descrittiva</span>, già nel progetto; il coefficiente di variazione è la deviazione standard divisa per la media.</p>
+<aside class="callout ok"><b>Si riapre uguale.</b> Salvato e riaperto, il progetto ha la stessa formula, carattere per carattere, e gli stessi otto valori. Se cambi il segnale di P1 da 332,1 a 400, la cella calcolata passa subito da 40,50 a 48,78.</aside>
+</section>
+
+<section id="caso-limite" class="edge" aria-labelledby="h-caso">
+<h2 id="h-caso" data-tag="Caso limite" data-toc="Caso limite">Una cella esclusa nella colonna di origine</h2>
+<p>Escludi la proteina del pozzetto P3: selezionala e premi <span class="ui">Home → Escludi / includi cella</span>. La cella calcolata di P3 diventa vuota, perché un rapporto con un valore escluso non ha un risultato. La colonna calcolata resta con 7 valori e la media diventa 41,18 (41,1798 contro 41,1808 con tutti e otto).</p>
+<p>È il comportamento corretto, ma se non te ne accorgi pensi di avere otto pozzetti e ne analizzi sette. <b>Come accorgersene:</b> nella colonna calcolata c’è una cella vuota dove le colonne di origine hanno un numero; in <span class="ui">Statistica descrittiva</span> la riga N vale 7 e Missing vale 1. Per ripristinare, seleziona di nuovo la cella e premi lo stesso comando.</p>
+</section>
+
+<section id="riportare" aria-labelledby="h-riportare">
+<h2 id="h-riportare">Cosa riportare</h2>
+<ul class="checks">
+<li>La formula esatta e le unità del risultato.</li>
+<li>Perché il rapporto è giustificato: proporzionalità e assenza di fondo, oppure come il fondo è stato tolto.</li>
+<li>Celle escluse e numero di valori usati.</li>
+<li>Versione di Trama e progetto <code>.alab</code> con la formula.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>Il segnale di ciascun pozzetto è stato diviso per la quantità di proteina caricata con una colonna calcolata in Trama 0.95.0 beta (formula <code>=COL("Segnale (u.a.)") / COL("Proteina (µg)")</code>). La normalizzazione ha ridotto il coefficiente di variazione fra pozzetti dal 19,4% al 2,4% (n = 8).</p></blockquote>
+<figcaption>Esempio di frase per la sezione Metodi. <button type="button" class="copy" data-copy="#frase" hidden>Copia la frase</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti">Fonti</h2>
+<ol class="refs">
+<li>Curran-Everett D. (2013). Explorations in statistics: the analysis of ratios and normalized data. <i>Advances in Physiology Education</i>, 37(3), 213–219. <a href="https://doi.org/10.1152/advan.00053.2013">doi:10.1152/advan.00053.2013</a></li>
+<li>Kronmal R. A. (1993). Spurious correlation and the fallacy of the ratio standard revisited. <i>Journal of the Royal Statistical Society A</i>, 156(3), 379–392. <a href="https://doi.org/10.2307/2983064">doi:10.2307/2983064</a></li>
+</ol>
+<p class="ver">Verificato con Trama 0.95.0 beta (tag <a href="https://github.com/realfulvio/Trama/tree/v0.95.0">v0.95.0</a>, commit 4c07db6) il 20 novembre 2026. Formule in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/data.py">analisi/data.py</a>, finestra in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/trama_qt/formula.py">trama_qt/formula.py</a>.</p>
+</section>
+<nav class="pager" aria-label="Capitoli vicini"><a href="../../../guida/curve/curva-standard/"><small>Indietro</small>Risalire alla concentrazione dalla risposta</a><a href="../../../guida/grafici/esportazione/"><small>Avanti</small>Esportare una figura vettoriale</a></nav></article>
+</main>
+</div>
+<footer><div class="wrap"><div class="brand"><img src="../../../site/trama.svg" alt="" width="34" height="34">Trama</div><p>Guida di Trama. Esempi con dati sintetici, numeri verificati nella versione indicata in ogni capitolo.</p><nav aria-label="Collegamenti"><a href="../../../guida/">Indice della guida</a><a href="../../../">Home</a><a href="../../../funzionalita/">Funzionalità</a><a data-release-page href="https://github.com/realfulvio/Trama/releases/tag/v0.95.0">Novità 0.95</a><a href="https://github.com/realfulvio/Trama/blob/main/LICENSE">Licenza MIT</a></nav><p>Trama è un progetto indipendente in fase beta. Non viene dichiarata una validazione clinica o una certificazione regolatoria.</p></div></footer>
+<script src="../../../site/releases.js" defer></script>
+</body>
+</html>

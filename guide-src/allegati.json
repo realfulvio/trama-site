@@ -1,0 +1,513 @@
+{
+ "_trama": "0.95.0",
+ "anova": {
+  "en": {
+   "alab": {
+    "bytes": 1225,
+    "path": "en/guide/files/anova/data/anova-example.alab"
+   },
+   "alab_tech": {
+    "bytes": 2086,
+    "path": "en/guide/files/anova/data/edge-case-replicates.alab"
+   },
+   "app_dialog": {
+    "bytes": 102471,
+    "height": 680,
+    "path": "en/guide/files/anova/app/options-dialog.png",
+    "width": 796
+   },
+   "app_results": {
+    "bytes": 101769,
+    "height": 800,
+    "path": "en/guide/files/anova/app/results.png",
+    "width": 1280
+   },
+   "box": {
+    "bytes": 28294,
+    "height": 600,
+    "path": "en/guide/files/anova/figures/conditions-box.png",
+    "width": 960
+   },
+   "box_svg": {
+    "bytes": 16790,
+    "path": "en/guide/files/anova/figures/conditions-box.svg"
+   },
+   "csv": {
+    "bytes": 317,
+    "path": "en/guide/files/anova/data/three-conditions.csv"
+   },
+   "csv_tech": {
+    "bytes": 1184,
+    "path": "en/guide/files/anova/data/technical-replicates.csv"
+   },
+   "json": {
+    "bytes": 1367,
+    "path": "en/guide/files/anova/data/results.json"
+   },
+   "json_tech": {
+    "bytes": 363,
+    "path": "en/guide/files/anova/data/edge-case-replicates.json"
+   }
+  },
+  "it": {
+   "alab": {
+    "bytes": 1262,
+    "path": "guida/allegati/anova/dati/esempio-anova.alab"
+   },
+   "alab_tech": {
+    "bytes": 2193,
+    "path": "guida/allegati/anova/dati/caso-limite-repliche.alab"
+   },
+   "app_dialog": {
+    "bytes": 110080,
+    "height": 680,
+    "path": "guida/allegati/anova/app/dialogo-opzioni.png",
+    "width": 796
+   },
+   "app_results": {
+    "bytes": 105750,
+    "height": 800,
+    "path": "guida/allegati/anova/app/risultati.png",
+    "width": 1280
+   },
+   "box": {
+    "bytes": 29887,
+    "height": 600,
+    "path": "guida/allegati/anova/figure/condizioni-box.png",
+    "width": 960
+   },
+   "box_svg": {
+    "bytes": 16807,
+    "path": "guida/allegati/anova/figure/condizioni-box.svg"
+   },
+   "csv": {
+    "bytes": 354,
+    "path": "guida/allegati/anova/dati/tre-condizioni.csv"
+   },
+   "csv_tech": {
+    "bytes": 1293,
+    "path": "guida/allegati/anova/dati/repliche-tecniche.csv"
+   },
+   "json": {
+    "bytes": 1391,
+    "path": "guida/allegati/anova/dati/risultati.json"
+   },
+   "json_tech": {
+    "bytes": 363,
+    "path": "guida/allegati/anova/dati/caso-limite-repliche.json"
+   }
+  }
+ },
+ "colonne-calcolate": {
+  "en": {
+   "alab": {
+    "bytes": 560,
+    "path": "en/guide/files/calculated-columns/data/calculated-column-example.alab"
+   },
+   "app_formula": {
+    "bytes": 25031,
+    "height": 303,
+    "path": "en/guide/files/calculated-columns/app/formula-dialog.png",
+    "width": 560
+   },
+   "app_sheet": {
+    "bytes": 88903,
+    "height": 800,
+    "path": "en/guide/files/calculated-columns/app/sheet.png",
+    "width": 1280
+   },
+   "csv": {
+    "bytes": 140,
+    "path": "en/guide/files/calculated-columns/data/wells.csv"
+   },
+   "json": {
+    "bytes": 846,
+    "path": "en/guide/files/calculated-columns/data/results.json"
+   }
+  },
+  "it": {
+   "alab": {
+    "bytes": 574,
+    "path": "guida/allegati/colonne-calcolate/dati/esempio-colonna-calcolata.alab"
+   },
+   "app_formula": {
+    "bytes": 26243,
+    "height": 303,
+    "path": "guida/allegati/colonne-calcolate/app/dialogo-formula.png",
+    "width": 560
+   },
+   "app_sheet": {
+    "bytes": 89458,
+    "height": 800,
+    "path": "guida/allegati/colonne-calcolate/app/foglio.png",
+    "width": 1280
+   },
+   "csv": {
+    "bytes": 146,
+    "path": "guida/allegati/colonne-calcolate/dati/pozzetti.csv"
+   },
+   "json": {
+    "bytes": 850,
+    "path": "guida/allegati/colonne-calcolate/dati/risultati.json"
+   }
+  }
+ },
+ "curva-standard": {
+  "en": {
+   "alab": {
+    "bytes": 1008,
+    "path": "en/guide/files/standard-curve/data/standard-curve-example.alab"
+   },
+   "app_dialog": {
+    "bytes": 82799,
+    "height": 680,
+    "path": "en/guide/files/standard-curve/app/options-dialog.png",
+    "width": 796
+   },
+   "app_graph": {
+    "bytes": 96063,
+    "height": 800,
+    "path": "en/guide/files/standard-curve/app/graph.png",
+    "width": 1280
+   },
+   "app_results": {
+    "bytes": 99486,
+    "height": 800,
+    "path": "en/guide/files/standard-curve/app/results.png",
+    "width": 1280
+   },
+   "csv": {
+    "bytes": 222,
+    "path": "en/guide/files/standard-curve/data/standard-curve.csv"
+   },
+   "curve": {
+    "bytes": 41672,
+    "height": 600,
+    "path": "en/guide/files/standard-curve/figures/standard-curve.png",
+    "width": 960
+   },
+   "curve_svg": {
+    "bytes": 13502,
+    "path": "en/guide/files/standard-curve/figures/standard-curve.svg"
+   },
+   "json": {
+    "bytes": 1382,
+    "path": "en/guide/files/standard-curve/data/results.json"
+   }
+  },
+  "it": {
+   "alab": {
+    "bytes": 1011,
+    "path": "guida/allegati/curva-standard/dati/esempio-curva-standard.alab"
+   },
+   "app_dialog": {
+    "bytes": 86407,
+    "height": 680,
+    "path": "guida/allegati/curva-standard/app/dialogo-opzioni.png",
+    "width": 796
+   },
+   "app_graph": {
+    "bytes": 97312,
+    "height": 800,
+    "path": "guida/allegati/curva-standard/app/grafico.png",
+    "width": 1280
+   },
+   "app_results": {
+    "bytes": 102741,
+    "height": 800,
+    "path": "guida/allegati/curva-standard/app/risultati.png",
+    "width": 1280
+   },
+   "csv": {
+    "bytes": 223,
+    "path": "guida/allegati/curva-standard/dati/curva-standard.csv"
+   },
+   "curve": {
+    "bytes": 41850,
+    "height": 600,
+    "path": "guida/allegati/curva-standard/figure/curva-standard.png",
+    "width": 960
+   },
+   "curve_svg": {
+    "bytes": 13503,
+    "path": "guida/allegati/curva-standard/figure/curva-standard.svg"
+   },
+   "json": {
+    "bytes": 1382,
+    "path": "guida/allegati/curva-standard/dati/risultati.json"
+   }
+  }
+ },
+ "esportazione": {
+  "en": {
+   "alab": {
+    "bytes": 1162,
+    "path": "en/guide/files/vector-export/data/layout-example.alab"
+   },
+   "alab_small": {
+    "bytes": 1057,
+    "path": "en/guide/files/vector-export/data/edge-case-default-fonts.alab"
+   },
+   "app_export": {
+    "bytes": 25053,
+    "height": 299,
+    "path": "en/guide/files/vector-export/app/export-dialog.png",
+    "width": 310
+   },
+   "app_layout": {
+    "bytes": 106950,
+    "height": 800,
+    "path": "en/guide/files/vector-export/app/layout.png",
+    "width": 1280
+   },
+   "json": {
+    "bytes": 926,
+    "path": "en/guide/files/vector-export/data/results.json"
+   },
+   "pdf": {
+    "bytes": 24884,
+    "path": "en/guide/files/vector-export/figures/figure-1.pdf"
+   },
+   "png": {
+    "bytes": 38089,
+    "height": 316,
+    "path": "en/guide/files/vector-export/figures/figure-1-preview.png",
+    "width": 736
+   },
+   "png_small": {
+    "bytes": 27225,
+    "height": 316,
+    "path": "en/guide/files/vector-export/figures/edge-case-default-fonts.png",
+    "width": 736
+   },
+   "svg_paths": {
+    "bytes": 52517,
+    "path": "en/guide/files/vector-export/figures/figure-1-paths.svg"
+   },
+   "svg_small": {
+    "bytes": 28717,
+    "path": "en/guide/files/vector-export/figures/edge-case-default-fonts.svg"
+   },
+   "svg_text": {
+    "bytes": 25790,
+    "path": "en/guide/files/vector-export/figures/figure-1-text.svg"
+   }
+  },
+  "it": {
+   "alab": {
+    "bytes": 1165,
+    "path": "guida/allegati/esportazione/dati/esempio-layout.alab"
+   },
+   "alab_small": {
+    "bytes": 1060,
+    "path": "guida/allegati/esportazione/dati/caso-limite-caratteri-predefiniti.alab"
+   },
+   "app_export": {
+    "bytes": 28984,
+    "height": 283,
+    "path": "guida/allegati/esportazione/app/dialogo-esporta.png",
+    "width": 419
+   },
+   "app_layout": {
+    "bytes": 107685,
+    "height": 800,
+    "path": "guida/allegati/esportazione/app/layout.png",
+    "width": 1280
+   },
+   "json": {
+    "bytes": 926,
+    "path": "guida/allegati/esportazione/dati/risultati.json"
+   },
+   "pdf": {
+    "bytes": 25051,
+    "path": "guida/allegati/esportazione/figure/figura-1.pdf"
+   },
+   "png": {
+    "bytes": 38345,
+    "height": 316,
+    "path": "guida/allegati/esportazione/figure/figura-1-anteprima.png",
+    "width": 736
+   },
+   "png_small": {
+    "bytes": 27277,
+    "height": 316,
+    "path": "guida/allegati/esportazione/figure/caso-limite-caratteri-predefiniti.png",
+    "width": 736
+   },
+   "svg_paths": {
+    "bytes": 53004,
+    "path": "guida/allegati/esportazione/figure/figura-1-tracciati.svg"
+   },
+   "svg_small": {
+    "bytes": 28718,
+    "path": "guida/allegati/esportazione/figure/caso-limite-caratteri-predefiniti.svg"
+   },
+   "svg_text": {
+    "bytes": 25791,
+    "path": "guida/allegati/esportazione/figure/figura-1-testo.svg"
+   }
+  }
+ },
+ "k-means": {
+  "en": {
+   "alab": {
+    "bytes": 1936,
+    "path": "en/guide/files/k-means/data/k-means-example.alab"
+   },
+   "alab_uV": {
+    "bytes": 1931,
+    "path": "en/guide/files/k-means/data/edge-case-uV.alab"
+   },
+   "app_dialog": {
+    "bytes": 105816,
+    "height": 680,
+    "path": "en/guide/files/k-means/app/options-dialog.png",
+    "width": 796
+   },
+   "app_results": {
+    "bytes": 93936,
+    "height": 800,
+    "path": "en/guide/files/k-means/app/results.png",
+    "width": 1280
+   },
+   "csv": {
+    "bytes": 683,
+    "path": "en/guide/files/k-means/data/synthetic-signals.csv"
+   },
+   "csv_uV": {
+    "bytes": 676,
+    "path": "en/guide/files/k-means/data/synthetic-signals-uV.csv"
+   },
+   "edge_raw": {
+    "bytes": 38630,
+    "height": 600,
+    "path": "en/guide/files/k-means/figures/edge-case-uV-not-standardized.png",
+    "width": 960
+   },
+   "edge_std": {
+    "bytes": 38412,
+    "height": 600,
+    "path": "en/guide/files/k-means/figures/edge-case-uV-standardized.png",
+    "width": 960
+   },
+   "groups_2": {
+    "bytes": 34132,
+    "height": 600,
+    "path": "en/guide/files/k-means/figures/clusters-2.png",
+    "width": 960
+   },
+   "groups_2_svg": {
+    "bytes": 19949,
+    "path": "en/guide/files/k-means/figures/clusters-2.svg"
+   },
+   "groups_3": {
+    "bytes": 36230,
+    "height": 600,
+    "path": "en/guide/files/k-means/figures/clusters-3.png",
+    "width": 960
+   },
+   "groups_3_svg": {
+    "bytes": 20997,
+    "path": "en/guide/files/k-means/figures/clusters-3.svg"
+   },
+   "groups_4": {
+    "bytes": 38623,
+    "height": 600,
+    "path": "en/guide/files/k-means/figures/clusters-4.png",
+    "width": 960
+   },
+   "groups_4_svg": {
+    "bytes": 22045,
+    "path": "en/guide/files/k-means/figures/clusters-4.svg"
+   },
+   "json": {
+    "bytes": 521,
+    "path": "en/guide/files/k-means/data/results.json"
+   },
+   "json_uV": {
+    "bytes": 265,
+    "path": "en/guide/files/k-means/data/edge-case-uV.json"
+   }
+  },
+  "it": {
+   "alab": {
+    "bytes": 1936,
+    "path": "guida/allegati/k-means/dati/esempio-k-means.alab"
+   },
+   "alab_uV": {
+    "bytes": 1931,
+    "path": "guida/allegati/k-means/dati/caso-limite-uV.alab"
+   },
+   "app_dialog": {
+    "bytes": 115165,
+    "height": 680,
+    "path": "guida/allegati/k-means/app/dialogo-opzioni.png",
+    "width": 796
+   },
+   "app_results": {
+    "bytes": 95161,
+    "height": 800,
+    "path": "guida/allegati/k-means/app/risultati.png",
+    "width": 1280
+   },
+   "csv": {
+    "bytes": 683,
+    "path": "guida/allegati/k-means/dati/segnali-sintetici.csv"
+   },
+   "csv_uV": {
+    "bytes": 676,
+    "path": "guida/allegati/k-means/dati/segnali-sintetici-uV.csv"
+   },
+   "edge_raw": {
+    "bytes": 39370,
+    "height": 600,
+    "path": "guida/allegati/k-means/figure/caso-limite-uV-non-standardizzato.png",
+    "width": 960
+   },
+   "edge_std": {
+    "bytes": 39142,
+    "height": 600,
+    "path": "guida/allegati/k-means/figure/caso-limite-uV-standardizzato.png",
+    "width": 960
+   },
+   "groups_2": {
+    "bytes": 34815,
+    "height": 600,
+    "path": "guida/allegati/k-means/figure/gruppi-2.png",
+    "width": 960
+   },
+   "groups_2_svg": {
+    "bytes": 19949,
+    "path": "guida/allegati/k-means/figure/gruppi-2.svg"
+   },
+   "groups_3": {
+    "bytes": 36938,
+    "height": 600,
+    "path": "guida/allegati/k-means/figure/gruppi-3.png",
+    "width": 960
+   },
+   "groups_3_svg": {
+    "bytes": 20997,
+    "path": "guida/allegati/k-means/figure/gruppi-3.svg"
+   },
+   "groups_4": {
+    "bytes": 39288,
+    "height": 600,
+    "path": "guida/allegati/k-means/figure/gruppi-4.png",
+    "width": 960
+   },
+   "groups_4_svg": {
+    "bytes": 22045,
+    "path": "guida/allegati/k-means/figure/gruppi-4.svg"
+   },
+   "json": {
+    "bytes": 521,
+    "path": "guida/allegati/k-means/dati/risultati.json"
+   },
+   "json_uV": {
+    "bytes": 265,
+    "path": "guida/allegati/k-means/dati/caso-limite-uV.json"
+   }
+  }
+ }
+}

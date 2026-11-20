@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en" class="wide">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../../../site/lang.js"></script>
+<title>Choose the number of clusters with K-means · Trama guide</title>
+<meta name="description" content="Compare 2, 3 and 4 clusters by WSS and silhouette on 45 synthetic signals in Trama, with an edge case on units of measurement and a sentence for the methods.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<link rel="canonical" href="https://tramastat.org/en/guide/statistics/k-means/">
+<link rel="alternate" hreflang="it" href="https://tramastat.org/guida/statistica/k-means/">
+<link rel="alternate" hreflang="en" href="https://tramastat.org/en/guide/statistics/k-means/">
+<link rel="alternate" hreflang="x-default" href="https://tramastat.org/en/guide/statistics/k-means/">
+<link rel="icon" type="image/svg+xml" href="../../../../site/trama.svg">
+<link rel="preload" href="../../../../site/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../../../site/style.css">
+<link rel="stylesheet" href="../../../../site/guide.css">
+<meta property="og:site_name" content="Trama">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tramastat.org/en/guide/statistics/k-means/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:title" content="Choose the number of clusters with K-means · Trama guide">
+<meta property="og:description" content="Compare 2, 3 and 4 clusters by WSS and silhouette on 45 synthetic signals in Trama, with an edge case on units of measurement and a sentence for the methods.">
+<meta property="og:image" content="https://tramastat.org/en/guide/files/k-means/figures/clusters-3.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="960">
+<meta property="og:image:height" content="600">
+<meta property="og:image:alt" content="Scatter plot of drift against amplitude with three clusters of 15 signals each.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Choose the number of clusters with K-means · Trama guide">
+<meta name="twitter:description" content="Compare 2, 3 and 4 clusters by WSS and silhouette on 45 synthetic signals in Trama, with an edge case on units of measurement and a sentence for the methods.">
+<meta name="twitter:image" content="https://tramastat.org/en/guide/files/k-means/figures/clusters-3.png">
+<meta name="twitter:image:alt" content="Scatter plot of drift against amplitude with three clusters of 15 signals each.">
+<meta name="theme-color" content="#08232f">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://tramastat.org/en/guide/statistics/k-means/#webpage","url":"https://tramastat.org/en/guide/statistics/k-means/","name":"Choose the number of clusters with K-means · Trama guide","description":"Compare 2, 3 and 4 clusters by WSS and silhouette on 45 synthetic signals in Trama, with an edge case on units of measurement and a sentence for the methods.","inLanguage":"en","isPartOf":{"@id":"https://tramastat.org/#website"},"about":{"@id":"https://tramastat.org/#software"},"headline":"Choose the number of clusters with K-means","dateModified":"2026-11-20","primaryImageOfPage":{"@type":"ImageObject","url":"https://tramastat.org/en/guide/files/k-means/figures/clusters-3.png","width":960,"height":600}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trama","item":"https://tramastat.org/en/"},{"@type":"ListItem","position":2,"name":"Guide","item":"https://tramastat.org/en/guide/"},{"@type":"ListItem","position":3,"name":"Statistics","item":"https://tramastat.org/en/guide/statistics/"},{"@type":"ListItem","position":4,"name":"K-means","item":"https://tramastat.org/en/guide/statistics/k-means/"}]}]}</script>
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../../../../site/guide.js"></script>
+</head>
+<body>
+<a class="skip" href="#contenuto">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../../../../en/"><img src="../../../../site/trama.svg" alt="" width="34" height="34">Trama</a>
+<nav aria-label="Site"><a href="../../../../en/">Home</a><a href="../../../../en/features/">Features</a><a href="../../../../en/guide/" aria-current="true">Guide</a></nav>
+<div class="langs" role="group" aria-label="Language"><a href="../../../../guida/statistica/k-means/" hreflang="it" lang="it" title="Italiano" aria-label="Italiano">IT</a><span class="on" aria-current="true" lang="en" title="English">EN</span></div>
+<a class="btn" data-release-download href="https://github.com/realfulvio/Trama/releases/download/v0.95.0/Trama-0.95.0-Windows-x64.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download</a></div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Guide contents">
+<details class="gnav" open><summary>Guide contents</summary>
+<form class="search" role="search" action="../../../../en/guide/" method="get">
+<label for="q">Search the guide</label>
+<div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" name="q" type="search" placeholder="e.g. number of clusters, standard curve" autocomplete="off"><button class="go" type="submit">Search</button></div>
+</form>
+<p class="gl"><a href="../../../../en/guide/">All guides</a></p>
+<h2 class="gname"><a href="../../../../en/guide/statistics/"><svg class="gico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-8M12 20V6M19 20v-5"/><path d="M3 12h4M10 6h4M17 15h4"/><path d="M3 20h18"/></svg>Statistics</a></h2>
+<ul class="gtree"><li class="draft"><span>Describe a sample</span></li><li class="plan"><span>Interpret a confidence interval</span></li><li class="draft"><span>Compare independent and paired groups</span></li><li class="plan"><span>Compare with ranks</span></li><li><a href="../../../../en/guide/statistics/anova/">Compare several conditions with ANOVA</a></li><li class="plan"><span>Separate effects and interactions</span></li><li class="plan"><span>Analyse repeated measures</span></li><li class="plan"><span>Interpret counts and proportions</span></li><li class="plan"><span>Assess a correlation</span></li><li class="plan"><span>Read PCA scores and loadings</span></li><li><a href="./" aria-current="page">Choose the number of clusters with K-means</a></li><li class="plan"><span>Read a dendrogram</span></li><li class="plan"><span>Read a survival curve</span></li><li class="plan"><span>Interpret a Cox model</span></li><li class="plan"><span>Plan sample size and power</span></li></ul>
+<h2 class="gname sub">Other guides</h2>
+<ul class="gtree"><li><a href="../../../../en/guide/curves/">Curves and calibration</a></li><li><a href="../../../../en/guide/data/">Data and formulas</a></li><li><a href="../../../../en/guide/graphs/">Graphs and reports</a></li></ul>
+</details>
+</aside>
+<aside class="rail" aria-label="In this chapter">
+<details class="toc" open><summary>In this chapter</summary><ol><li><a href="#when">When to use it</a></li><li><a href="#data">The data</a></li><li><a href="#in-trama">In Trama</a></li><li><a href="#result">Read the result</a></li><li><a href="#edge-case">Edge case</a></li><li><a href="#report">What to report</a></li><li><a href="#fonti">Sources</a></li></ol></details>
+<details class="card proof" open><summary><h2>Proof sheet and files</h2></summary>
+<dl><div><dt>Trama</dt><dd>0.95.0 beta</dd></div><div><dt>Commit</dt><dd><code>4c07db6</code></dd></div><div><dt>Data</dt><dd>synthetic, 45 rows</dd></div><div><dt>Seed</dt><dd>42</dd></div></dl>
+<ul class="dl"><li><a href="../../../../en/guide/files/k-means/data/k-means-example.alab" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.alab project</a></li><li><a href="../../../../en/guide/files/k-means/data/synthetic-signals.csv" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.csv data</a></li><li><a href="../../../../en/guide/files/k-means/data/results.json" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>.json metrics</a></li></ul>
+<a class="tofonti" href="#fonti">4 primary sources ↓</a></details>
+</aside>
+<main id="contenuto" class="doc">
+<article><header class="chap-head" id="inizio">
+<p class="crumbs" aria-label="Breadcrumb"><a href="../../../../en/guide/">Guide</a><span aria-hidden="true">›</span><a href="../../../../en/guide/statistics/">Statistics</a><span aria-hidden="true">›</span><span aria-current="page">K-means</span></p>
+<h1>Choose the number of clusters with K-means</h1>
+<p class="ask">You measured the amplitude and drift of 45 signals and suspect they belong to a few families. How many clusters do the data really support, and how far can you trust the answer?</p>
+<ul class="facts" aria-label="Proof sheet and files"><li><b>Checked on</b> Trama 0.95.0 beta</li><li><b>Data</b> 45 synthetic signals</li><li><b>Seed</b> 42</li><li><b>Reading</b> 7 minutes</li></ul>
+</header>
+<section id="when" aria-labelledby="h-when">
+<h2 id="h-when">When to use it</h2>
+<p>K-means assigns every observation to one of <i>k</i> clusters and moves the centres until the sum of squared distances from each point to its own centre, the <abbr title="within-cluster sum of squares">WSS</abbr>, stops going down. It works well with numeric measurements and compact clusters of similar shape and size.</p>
+<p>Before reading the clusters, check three things, because each one can change the answer:</p>
+<ul class="checks">
+<li><b>The scale of the variables.</b> Distances add the variables as they are: the one with the largest numbers dominates. With different units, turn on <span class="ui">Standardize</span>. The <a href="#edge-case">edge case</a> below shows what happens otherwise.</li>
+<li><b>Outliers.</b> A point far from the rest can take a cluster all for itself.</li>
+<li><b>Initialisation.</b> In Trama, Lloyd’s algorithm starts 10 times from centres chosen with k-means++ and keeps the solution with the lowest WSS. The <span class="ui">Seed</span> makes the sequence repeatable.</li>
+</ul>
+<p>K-means always returns <i>k</i> clusters, even when the data have none. Comparing several values of <i>k</i> is how you find out whether the structure is there.</p>
+</section>
+
+<section id="data" aria-labelledby="h-data">
+<h2 id="h-data">The data</h2>
+<p>A <span class="ui">Multiple variables</span> table with one row per signal and two numeric columns: <code>Amplitude (mV)</code> and <code>Drift (mV/min)</code>. No missing values. If a row has a blank in one of the chosen variables, Trama leaves it out of the calculation.</p>
+<div class="files" role="group" aria-label="Files to download">
+<a class="file" href="../../../../en/guide/files/k-means/data/k-means-example.alab" download><span class="ext">.alab</span><span><b>Trama project</b><small>table and two ready analyses · 1.9 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/k-means/data/synthetic-signals.csv" download><span class="ext">.csv</span><span><b>Synthetic data</b><small>45 rows, 2 columns · 0.7 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/k-means/data/results.json" download><span class="ext">.json</span><span><b>Proof metrics</b><small>WSS and silhouette at full precision</small></span></a>
+</div>
+<div class="table-wrap"><table class="peek">
+<caption>First rows of the CSV</caption>
+<thead><tr><th scope="col">Amplitude (mV)</th><th scope="col">Drift (mV/min)</th></tr></thead>
+<tbody><tr><td>−1.5351</td><td>0.4488</td></tr><tr><td>−1.3544</td><td>0.1264</td></tr><tr><td>−1.2954</td><td>−0.0400</td></tr><tr><td colspan="2" class="more">… 42 more rows</td></tr></tbody>
+</table></div>
+</section>
+
+<section id="in-trama" aria-labelledby="h-in-trama">
+<h2 id="h-in-trama">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Open the project</b> with <span class="ui">File → Open…</span>, or bring in the CSV with <span class="ui">File → Import into project…</span>.</li>
+<li><b>Select the table</b> <span class="ui">Synthetic signals</span> and choose <span class="ui">Analyze → Analyze…</span> (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>).</li>
+<li><b>In the list of analyses</b> open <span class="ui">Clustering → K-means model selection</span>. On the <span class="ui">Variables</span> tab tick both columns.</li>
+<li><b>On the <span class="ui">Options</span> tab</b> set the values in the table below and press <span class="ui">Run analysis</span>.</li>
+<li><b>To see the partition</b> repeat with <span class="ui">K-means clustering</span>, 3 clusters, same variables, scaling and seed. Both analyses are already set up in the attached project.</li>
+</ol>
+<div class="table-wrap"><table class="settings">
+<caption>Settings that decide the result</caption>
+<tbody>
+<tr><th scope="row">Minimum k · Maximum k</th><td>2 · 4</td></tr>
+<tr><th scope="row">Standardize</th><td>on</td></tr>
+<tr><th scope="row">Seed</th><td>42</td></tr>
+<tr><th scope="row">Criterion</th><td>Silhouette</td></tr>
+<tr><th scope="row">K-means algorithm</th><td>Lloyd (default)</td></tr>
+</tbody></table></div>
+<details class="shot">
+<summary>Show the Options tab screenshot</summary>
+<figure><img src="../../../../en/guide/files/k-means/app/options-dialog.png" width="796" height="680" loading="lazy" alt="K-means model selection window, Options tab: Minimum k 2, Maximum k 4, Standardize ticked, Seed 42, Criterion Silhouette, K-means algorithm Lloyd. On the left, the list of analyses with Clustering expanded.">
+<figcaption><span class="tag app">App screenshot</span> Trama 0.95.0 beta, English interface, light theme, attached project.</figcaption></figure>
+</details>
+</section>
+
+<section id="result" aria-labelledby="h-result">
+<h2 id="h-result">Read the result</h2>
+<p>The metrics are on the <span class="ui">Model metrics</span> tab of the results and the choice on the <span class="ui">Selection</span> tab, in the <span class="ui">Suggested k</span> row.</p>
+<div class="kcmp">
+<fieldset class="kpick"><legend>Compare the solutions</legend><label><input type="radio" name="k" value="2"><span>2 clusters</span></label><label><input type="radio" name="k" value="3" checked><span>3 clusters</span></label><label><input type="radio" name="k" value="4"><span>4 clusters</span></label></fieldset>
+<div class="kgrid">
+<div class="kfigs">
+<figure class="kfig" data-k="2">
+<a class="zoom" href="../../../../en/guide/files/k-means/figures/clusters-2.svg" title="Open the vector figure"><img src="../../../../en/guide/files/k-means/figures/clusters-2.png" width="960" height="600" loading="lazy" alt="Scatter plot of drift against amplitude with 2 coloured clusters: two of the three families are merged into one cluster."></a>
+<figcaption><span class="tag fig">Exported figure</span> <b>k = 2</b> · WSS 36.17 · silhouette 0.620. Two of the three families are merged into one cluster. <a href="../../../../en/guide/files/k-means/figures/clusters-2.svg">SVG</a></figcaption>
+</figure>
+<figure class="kfig" data-k="3">
+<a class="zoom" href="../../../../en/guide/files/k-means/figures/clusters-3.svg" title="Open the vector figure"><img src="../../../../en/guide/files/k-means/figures/clusters-3.png" width="960" height="600" loading="lazy" alt="Scatter plot of drift against amplitude with 3 coloured clusters: each family of signals has its own cluster."></a>
+<figcaption><span class="tag fig">Exported figure</span> <b>k = 3</b> · WSS 2.68 · silhouette 0.856. Each family of signals has its own cluster: 15, 15 and 15 signals. <a href="../../../../en/guide/files/k-means/figures/clusters-3.svg">SVG</a></figcaption>
+</figure>
+<figure class="kfig" data-k="4">
+<a class="zoom" href="../../../../en/guide/files/k-means/figures/clusters-4.svg" title="Open the vector figure"><img src="../../../../en/guide/files/k-means/figures/clusters-4.png" width="960" height="600" loading="lazy" alt="Scatter plot of drift against amplitude with 4 coloured clusters: one compact family is split in two."></a>
+<figcaption><span class="tag fig">Exported figure</span> <b>k = 4</b> · WSS 2.04 · silhouette 0.733. The fourth centre splits a compact family in two. <a href="../../../../en/guide/files/k-means/figures/clusters-4.svg">SVG</a></figcaption>
+</figure>
+</div>
+<div class="kside">
+<div class="table-wrap"><table class="metrics">
+<caption>Metrics by number of clusters, rounded</caption>
+<thead><tr><th scope="col">k</th><th scope="col">WSS</th><th scope="col">Versus k − 1</th><th scope="col">Mean silhouette</th></tr></thead>
+<tbody>
+<tr data-k="2"><th scope="row">2</th><td>36.17</td><td>−58.9%</td><td><span class="silbar" style="--v:0.620"><span>0.620</span></span></td></tr>
+<tr data-k="3"><th scope="row">3</th><td>2.68</td><td>−92.6%</td><td><span class="silbar" style="--v:0.856"><span>0.856</span></span></td></tr>
+<tr data-k="4"><th scope="row">4</th><td>2.04</td><td>−24.0%</td><td><span class="silbar" style="--v:0.733"><span>0.733</span></span></td></tr>
+</tbody>
+</table></div>
+<p class="note-s">With a single cluster the WSS is 88.00: with two standardised variables and 45 rows it is 2 × 44. Full-precision values are in the <a href="../../../../en/guide/files/k-means/data/results.json">proof JSON</a>.</p>
+</div>
+</div>
+</div>
+<p>From two to three clusters the WSS collapses from 36.17 to 2.68: the third centre separates two families that stayed together with <i>k</i> = 2. From three to four it only drops to 2.04, and the mean silhouette falls from 0.856 to 0.733, because the fourth centre cuts a compact family in two. <b>On these data Trama suggests <i>k</i> = 3.</b></p>
+<p>The silhouette of a signal compares <i>a</i>, its mean distance to the other members of its cluster, with <i>b</i>, its mean distance to the members of the nearest other cluster: <i>s</i> = (<i>b</i> − <i>a</i>) / max(<i>a</i>, <i>b</i>). It ranges from −1 to 1. A mean close to 1 means compact, well-separated clusters. Trama computes it on the same standardised variables used for the fit.</p>
+<aside class="callout ok"><b>Robustness check.</b> With seeds 1, 7, 123 and 2026, with the Hartigan–Wong algorithm, and with the Calinski–Harabasz, Davies–Bouldin, Elbow and Gap criteria over <i>k</i> from 1 to 8, the choice stays at 3. Here the families are built to be well separated: on your data the criteria may not agree.</aside>
+<details class="shot">
+<summary>Show the Model metrics table screenshot</summary>
+<figure><img src="../../../../en/guide/files/k-means/app/results.png" width="1280" height="800" loading="lazy" alt="Trama showing the K-means model selection results: Model metrics tab with rows k = 2, 3, 4 and columns WSS, Silhouette, Calinski–Harabasz, Davies–Bouldin.">
+<figcaption><span class="tag app">App screenshot</span> The numbers match the proof JSON.</figcaption></figure>
+</details>
+</section>
+
+<section id="edge-case" class="edge" aria-labelledby="h-edge">
+<h2 id="h-edge" data-tag="Edge case" data-toc="Edge case">The unit of measurement decides for you</h2>
+<p>Express amplitude in µV instead of mV, that is with numbers a thousand times larger, and turn off <span class="ui">Standardize</span>. Distances now depend almost only on amplitude. The silhouette suggests 2 clusters (0.844 against 0.787 with <i>k</i> = 3). With <i>k</i> = 3, three signals from the top-right family end up with the bottom-right ones, which have a similar amplitude but opposite drift.</p>
+<div class="pair">
+<figure><a class="zoom" href="../../../../en/guide/files/k-means/figures/edge-case-uV-not-standardized.png"><img src="../../../../en/guide/files/k-means/figures/edge-case-uV-not-standardized.png" width="960" height="600" loading="lazy" alt="Three-cluster partition with amplitude in microvolts and no standardisation: three points from the top-right family are coloured like the bottom-right family."></a>
+<figcaption><span class="tag fig">Exported figure</span> µV, <b>Standardize off</b>: 3 signals in the wrong cluster.</figcaption></figure>
+<figure><a class="zoom" href="../../../../en/guide/files/k-means/figures/edge-case-uV-standardized.png"><img src="../../../../en/guide/files/k-means/figures/edge-case-uV-standardized.png" width="960" height="600" loading="lazy" alt="Three-cluster partition with amplitude in microvolts and standardisation on: the three families are separated correctly."></a>
+<figcaption><span class="tag fig">Exported figure</span> µV, <b>Standardize on</b>: same result as the mV data.</figcaption></figure>
+</div>
+<p><b>How to notice.</b> The choice of <i>k</i> changes when you change units; clusters are cut along a single axis; columns span ranges of different orders of magnitude. With <span class="ui">Standardize</span> on, the results are identical to the mV ones.</p>
+<div class="files" role="group" aria-label="Edge case files">
+<a class="file" href="../../../../en/guide/files/k-means/data/edge-case-uV.alab" download><span class="ext">.alab</span><span><b>Edge case project</b><small>amplitude in µV, no standardisation · 1.9 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/k-means/data/synthetic-signals-uV.csv" download><span class="ext">.csv</span><span><b>Data in µV</b><small>same 45 signals · 0.7 kB</small></span></a>
+<a class="file" href="../../../../en/guide/files/k-means/data/edge-case-uV.json" download><span class="ext">.json</span><span><b>Edge case metrics</b><small>full precision</small></span></a>
+</div>
+</section>
+
+<section id="report" aria-labelledby="h-report">
+<h2 id="h-report">What to report</h2>
+<ul class="checks">
+<li>Variables and units, excluded rows and how missing values were handled.</li>
+<li>Standardisation, algorithm and number of starts, seed.</li>
+<li>Range of <i>k</i> tried, selection criterion and the value obtained.</li>
+<li>Trama version and the <code>.alab</code> project that repeats the calculation.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>Amplitude and drift were standardised and clustered with K-means (Lloyd’s algorithm, 10 k-means++ starts, seed 42) for <i>k</i> from 2 to 4 in Trama 0.95.0 beta. The mean silhouette was highest with <i>k</i> = 3 (0.856, against 0.620 with <i>k</i> = 2 and 0.733 with <i>k</i> = 4).</p></blockquote>
+<figcaption>Example sentence for the Methods section. <button type="button" class="copy" data-copy="#frase" hidden>Copy the sentence</button></figcaption>
+</figure>
+<p>An exploratory partition is not a classification. Before using the clusters to assign new samples, look for independent support: another set of measurements, a variable not used for clustering, another method.</p>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti" data-toc="Sources">Sources</h2>
+<ol class="refs">
+<li>Lloyd S. P. (1982). Least squares quantization in PCM. <i>IEEE Transactions on Information Theory</i>, 28(2), 129–137. <a href="https://doi.org/10.1109/TIT.1982.1056489">doi:10.1109/TIT.1982.1056489</a></li>
+<li>Arthur D., Vassilvitskii S. (2007). k-means++: the advantages of careful seeding. <i>Proceedings of the 18th ACM-SIAM Symposium on Discrete Algorithms</i>, 1027–1035. <a href="https://dl.acm.org/doi/10.5555/1283383.1283494">ACM Digital Library</a></li>
+<li>Rousseeuw P. J. (1987). Silhouettes: a graphical aid to the interpretation and validation of cluster analysis. <i>Journal of Computational and Applied Mathematics</i>, 20, 53–65. <a href="https://doi.org/10.1016/0377-0427(87)90125-7">doi:10.1016/0377-0427(87)90125-7</a></li>
+<li>Tibshirani R., Walther G., Hastie T. (2001). Estimating the number of clusters in a data set via the gap statistic. <i>Journal of the Royal Statistical Society B</i>, 63(2), 411–423. <a href="https://doi.org/10.1111/1467-9868.00293">doi:10.1111/1467-9868.00293</a></li>
+</ol>
+<p class="ver">Checked with Trama 0.95.0 beta (tag <a href="https://github.com/realfulvio/Trama/tree/v0.95.0">v0.95.0</a>, commit 4c07db6) on 20 November 2026. Calculation in <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/stats.py">analisi/stats.py</a> and <a href="https://github.com/realfulvio/Trama/blob/v0.95.0/analisi/advanced.py">analisi/advanced.py</a>.</p>
+</section>
+<nav class="pager" aria-label="Nearby chapters"><a href="../../../../en/guide/statistics/anova/"><small>Previous</small>Compare several conditions with ANOVA</a><a href="../../../../en/guide/curves/standard-curve/"><small>Next</small>Read concentrations off a standard curve</a></nav></article>
+</main>
+</div>
+<footer><div class="wrap"><div class="brand"><img src="../../../../site/trama.svg" alt="" width="34" height="34">Trama</div><p>Trama guide. Examples use synthetic data; every chapter states the version its numbers were checked on.</p><nav aria-label="Links"><a href="../../../../en/guide/">Guide contents</a><a href="../../../../en/">Home</a><a href="../../../../en/features/">Features</a><a data-release-page href="https://github.com/realfulvio/Trama/releases/tag/v0.95.0">What’s new in 0.95</a><a href="https://github.com/realfulvio/Trama/blob/main/LICENSE">MIT licence</a></nav><p>Trama is an independent project in beta. No clinical validation or regulatory certification is claimed.</p></div></footer>
+<script src="../../../../site/releases.js" defer></script>
+</body>
+</html>

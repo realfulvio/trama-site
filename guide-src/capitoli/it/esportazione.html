@@ -1,0 +1,120 @@
+<!--
+{"title": "Esportare una figura vettoriale",
+ "short": "Export vettoriale",
+ "description": "Un layout a due pannelli esportato da Trama in SVG e PDF a 170 mm: testo o tracciati, che cosa controllare nel file e perché i caratteri predefiniti diventano di 4 punti.",
+ "ask": "La rivista vuole la figura 1 in formato vettoriale, larga 170 mm, con i pannelli A e B. Come la esporti da Trama perché resti nitida a ogni ingrandimento, con un testo che si legge ancora una volta stampata?",
+ "facts": [["Verificato", "Trama {{V}}"], ["Dati", "la curva standard sintetica"], ["Larghezza", "170 mm"], ["Lettura", "7 minuti"]],
+ "proof": [["Dati", "sintetici, 12 righe"], ["Larghezza", "170 mm"]],
+ "downloads": [["alab", "Progetto .alab"], ["pdf", "Figura .pdf"], ["svg_text", "Figura .svg"], ["json", "Controlli .json"]],
+ "image": "png", "image_alt": "Figura 1 con due pannelli: A, la retta di calibrazione con la banda di confidenza; B, i residui contro i valori stimati."}
+-->
+<section id="quando" aria-labelledby="h-quando">
+<h2 id="h-quando">Quando usarlo</h2>
+<p>Un file <b>vettoriale</b> (SVG, PDF) descrive linee, punti e testo come geometria: si ingrandisce senza perdere nitidezza e il testo resta testo. Un file <b>raster</b> (PNG, TIFF) è una griglia di pixel fissata al momento dell’esportazione: oltre la sua risoluzione si vedono gli scalini.</p>
+<ul class="checks">
+<li><b>Grafici, curve, schemi:</b> vettoriale. È il caso di quasi tutto quello che esce da Trama.</li>
+<li><b>Fotografie e immagini al microscopio:</b> raster, alla risoluzione chiesta dalla rivista.</li>
+<li><b>La larghezza finale</b> si decide prima: molte riviste usano una colonna (circa 85 mm) o due (circa 170 mm). Controlla le istruzioni per gli autori, che indicano anche il corpo minimo del testo.</li>
+<li><b>Il corpo dei caratteri</b> si controlla alla larghezza finale, non sullo schermo. È il <a href="#caso-limite">caso limite</a> di questo capitolo.</li>
+</ul>
+</section>
+
+<section id="dati" aria-labelledby="h-dati">
+<h2 id="h-dati">I dati</h2>
+<p>Gli standard sintetici del capitolo <a href="../../curve/curva-standard/">Curva standard</a>: concentrazione e assorbanza. Il progetto contiene due grafici di <span class="ui">Regressione lineare</span>, la retta con la banda di confidenza e i residui contro i valori stimati, e il layout <span class="ui">Figura 1</span> che li mette affiancati come pannelli A e B. I due grafici hanno già i caratteri ingranditi in <span class="ui">Formato grafico</span>; il perché è nel caso limite.</p>
+<div class="files" role="group" aria-label="File da scaricare">
+<a class="file" href="{{href:alab}}" download><span class="ext">.alab</span><span><b>Progetto Trama</b><small>tabella, due grafici e il layout · {{kb:alab}}</small></span></a>
+<a class="file" href="{{href:pdf}}" download><span class="ext">.pdf</span><span><b>Figura 1 in PDF</b><small>170 mm, esportata da Trama · {{kb:pdf}}</small></span></a>
+<a class="file" href="{{href:svg_text}}" download><span class="ext">.svg</span><span><b>Figura 1 in SVG, testo</b><small>testo modificabile · {{kb:svg_text}}</small></span></a>
+<a class="file" href="{{href:svg_paths}}" download><span class="ext">.svg</span><span><b>Figura 1 in SVG, tracciati</b><small>testo convertito in forme · {{kb:svg_paths}}</small></span></a>
+</div>
+</section>
+
+<section id="percorso" aria-labelledby="h-percorso">
+<h2 id="h-percorso">In Trama</h2>
+<ol class="steps-lab">
+<li><b>Apri il progetto</b> con <span class="ui">File → Apri…</span> e seleziona il layout <span class="ui">Figura 1</span> nel pannello a sinistra, sotto <span class="ui">Layout</span>.</li>
+<li><b>Scegli <span class="ui">File → Esporta con opzioni…</span></b>. Lo stesso comando è nella scheda <span class="ui">Grafico</span>.</li>
+<li><b>Imposta il formato e la larghezza</b> come nella tabella qui sotto. La riga <span class="ui">Dimensione finale</span> mostra subito le misure della pagina: 170,0 × 72,9 mm.</li>
+<li><b>Premi <span class="ui">OK</span></b> e scegli nome e cartella del file.</li>
+<li><b>Per il PDF</b> ripeti con <span class="ui">Formato</span> = PDF. Il predefinito <span class="ui">Vettoriale</span> imposta un PDF da 85 mm, cioè una colonna.</li>
+</ol>
+<div class="pair wide-first">
+<details class="shot" open>
+<summary>Mostra il layout nell’app</summary>
+<figure><img src="{{href:app_layout}}" {{wh:app_layout}} loading="lazy" alt="Trama con il layout Figura 1 aperto: pannello A con la retta di calibrazione, pannello B con i residui. A sinistra il navigatore con la tabella Curva standard, due grafici e il layout.">
+<figcaption><span class="tag app">Schermata dell’app</span> Il layout come appare in Trama.</figcaption></figure>
+</details>
+<figure class="solo"><img src="{{href:app_export}}" {{wh:app_export}} loading="lazy" alt="Finestra Esporta con opzioni: Predefinito Personalizzato, Formato SVG, Larghezza 170 mm, Testo SVG Testo, Sfondo trasparente non spuntato, Dimensione finale 170,0 × 72,9 mm.">
+<figcaption><span class="tag app">Schermata dell’app</span> La finestra con le impostazioni di questo esempio.</figcaption></figure>
+</div>
+<div class="table-wrap"><table class="settings">
+<caption>Impostazioni che decidono il file</caption>
+<tbody>
+<tr><th scope="row">Formato</th><td>SVG (poi PDF)</td></tr>
+<tr><th scope="row">Larghezza (mm)</th><td>170</td></tr>
+<tr><th scope="row">Testo SVG</th><td>Testo</td></tr>
+<tr><th scope="row">Sfondo trasparente</th><td>no</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="risultato" aria-labelledby="h-risultato">
+<h2 id="h-risultato">Controlla il file</h2>
+<p>Non fidarti dell’estensione: apri il file e controlla che sia davvero vettoriale. Sui file di questo esempio:</p>
+<figure class="solo"><a class="zoom" href="{{href:svg_text}}" title="Apri l’SVG"><img src="{{href:png}}" {{wh:png}} loading="lazy" alt="Figura 1: titolo in alto, pannello A con la retta di calibrazione dell’assorbanza sulla concentrazione e la banda di confidenza, pannello B con i residui sparsi attorno allo zero."></a>
+<figcaption><span class="tag fig">Figura esportata</span> Anteprima PNG della figura; il collegamento apre l’SVG vero, da ingrandire nel browser.</figcaption></figure>
+<div class="table-wrap"><table class="metrics wide">
+<caption>Che cosa contengono i tre file</caption>
+<thead><tr><th scope="col"></th><th scope="col">SVG, Testo</th><th scope="col">SVG, Tracciati</th><th scope="col">PDF</th></tr></thead>
+<tbody>
+<tr><th scope="row">Pagina</th><td>170 × 72,9 mm</td><td>170 × 72,9 mm</td><td>170 × 72,9 mm, 1 pagina</td></tr>
+<tr><th scope="row">Testo come testo</th><td>33 elementi</td><td>nessuno</td><td>sì, cercabile</td></tr>
+<tr><th scope="row">Immagini incorporate</th><td>nessuna</td><td>nessuna</td><td>nessuna</td></tr>
+<tr><th scope="row">Dimensione</th><td>{{kb:svg_text}}</td><td>{{kb:svg_paths}}</td><td>{{kb:pdf}}</td></tr>
+</tbody>
+</table></div>
+<p><b>Testo o tracciati.</b> Con <span class="ui">Testo</span> le etichette restano testo: puoi correggerle in un editor vettoriale e cercarle nel file. Il file però indica una famiglia di caratteri, e su un computer che non la ha il programma ne sostituisce un’altra, con larghezze diverse. Con <span class="ui">Tracciati</span> ogni lettera diventa una forma: la figura è identica ovunque, ma il testo non si corregge più e il file pesa circa il doppio. Usa Testo finché la figura cambia, Tracciati per la versione finale se la rivista chiede di convertire i caratteri.</p>
+<aside class="callout ok"><b>Come controllare da solo.</b> Apri l’SVG nel browser e ingrandisci all’800%: linee e lettere restano nette. Cerca una parola dell’asse con <kbd>Ctrl</kbd>+<kbd>F</kbd>: nel file con Testo la trovi, in quello con Tracciati no. Nel PDF il testo si seleziona.</aside>
+</section>
+
+<section id="caso-limite" class="edge" aria-labelledby="h-caso">
+<h2 id="h-caso" data-tag="Caso limite" data-toc="Caso limite">I caratteri predefiniti diventano di 4 punti</h2>
+<p>Lo stesso layout, con i caratteri predefiniti dei grafici, esportato a 170 mm. Il file è vettoriale e nitido, ma il testo dentro i pannelli è minuscolo: <b>4,0 punti</b> per le etichette delle tacche e i titoli degli assi, 4,8 per il titolo del pannello. Succede perché il layout rimpicciolisce ogni grafico per farne stare due in una riga, e la larghezza di 170 mm rimpicciolisce di nuovo la pagina intera. Il titolo del layout e le lettere A e B, che stanno sulla pagina, restano a 9,6 e 11,2 punti.</p>
+<div class="pair">
+<figure><a class="zoom" href="{{href:svg_small}}"><img src="{{href:png_small}}" {{wh:png_small}} loading="lazy" alt="Figura 1 con i caratteri predefiniti: le etichette degli assi e delle tacche sono molto piccole rispetto alle lettere A e B."></a>
+<figcaption><span class="tag fig">Figura esportata</span> <b>Caratteri predefiniti</b>: testo dei pannelli da 4,0 a 4,8 pt.</figcaption></figure>
+<figure><a class="zoom" href="{{href:svg_text}}"><img src="{{href:png}}" {{wh:png}} loading="lazy" alt="Figura 1 con i caratteri ingranditi: le etichette degli assi si leggono bene."></a>
+<figcaption><span class="tag fig">Figura esportata</span> <b>Titolo 22, assi 20, tacche 18</b>: testo dei pannelli da 7,2 a 8,9 pt.</figcaption></figure>
+</div>
+<p><b>Come rimediare.</b> Seleziona ogni grafico del layout, apri <span class="ui">Grafico → Formato grafico</span> e, in <span class="ui">Dimensioni dei caratteri in punti</span>, aumenta <span class="ui">Titolo</span>, <span class="ui">Titoli assi</span> ed <span class="ui">Etichette tacche</span>. I valori sono riferiti al grafico da solo: in questo layout a due colonne e a 170 mm vengono moltiplicati per circa 0,4. Con 22, 20 e 18 il testo finale va da 7,2 a 8,9 punti.</p>
+<p><b>Come accorgersene.</b> Stampa la pagina al 100% o apri il PDF alla dimensione reale: se le etichette degli assi sono più piccole del testo di una nota a piè di pagina, sono troppo piccole. Il <a href="{{href:json}}">JSON dei controlli</a> riporta il corpo effettivo di ogni testo nei due casi.</p>
+<div class="files" role="group" aria-label="File del caso limite">
+<a class="file" href="{{href:alab_small}}" download><span class="ext">.alab</span><span><b>Progetto del caso limite</b><small>stesso layout, caratteri predefiniti · {{kb:alab_small}}</small></span></a>
+<a class="file" href="{{href:svg_small}}" download><span class="ext">.svg</span><span><b>Figura con caratteri da 4 pt</b><small>170 mm, testo · {{kb:svg_small}}</small></span></a>
+</div>
+</section>
+
+<section id="riportare" aria-labelledby="h-riportare">
+<h2 id="h-riportare">Cosa controllare prima di inviare</h2>
+<ul class="checks">
+<li>Formato e larghezza richiesti dalla rivista, e la riga <span class="ui">Dimensione finale</span> che li conferma.</li>
+<li>Corpo del testo alla larghezza finale, nei pannelli e non solo nel titolo.</li>
+<li>Testo o tracciati, secondo le istruzioni per gli autori.</li>
+<li>Nessuna immagine raster nascosta: un layout importato con pannelli incorporati come immagini resta raster anche in SVG e PDF, e Trama lo dice nella finestra di esportazione.</li>
+<li>Il progetto <code>.alab</code> da cui la figura si riesporta, se serve cambiarla.</li>
+</ul>
+<figure class="quote">
+<blockquote id="frase"><p>Le figure sono state preparate in Trama {{V}} ed esportate in PDF vettoriale alla larghezza finale di 170 mm.</p></blockquote>
+<figcaption>Esempio di frase per la sezione Metodi o per la lettera all’editore. <button type="button" class="copy" data-copy="#frase" hidden>Copia la frase</button></figcaption>
+</figure>
+</section>
+
+<section id="fonti" aria-labelledby="h-fonti">
+<h2 id="h-fonti">Fonti</h2>
+<ol class="refs">
+<li>Rougier N. P., Droettboom M., Bourne P. E. (2014). Ten simple rules for better figures. <i>PLoS Computational Biology</i>, 10(9), e1003833. <a href="https://doi.org/10.1371/journal.pcbi.1003833">doi:10.1371/journal.pcbi.1003833</a></li>
+<li>W3C (2011). <i>Scalable Vector Graphics (SVG) 1.1 (Second Edition)</i>. Raccomandazione W3C. <a href="https://www.w3.org/TR/SVG11/">w3.org/TR/SVG11</a></li>
+<li>ISO 32000-2:2020. <i>Document management — Portable document format — Part 2: PDF 2.0</i>. Organizzazione internazionale per la normazione.</li>
+</ol>
+<p class="ver">Verificato con Trama {{V}} (tag <a href="https://github.com/realfulvio/Trama/tree/{{TAG}}">{{TAG}}</a>, commit {{COMMIT}}) il 20 novembre 2026. Esportazione in <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/layout_svg.py">analisi/layout_svg.py</a> e <a href="https://github.com/realfulvio/Trama/blob/{{TAG}}/analisi/figure_export.py">analisi/figure_export.py</a>.</p>
+</section>

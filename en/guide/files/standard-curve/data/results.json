@@ -1,0 +1,64 @@
+{
+  "trama": "0.95.0",
+  "data": "synthetic",
+  "seed": 11,
+  "standards": 12,
+  "calibration": {
+    "slope": 0.011834654377880184,
+    "intercept": 0.05327142857142858,
+    "r2": 0.998833605741604,
+    "slope_se": 0.00012788855869949706
+  },
+  "highest_standard_response": [
+    1.015,
+    0.995
+  ],
+  "unknowns": [
+    {
+      "response": 0.231,
+      "x": 15.017639362646607,
+      "outside_calibration": false,
+      "prediction_interval": [
+        12.61347673130004,
+        17.409254038507157
+      ],
+      "mean_response_interval": [
+        14.300751813208274,
+        15.721978956598921
+      ]
+    },
+    {
+      "response": 0.478,
+      "x": 35.88854882170615,
+      "outside_calibration": false,
+      "prediction_interval": [
+        33.498414698824355,
+        38.290348621953854
+      ],
+      "mean_response_interval": [
+        35.19027986795655,
+        36.598483452821654
+      ]
+    },
+    {
+      "response": 0.702,
+      "x": 54.81601327040792,
+      "outside_calibration": false,
+      "prediction_interval": [
+        52.34897344800643,
+        57.316677692275846
+      ],
+      "mean_response_interval": [
+        53.8712523707277,
+        55.794398769554576
+      ]
+    },
+    {
+      "response": 1.12,
+      "x": 90.13601389343178,
+      "outside_calibration": true,
+      "prediction_interval": null,
+      "mean_response_interval": null
+    }
+  ]
+}

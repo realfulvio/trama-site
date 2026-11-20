@@ -1,0 +1,18 @@
+{
+  "trama": "0.95.0",
+  "rows": 54,
+  "units": 18,
+  "replicates_per_unit": 3,
+  "anova": {
+    "F": 97.02343034794485,
+    "df1": 2,
+    "df2": 51,
+    "p": 4.1417734601015575e-18
+  },
+  "control_vs_B": {
+    "difference": -0.9583333333333333,
+    "se": 0.21789370997189408,
+    "adjusted_p": 0.00016250235206682895
+  },
+  "unit_means_equal_main_table": true
+}
