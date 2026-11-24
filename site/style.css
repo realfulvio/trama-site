@@ -103,9 +103,17 @@ p { margin: 0; }
 .hero h1 span { display: block; color: var(--mint); }
 .hero .lead { margin-top: var(--s5); max-width: 54ch; font-size: var(--fs-l); color: var(--on-navy-muted); }
 .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s4); margin-top: var(--s6); }
-.meta { margin-top: var(--s5); font-size: var(--fs-s); color: var(--on-navy-muted); max-width: 60ch; }
-.meta a { color: var(--mint); }
-.beta { display: inline-block; margin-right: var(--s2); padding: 2px 10px; border-radius: 999px; background: var(--coral); color: var(--navy); font-weight: 700; }
+.release-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s1) var(--s4);
+  margin-block-start: var(--s3);
+  font-size: var(--fs-s);
+  color: var(--on-navy-muted);
+}
+.release-meta [data-release-version] { color: var(--on-navy); font-weight: 700; }
+.release-meta a { color: var(--mint); text-underline-offset: .2em; }
 .plot { width: 100%; height: auto; }
 .plot .curve { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s .3s cubic-bezier(.4, 0, .2, 1) forwards; }
 .plot .pt { opacity: 0; animation: pop .3s ease-out forwards; animation-delay: calc(.5s + var(--i) * .11s); }
