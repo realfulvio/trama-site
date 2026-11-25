@@ -93,12 +93,17 @@
 .flow li:not(.plan) .fbtn:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; border-radius: 6px; }
 .fnote { margin-top: var(--s5); color: var(--muted); font-size: var(--fs-s); max-width: 80ch; }
 
-@media (max-width: 960px) { .flayout { grid-template-columns: 1fr; } .fside { position: static; grid-template-columns: 1fr 1fr; } .fmain { padding-top: var(--s6); } }
+@media (max-width: 960px) { .flayout { grid-template-columns: minmax(0, 1fr); } .fside { position: static; grid-template-columns: 1fr 1fr; } .fmain { padding-top: var(--s6); } }
 @media (max-width: 640px) {
   .mrow { grid-template-columns: 1fr auto; }
   .mrow .cells { grid-column: 1 / -1; }
   .fside { grid-template-columns: 1fr; }
   .flow { grid-template-columns: 1fr; gap: var(--s4); }
   .hub, .flow svg.links { display: none; }
+}
+@media (max-width: 380px) {
+  .fmap { padding-inline: var(--s4); }
+  .seg { flex-wrap: wrap; max-width: 100%; }
+  .seg button { padding-inline: var(--s2); }
 }
 @media (prefers-reduced-motion: reduce) { .cell { animation: none; transition: none; } .links path { transition: none; } }
