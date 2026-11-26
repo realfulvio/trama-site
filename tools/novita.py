@@ -32,7 +32,7 @@ TEXT = {
         "h1": "Novità", "lead": "Che cosa è cambiato nelle ultime dieci versioni di Trama.",
         "latest": "Ultima versione", "notes": "Note di rilascio e download", "all": "Tutte le versioni su GitHub",
         "download": "Scarica",
-        "dl_long": "Scarica la {v}", "jump": "Vai a una versione", "close_h": "Provala sui tuoi dati", "close_p": "Gratuita, portabile, in italiano e in inglese. Estrai lo ZIP e apri Trama.exe.", "dl_win": "Scarica per Windows x64", "code": "Codice su GitHub",
+        "dl_long": "Scarica la {v}", "jump": "Vai a una versione", "close_h": "Scarica Trama", "close_p": "ZIP per Windows 10 e 11 a 64 bit. Estrai la cartella e apri Trama.exe.", "dl_win": "Scarica per Windows x64", "code": "Codice su GitHub",
     },
     "en": {
         "path": "en/whats-new/index.html", "url": "https://tramastat.org/en/whats-new/", "alt": "https://tramastat.org/novita/",
@@ -42,7 +42,7 @@ TEXT = {
         "h1": "What’s new", "lead": "Changes in the ten most recent Trama releases.",
         "latest": "Latest version", "notes": "Release notes and download", "all": "All versions on GitHub",
         "download": "Download",
-        "dl_long": "Download {v}", "jump": "Jump to a version", "close_h": "Try it on your own data", "close_p": "Free, portable, in Italian and English. Extract the ZIP and open Trama.exe.", "dl_win": "Download for Windows x64", "code": "Code on GitHub",
+        "dl_long": "Download {v}", "jump": "Jump to a version", "close_h": "Download Trama", "close_p": "ZIP for 64-bit Windows 10 and 11. Extract the folder and open Trama.exe.", "dl_win": "Download for Windows x64", "code": "Code on GitHub",
     },
 }
 
