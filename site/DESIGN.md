@@ -1,6 +1,10 @@
 # Sistema di design del sito di Trama
 
-Documento di lavoro per chi modifica `index.html`, `en/index.html` e `site/style.css`. Stack: HTML e CSS statici, nessuna build, nessun JavaScript, nessuna risorsa esterna (il font dei titoli è nel repository).
+Documento di lavoro per chi modifica `index.html`, `en/index.html` e `site/style.css`. Stack: HTML e CSS statici, nessuna build, nessuna risorsa esterna (il font dei titoli è nel repository). JavaScript solo facoltativo: senza script ogni pagina è completa e ferma.
+
+**Aggiornamento 2026-11-26.** La home è stata accorciata (circa 5.500 px invece di 11.700) e ha il suo foglio `home.css` e lo script `home.js`. Il confronto con il software commerciale è uscito dalla home: i vantaggi con le verifiche dicono la stessa cosa. Tutte le pagine hanno lo stesso menu: Home, Funzionalità, Novità.
+
+**Movimento.** Serve a mostrare il programma, mai a decorare: fit in testata (le forme intermedie sono le iterazioni reali di un Levenberg–Marquardt sui dati mostrati), dimostrazione in quattro schermate con pausa, comparsa delle sezioni e numeri che contano. Con «riduci movimento» del sistema si vede subito lo stato finale; senza JavaScript la pagina mostra il fit concluso e la prima schermata.
 
 ## 1. Analisi
 
