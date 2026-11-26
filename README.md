@@ -20,8 +20,9 @@ python tools/novita.py ../Trama
 
 Usa un clone di Trama fermo al tag appena pubblicato su GitHub. Prima di eseguire il comando,
 aggiorna le voci della mappa in `funzionalita/index.html` e `en/features/index.html` con i cambiamenti
-della release. Lo script legge `docs/release-*.md` dalla 0.104 in poi e rigenera Novità in entrambe le
-lingue. Aggiorna i download statici, la versione delle home e del catalogo, i dati strutturati,
+della release. Lo script legge `docs/release-*.md` dalla 0.104 in poi. Sia l’indice sia la pagina
+Novità mostrano le dieci versioni più recenti in entrambe le lingue, con un link allo storico completo
+su GitHub. Lo script aggiorna i download statici, la versione delle home e del catalogo, i dati strutturati,
 i contatori della mappa e le date nella sitemap. Salta, segnalandole, le voci che nominano prodotti
 di terzi.
 
