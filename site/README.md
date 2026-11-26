@@ -4,7 +4,7 @@ Sito statico (HTML e CSS, nessuna build, nessun JavaScript, nessuna richiesta es
 
 - `index.html` — pagina in italiano. `en/index.html` — versione inglese.
 - `site/style.css` — stile "Scientifico compatto" (stessi colori e densità di `analisi/ui_theme.py`); `site/DESIGN.md` — sistema di design, componenti, accessibilità e lista di coerenza.
-- Le immagini sono quelle di `media/homepage/`; il progetto di esempio è `examples/Laboratorio.alab`.
+- Le immagini sono quelle di `media/workflows-112/`; il progetto di esempio è `examples/Laboratorio.alab`.
 - `.nojekyll` in `/docs` evita che Pages elabori i file Markdown della documentazione.
 
 Anteprima locale: `python -m http.server -d docs 8000` e apri http://localhost:8000/.
