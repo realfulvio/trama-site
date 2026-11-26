@@ -9,9 +9,11 @@ Le voci che li contengono vengono saltate e il generatore le elenca a video.
 """
 from datetime import date
 import html
+import json
 import re
 import sys
 from pathlib import Path
+from urllib.request import Request, urlopen
 
 CURVES = '<svg class="hero-bg" viewBox="0 0 1440 640" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M-20 560C420 560 520 150 1460 110"/><path pathLength="1" d="M-20 600C560 600 700 260 1460 220"/><path pathLength="1" d="M-20 500C300 500 420 60 1460 40"/></svg>'
 DOWNLOAD_MARK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>'
@@ -69,18 +71,42 @@ def bullets(block):
     return [" ".join(i) for i in items]
 
 
+def published_releases():
+    releases = {}
+    url = "https://api.github.com/repos/realfulvio/Trama/releases?per_page=100"
+    while url:
+        request = Request(url, headers={"User-Agent": "trama-site", "Accept": "application/vnd.github+json"})
+        with urlopen(request, timeout=30) as response:
+            data = json.load(response)
+            next_page = re.search(r'<([^>]+)>; rel="next"', response.headers.get("Link", ""))
+        for item in data:
+            tag = re.fullmatch(r"v(\d+)\.(\d+)\.(\d+)", item["tag_name"])
+            if tag and not item["draft"] and item["published_at"]:
+                version = tuple(map(int, tag.groups()))
+                if version >= FIRST:
+                    releases[version] = item
+        url = next_page[1] if next_page else None
+    return releases
+
+
 def releases(trama):
-    found = []
+    notes = {}
     for f in sorted((Path(trama) / "docs").glob("release-*.md")):
         text = f.read_text(encoding="utf-8")
         m = re.match(r"# Trama (\d+)\.(\d+)\.(\d+)", text)
-        if not m:
-            continue
-        ver = tuple(int(x) for x in m.groups())
-        if ver < FIRST:
-            continue
+        if m:
+            notes[tuple(map(int, m.groups()))] = text
+
+    published = published_releases()
+    recent = sorted(published, key=lambda v: (published[v]["published_at"], v), reverse=True)[:RECENT_RELEASES]
+    if not recent:
+        sys.exit("Nessuna versione di Trama pubblicata.")
+    found = []
+    for ver in recent:
+        text = notes.get(ver, published[ver]["body"] or "")
         it, _, en = text.partition("\n## English")
         en = en.split("\n", 1)[1] if "\n" in en else ""
+        en = re.split(r"^## (?:Collaudo|Validation)\s*$", en, maxsplit=1, flags=re.M)[0]
         lang = {"it": bullets(it), "en": bullets(en)}
         for code, items in lang.items():
             kept = [i for i in items if not THIRD_PARTY.search(i)]
@@ -89,8 +115,7 @@ def releases(trama):
                     print(f"saltata ({code} {'.'.join(map(str, ver))}): {i[:70]}…")
             lang[code] = kept
         found.append((ver, lang))
-    found.sort(reverse=True)
-    return found[:RECENT_RELEASES]
+    return found
 
 
 def page(code, rels):
