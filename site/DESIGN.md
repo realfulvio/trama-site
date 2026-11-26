@@ -90,4 +90,4 @@ Con riduzione del movimento la curva è già completa e i pulsanti non si muovon
 - [ ] Solo i colori del marchio: blu, verde acqua, menta, corallo, avorio. Il corallo segna beta, limiti e annotazioni.
 - [ ] Ombra solo sulle finestre del programma; raggi dai token.
 - [ ] Pulsanti e collegamenti interattivi ≥ 44 px; nessuno scorrimento orizzontale a 390 px.
-- [ ] Le immagini sono catture reali con dati sintetici e provenienza in `media/homepage/PROVENANCE.md`.
+- [ ] Le immagini sono catture reali con dati sintetici e provenienza in `media/workflows-112/PROVENANCE.md`.
