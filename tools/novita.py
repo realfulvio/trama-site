@@ -7,6 +7,7 @@ l'italiano, quella dopo l'inglese. Solo libreria standard.
 Regola del sito: niente nomi né estensioni di formati di prodotti di terzi.
 Le voci che li contengono vengono saltate e il generatore le elenca a video.
 """
+from datetime import date
 import html
 import re
 import sys
@@ -172,6 +173,37 @@ def page(code, rels):
 """
 
 
+VERSION = r"\d+\.\d+\.\d+"
+RELEASE_ROOT = "https://github.com/realfulvio/Trama/releases"
+
+
+def refresh_release_fields(version):
+    """Update static downloads and the catalogue release labels, including without JavaScript."""
+    for name in ("index.html", "en/index.html", "funzionalita/index.html", "en/features/index.html"):
+        path = SITE / name
+        text = path.read_text(encoding="utf-8")
+        text = re.sub(rf"{RELEASE_ROOT}/download/v{VERSION}/Trama-{VERSION}-Windows-x64\.zip",
+                      f"{RELEASE_ROOT}/download/v{version}/Trama-{version}-Windows-x64.zip", text)
+        text = re.sub(rf"{RELEASE_ROOT}/tag/v{VERSION}", f"{RELEASE_ROOT}/tag/v{version}", text)
+        if name in ("index.html", "en/index.html"):
+            text = re.sub(rf'("softwareVersion":"){VERSION}(")', rf'\g<1>{version}\2', text)
+            text = re.sub(rf'(data-release-version>Beta ){VERSION}', rf'\g<1>{version}', text)
+            text = re.sub(rf'Trama-{VERSION}-Windows-x64\.zip', f'Trama-{version}-Windows-x64.zip', text)
+        else:
+            text = re.sub(rf'{VERSION} beta', f'{version} beta', text)
+            for status in ("ok", "plan"):
+                count = text.count(f'data-s="{status}"')
+                text = re.sub(rf'(data-feature-count="{status}">)\d+', rf'\g<1>{count}', text)
+        path.write_text(text, encoding="utf-8")
+
+
+def refresh_sitemap():
+    path = SITE / "sitemap.xml"
+    text = path.read_text(encoding="utf-8")
+    text = re.sub(r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>", f"<lastmod>{date.today()}</lastmod>", text)
+    path.write_text(text, encoding="utf-8")
+
+
 def main():
     if len(sys.argv) != 2:
         sys.exit(__doc__)
@@ -181,6 +213,8 @@ def main():
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(page(code, rels), encoding="utf-8")
         print("scritto", out.relative_to(SITE), len(rels), "versioni")
+    refresh_release_fields(".".join(map(str, rels[0][0])))
+    refresh_sitemap()
 
 
 if __name__ == "__main__":

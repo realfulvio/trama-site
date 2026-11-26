@@ -18,12 +18,19 @@ Tutte le pagine hanno lo stesso menu: Home, Funzionalità, Novità.
 python tools/novita.py ../Trama
 ```
 
-Legge `docs/release-*.md` del clone di Trama dalla 0.104 in poi e riscrive le due pagine Novità. Salta, segnalandole, le voci che nominano formati di prodotti di terzi.
+Usa un clone di Trama fermo al tag appena pubblicato su GitHub. Prima di eseguire il comando,
+aggiorna le voci della mappa in `funzionalita/index.html` e `en/features/index.html` con i cambiamenti
+della release. Lo script legge `docs/release-*.md` dalla 0.104 in poi e rigenera Novità in entrambe le
+lingue. Aggiorna i download statici, la versione delle home e del catalogo, i dati strutturati,
+i contatori della mappa e le date nella sitemap. Salta, segnalandole, le voci che nominano prodotti
+di terzi.
+
+Verifica le sei pagine sul dominio pubblico e prova il link diretto al portabile. Se i cambiamenti
+riguardano un percorso illustrato, usa schermate reali e aggiorna la relativa provenienza.
 
 ## SEO
 
 - Ogni pagina ha `title`, `description`, `canonical`, `hreflang` (it, en, x-default) assoluti, Open Graph, Twitter card e dati strutturati JSON-LD (`SoftwareApplication`, `WebSite`, `FAQPage` nelle home; `WebPage` e `BreadcrumbList` nelle pagine funzionalità).
 - `sitemap.xml` elenca le sei pagine con le alternative di lingua. Aggiornare `lastmod` quando cambiano i contenuti.
-- Con una nuova versione aggiornare anche `softwareVersion`, `downloadUrl` e `releaseNotes` nel JSON-LD delle due home (il testo visibile si aggiorna da `site/releases.js`, il JSON-LD no).
 - Le immagini di anteprima social sono in `media/og/` (1200 × 630).
 - `robots.txt` alla radice consente tutto e indica la sitemap. Con il dominio personalizzato i crawler lo leggono su https://tramastat.org/robots.txt.
