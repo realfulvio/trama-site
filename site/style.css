@@ -95,6 +95,12 @@ p { margin: 0; }
 .langs a:hover { color: var(--on-navy); background: var(--navy-3); }
 .langs .on { background: var(--on-navy); color: var(--navy); }
 .top .btn { min-height: var(--target); padding: 0 var(--s4); font-size: var(--fs-s); }
+/* logo GitHub: porta al codice sorgente */
+.gh { display: inline-flex; align-items: center; gap: var(--s2); min-height: var(--target); padding: 0 var(--s3); border: 1px solid var(--navy-line); border-radius: 999px; color: var(--on-navy); text-decoration: none; font: 700 var(--fs-s)/1 var(--display); transition: background-color .15s, border-color .15s; }
+.gh:hover { background: var(--navy-3); border-color: var(--mint); color: var(--on-navy); }
+.gh svg { width: 22px; height: 22px; flex: none; }
+.gh-foot { gap: var(--s2); }
+.gh-foot svg { width: 18px; height: 18px; flex: none; }
 
 footer { margin-top: var(--s9); background: var(--navy); color: var(--on-navy-muted); padding-block: var(--s7); font-size: var(--fs-s); }
 footer a { color: var(--mint); }
@@ -102,6 +108,31 @@ footer p { margin: 0 0 var(--s2); max-width: 90ch; }
 footer nav { display: flex; flex-wrap: wrap; gap: 0 var(--s5); margin-bottom: var(--s4); }
 footer nav a { display: inline-flex; align-items: center; min-height: var(--target); }
 footer .brand { margin-bottom: var(--s3); }
+
+
+/* parti animate comuni a tutte le pagine (home.js e motion.js aggiungono .anim solo se il movimento è consentito) */
+.hero-bg { position: absolute; inset: 0; width: 100%; height: 640px; max-width: none; z-index: 0; pointer-events: none; }
+.hero-bg path { fill: none; stroke: var(--teal); stroke-width: 1.5; opacity: .28; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.hero-bg path:nth-child(2) { stroke: var(--coral); opacity: .24; }
+.hero-bg path:nth-child(3) { stroke: var(--mint); opacity: .16; }
+.anim .hero-bg path { animation: trace 2.6s .2s ease-out both; }
+.anim .hero-bg path:nth-child(2) { animation-delay: .5s; } .anim .hero-bg path:nth-child(3) { animation-delay: .8s; }
+.anim .hero-bg { animation: drift 14s ease-in-out infinite alternate; }
+@keyframes up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes trace { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes drift { from { transform: translateY(0); } to { transform: translateY(18px); } }
+.close { background: linear-gradient(120deg, var(--navy), var(--navy-3)); color: var(--on-navy); border-radius: 22px; padding: clamp(24px, 5vw, 44px); display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; margin-top: 40px; }
+.close h2 { font-size: var(--fs-h2); }
+.close p { color: var(--on-navy-muted); }
+.close .cta { margin-top: 0; }
+/* comparsa allo scorrimento: solo se il movimento è consentito */
+.anim .rv { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.anim .rv.in { opacity: 1; transform: none; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.btn.line svg { width: 20px; height: 20px; }
+.page-in > * { position: relative; z-index: 1; }
+.anim .page-in > :not(.hero-bg) { animation: up .7s cubic-bezier(.2, .7, .2, 1) both; }
+.anim .page-in > :nth-child(3) { animation-delay: .08s; } .anim .page-in > :nth-child(4) { animation-delay: .16s; } .anim .page-in > :nth-child(5) { animation-delay: .24s; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -114,15 +145,20 @@ footer .brand { margin-bottom: var(--s3); }
   .top nav { order: 5; flex: 0 0 100%; margin: 0 calc(-1 * var(--s2)); overflow-x: auto; scrollbar-width: none; border-top: 1px solid var(--navy-line); }
   .top nav a { white-space: nowrap; }
 }
+@media (max-width: 720px) {
+  .gh { padding: 0; width: var(--target); justify-content: center; }
+  .gh span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+}
 @media (max-width: 480px) {
   .top .wrap { column-gap: var(--s2); }
-  .top .btn { padding-inline: var(--s3); }
+  /* sul telefono il pulsante di scarico in barra resta solo icona: il nome rimane per i lettori di schermo */
+  .top .btn { width: var(--target); padding: 0; gap: 0; font-size: 0; }
+  .top .btn svg { width: 20px; height: 20px; }
 }
 @media (max-width: 380px) {
   .top .wrap { gap: 0 var(--s2); padding-block: var(--s1) 0; }
   .top .brand { gap: var(--s1); font-size: 1.2rem; }
   .top .brand img { width: 30px; height: 30px; }
   .top .langs { padding: 2px; }
-  .top .btn { gap: var(--s1); padding-inline: var(--s2); }
 }
 @media print { .top, .skip { display: none; } }

@@ -1,6 +1,5 @@
 /* Pagina «Funzionalità e formati» (mappa). Usa i token di style.css. Senza JavaScript restano visibili gli elenchi. */
 .fhero { position: relative; overflow: hidden; color: var(--on-navy); background: radial-gradient(120% 90% at 85% 10%, var(--navy-3) 0%, var(--navy-2) 38%, var(--navy) 78%); padding-block: var(--s8) var(--s7); }
-.fhero::after { content: ""; position: absolute; right: -8%; bottom: -70px; width: 70%; height: 170px; transform: skewY(-6deg); pointer-events: none; background: linear-gradient(100deg, transparent, rgba(24, 185, 172, .22) 45%, rgba(241, 138, 114, .14)); }
 .fhero .wrap { position: relative; z-index: 1; }
 .fhero h1 { font-size: clamp(2.25rem, 4.6vw + .6rem, 4rem); line-height: 1.04; letter-spacing: -.02em; max-width: 16ch; }
 .fhero p { margin-top: var(--s4); max-width: 62ch; color: var(--on-navy-muted); font-size: var(--fs-l); }
@@ -10,6 +9,7 @@
 .fhero .ctr span { font-size: var(--fs-s); color: var(--on-navy-muted); }
 
 .fmain { padding-top: var(--s7); }
+.fmain > .close { margin-top: var(--s7); }
 .flayout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--s5); align-items: start; }
 .fpanel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-pan); }
 .fmap { padding: var(--s5) var(--s5) var(--s3); }

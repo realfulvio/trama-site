@@ -1,5 +1,5 @@
 /* Pagine interne semplici (Novità): testata e linea del tempo. Usa i token di style.css. */
-.phead { background: radial-gradient(120% 120% at 85% 0%, var(--navy-3), var(--navy) 62%); color: var(--on-navy); }
+.phead { position: relative; overflow: hidden; background: radial-gradient(120% 120% at 85% 0%, var(--navy-3), var(--navy) 62%); color: var(--on-navy); }
 .phead .wrap { padding-block: clamp(32px, 5vw, 56px); display: grid; gap: var(--s3); }
 .phead h1 { font-size: clamp(2rem, 3.4vw + .8rem, 3.2rem); line-height: 1.05; letter-spacing: -0.02em; }
 .phead p { color: var(--on-navy-muted); font-size: var(--fs-l); max-width: 58ch; }
@@ -16,3 +16,13 @@
 .tag { font: 700 .78rem var(--font); letter-spacing: 0; border-radius: 999px; padding: 3px 10px; background: var(--coral-tint); color: var(--coral-ink); }
 .tl-end { color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .rel.latest::before { animation: none; } }
+/* indice delle versioni e chiamata finale */
+.vers { display: flex; flex-wrap: wrap; gap: 8px; margin: var(--s2) 0 0; padding: 0; list-style: none; }
+.vers a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--navy-line); color: var(--on-navy); text-decoration: none; font: 600 var(--fs-s)/1 var(--display); font-variant-numeric: tabular-nums; transition: background-color .15s, border-color .15s; }
+.vers a:hover { background: var(--navy-3); border-color: var(--mint); color: var(--on-navy); }
+.vers li:first-child a { background: var(--teal); border-color: var(--teal); color: var(--navy); }
+.phead .cta { margin-top: var(--s3); }
+.rel.latest { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-pan); padding: var(--s5) var(--s5) var(--s5) 28px; margin-bottom: var(--s6); box-shadow: 0 20px 40px -30px rgba(8, 35, 47, .45); }
+.rel.latest::before { top: calc(var(--s5) + 8px); }
+.page-body > .close { margin-top: var(--s6); }
+@media (prefers-reduced-motion: reduce) { .vers a { transition: none; } }

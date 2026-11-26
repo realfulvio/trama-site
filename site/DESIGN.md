@@ -91,3 +91,11 @@ Con riduzione del movimento la curva è già completa e i pulsanti non si muovon
 - [ ] Ombra solo sulle finestre del programma; raggi dai token.
 - [ ] Pulsanti e collegamenti interattivi ≥ 44 px; nessuno scorrimento orizzontale a 390 px.
 - [ ] Le immagini sono catture reali con dati sintetici e provenienza in `media/workflows-112/PROVENANCE.md`.
+
+## Schermate
+
+Le schermate del programma si mostrano sempre intere e con le proporzioni originali (1320 × 810): niente `object-fit: cover`, niente ingrandimenti o ritagli dentro la cornice. Nella home sono larghe quanto la colonna della pagina e un clic le apre a grandezza piena nel visore (`home.js`).
+
+## Logo GitHub
+
+Il marchio GitHub in barra (`.gh`) e nel piede (`.gh-foot`) porta a https://github.com/realfulvio/Trama ed è presente in tutte le pagine; `tools/novita.py` lo genera per le pagine Novità.
