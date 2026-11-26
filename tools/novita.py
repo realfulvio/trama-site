@@ -12,6 +12,8 @@ import re
 import sys
 from pathlib import Path
 
+CURVES = '<svg class="hero-bg" viewBox="0 0 1440 640" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M-20 560C420 560 520 150 1460 110"/><path pathLength="1" d="M-20 600C560 600 700 260 1460 220"/><path pathLength="1" d="M-20 500C300 500 420 60 1460 40"/></svg>'
+DOWNLOAD_MARK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>'
 GITHUB_MARK = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>'
 SITE = Path(__file__).resolve().parent.parent
 FIRST = (0, 104, 0)
@@ -27,6 +29,7 @@ TEXT = {
         "latest": "Ultima versione", "notes": "Note di rilascio e download", "all": "Tutte le versioni su GitHub",
         "older": "Le versioni precedenti alla 0.104 sono nell’archivio su GitHub.",
         "download": "Scarica",
+        "dl_long": "Scarica la {v}", "jump": "Vai a una versione", "close_h": "Provala sui tuoi dati", "close_p": "Gratuita, portabile, in italiano e in inglese. Estrai lo ZIP e apri Trama.exe.", "dl_win": "Scarica per Windows x64", "code": "Codice su GitHub",
     },
     "en": {
         "path": "en/whats-new/index.html", "url": "https://tramastat.org/en/whats-new/", "alt": "https://tramastat.org/novita/",
@@ -37,6 +40,7 @@ TEXT = {
         "latest": "Latest version", "notes": "Release notes and download", "all": "All versions on GitHub",
         "older": "Versions before 0.104 are in the GitHub archive.",
         "download": "Download",
+        "dl_long": "Download {v}", "jump": "Jump to a version", "close_h": "Try it on your own data", "close_p": "Free, portable, in Italian and English. Extract the ZIP and open Trama.exe.", "dl_win": "Download for Windows x64", "code": "Code on GitHub",
     },
 }
 
@@ -107,10 +111,11 @@ def page(code, rels):
         badge = f' <span class="tag">{t["latest"]}</span>' if i == 0 else ""
         lis = "".join(f"<li>{inline(x)}</li>" for x in lang[code])
         arts.append(
-            f'<article class="rel{" latest" if i == 0 else ""}" id="v{v.replace(".", "-")}">'
+            f'<article class="rel rv{" latest" if i == 0 else ""}" id="v{v.replace(".", "-")}">'
             f'<h2>Trama {v} beta{badge}</h2><ul>{lis}</ul>'
             f'<a href="https://github.com/realfulvio/Trama/releases/tag/v{v}">{t["notes"]}</a></article>'
         )
+    vers = "".join(f'<li><a href="#v{".".join(map(str, ver)).replace(".", "-")}">{".".join(map(str, ver))}</a></li>' for ver, lang in rels if lang[code])
     langs = (
         f'<span class="on" aria-current="true" lang="it" title="Italiano">IT</span><a href="{other}" hreflang="en" lang="en" title="English" aria-label="English">EN</a>'
         if code == "it" else
@@ -150,13 +155,17 @@ def page(code, rels):
 <a class="gh" href="https://github.com/realfulvio/Trama" aria-label="{gh_label}" title="{gh_label}">{GITHUB_MARK}<span>GitHub</span></a>
 <a class="btn" data-release-download href="{zip_url}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>{t["download"]}</a></div></header>
 <main id="contenuto">
-<div class="phead"><div class="wrap"><h1>{t["h1"]}</h1><p>{t["lead"]}</p></div></div>
+<div class="phead">{CURVES}<div class="wrap page-in"><h1>{t["h1"]}</h1><p>{t["lead"]}</p>
+<div class="cta"><a class="btn" data-release-download href="{zip_url}">{DOWNLOAD_MARK}{t["dl_long"].format(v=latest)}</a><a class="btn line" href="https://github.com/realfulvio/Trama">{GITHUB_MARK}{t["code"]}</a></div>
+<ul class="vers" aria-label="{t["jump"]}">{vers}</ul></div></div>
 <div class="wrap page-body"><div class="tl">
 {chr(10).join(arts)}
 </div>
-<p class="tl-end">{t["older"]} <a href="https://github.com/realfulvio/Trama/releases">{t["all"]}</a></p></div>
+<p class="tl-end">{t["older"]} <a href="https://github.com/realfulvio/Trama/releases">{t["all"]}</a></p>
+<div class="close rv"><div><h2>{t["close_h"]}</h2><p>{t["close_p"]}</p></div><div class="cta"><a class="btn" data-release-download href="{zip_url}">{DOWNLOAD_MARK}{t["dl_win"]}</a><a class="btn line" href="https://github.com/realfulvio/Trama">{GITHUB_MARK}{t["code"]}</a></div></div></div>
 </main>
 <footer><div class="wrap"><div class="brand"><img src="{up}site/trama.svg" alt="" width="34" height="34">Trama</div><nav aria-label="{t["nav"]}"><a href="{home}">{names[0]}</a><a href="{feats}">{names[1]}</a><a href="./">{names[2]}</a><a class="gh-foot" href="https://github.com/realfulvio/Trama">{GITHUB_MARK}GitHub</a><a href="https://github.com/realfulvio/Trama/blob/main/LICENSE">{"Licenza MIT" if code == "it" else "MIT licence"}</a></nav></div></footer>
+<script src="{up}site/motion.js" defer></script>
 <script src="{up}site/releases.js" defer></script>
 </body>
 </html>
