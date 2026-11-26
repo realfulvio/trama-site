@@ -2,8 +2,8 @@
   Home di Trama: movimento facoltativo. Senza questo file la pagina è completa e ferma.
   - testata: due curve dose-risposta a quattro parametri che convergono sui punti. Le forme
     intermedie sono le iterazioni reali di un Levenberg-Marquardt su questi dati sintetici;
-  - "Guarda come si lavora": quattro schermate intere in dissolvenza, con pausa; un clic le apre
-    a grandezza piena in un visore;
+  - testata: il programma al lavoro, quattro schermate intere in dissolvenza, con pausa; un clic
+    le apre a grandezza piena in un visore. Più sotto una seconda finestra, a schede;
   - comparsa allo scorrimento e numeri che contano.
   Con "riduci movimento" del sistema mostra subito lo stato finale.
 */
@@ -57,16 +57,22 @@
     };
     $("#fit-replay").hidden = false;
     $("#fit-replay").addEventListener("click", play);
-    play();
+    // parte quando il grafico entra nello schermo, così chi scorre lo vede dall'inizio
+    if (!reduce && "IntersectionObserver" in window) {
+      const once = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { once.disconnect(); play(); } }, { threshold: .4 });
+      once.observe(svg);
+    } else play();
   }
 
-  /* ---- dimostrazione in quattro passi ---- */
-  const stage = $("#stage");
-  let pauseDemo = () => {};
-  if (stage) {
-    const shots = $$("#stage .shot"), btns = $$("#steps button"), toggle = $("#demo-toggle"), count = $("#demo-count");
-    const HOLD = 6000;
-    let cur = 0, playing = !reduce, timer;
+  /* ---- finestre con le schermate: la prima scorre da sola, le altre a mano ---- */
+  const stoppers = [];
+  const pauseDemo = () => stoppers.forEach(f => f());
+  $$(".demo").forEach(demo => {
+    const q = sel => [...demo.querySelectorAll(sel)];
+    const stage = demo.querySelector(".stage"), shots = q(".shot"), btns = q(".steps button");
+    const toggle = demo.querySelector(".demo-toggle"), count = demo.querySelector(".demo-count");
+    const auto = demo.hasAttribute("data-auto"), HOLD = 6000;
+    let cur = 0, playing = auto && !reduce, timer;
     const go = i => {
       cur = (i + shots.length) % shots.length;
       shots.forEach((a, j) => { a.classList.toggle("on", j === cur); a.tabIndex = j === cur ? 0 : -1; });
@@ -79,25 +85,27 @@
       if (playing) timer = setTimeout(() => go(cur + 1), HOLD);
     };
     const setPlaying = on => { playing = on; toggle.textContent = playing ? T.pause : T.play; go(cur); };
-    pauseDemo = () => { if (playing) setPlaying(false); };
+    stoppers.push(() => { if (playing) setPlaying(false); });
     // scegliere un passo a mano ferma la sequenza: chi guarda decide il ritmo
     btns.forEach((b, j) => b.addEventListener("click", () => { playing = false; toggle.textContent = T.play; go(j); }));
-    toggle.hidden = false;
-    toggle.textContent = playing ? T.pause : T.play;
-    toggle.addEventListener("click", () => setPlaying(!playing));
-    // la sequenza parte quando la finestra è visibile e si ferma quando esce dallo schermo
-    if ("IntersectionObserver" in window && playing) {
+    if (auto) {
+      toggle.hidden = false;
+      toggle.textContent = playing ? T.pause : T.play;
+      toggle.addEventListener("click", () => setPlaying(!playing));
+    }
+    go(0); clearTimeout(timer);
+    // la sequenza scorre solo mentre la finestra è sullo schermo
+    if (playing && "IntersectionObserver" in window) {
       let seen = false;
-      go(0); clearTimeout(timer);
       new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting && !seen) { seen = true; go(cur); }
+        if (e.isIntersecting && !seen) { seen = true; if (playing) go(cur); }
         else if (!e.isIntersecting && seen) { clearTimeout(timer); seen = false; }
       }), { threshold: .35 }).observe(stage);
-    } else go(0);
-  }
+    } else if (playing) go(0);
+  });
 
   /* ---- visore: un clic su una schermata la apre a grandezza piena ---- */
-  const zooms = $$("#stage .shot, .more .thumb");
+  const zooms = $$(".stage .shot");
   if (zooms.length && "HTMLDialogElement" in window) {
     const dlg = document.createElement("dialog");
     dlg.className = "lb";
