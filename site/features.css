@@ -107,3 +107,9 @@
   .seg button { padding-inline: var(--s2); }
 }
 @media (prefers-reduced-motion: reduce) { .cell { animation: none; transition: none; } .links path { transition: none; } }
+/* ricerca nella mappa */
+.fsearch { order: 3; flex: 1 1 100%; display: flex; }
+.fsearch input { width: 100%; min-height: var(--target); border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); padding: 0 var(--s4); font: inherit; font-size: var(--fs-s); }
+.fsearch input:focus-visible { outline: 3px solid var(--teal); outline-offset: 1px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.cell.miss { opacity: .12; }

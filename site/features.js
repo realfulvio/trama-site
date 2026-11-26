@@ -45,6 +45,26 @@
     const f = fam(row.dataset.f);
     card.innerHTML = `<span class="k">${esc(S.family)}</span><h3>${esc(f.title)}</h3><p>${esc(S.count.replace("{ok}", f.items.filter(i => i.s === "ok").length).replace("{plan}", f.items.filter(i => i.s === "plan").length))}</p><ul>${f.items.map(i => `<li${i.s === "plan" ? ' class="plan"' : ""}>${esc(i.t)}${i.s === "plan" ? " (" + esc(S.plan.toLowerCase()) + ")" : ""}</li>`).join("")}</ul>`;
   });
+  // ricerca: accende solo i quadrati che contengono le parole cercate (senza badare ad accenti e maiuscole)
+  const fq = document.getElementById("fq");
+  if (fq) {
+    const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    fq.hidden = false;
+    fq.addEventListener("input", () => {
+      const q = fq.value.trim(), words = norm(q).split(/\s+/).filter(Boolean), hits = [];
+      rows.querySelectorAll(".cell").forEach(c => {
+        const f = fam(c.dataset.f), it = f.items[c.dataset.i], on = words.every(w => norm(it.t + " " + f.title).includes(w));
+        c.classList.toggle("miss", words.length > 0 && !on);
+        if (words.length && on) hits.push({ f, it });
+      });
+      map.classList.toggle("searching", words.length > 0);
+      if (!words.length) return intro();
+      clearCur();
+      card.innerHTML = hits.length
+        ? `<span class="k">${esc(S.searchK)}</span><h3>${esc(S.hits.replace("{n}", hits.length).replace("{q}", q))}</h3><ul>${hits.map(h => `<li${h.it.s === "plan" ? ' class="plan"' : ""}>${esc(h.it.t)}${h.it.s === "plan" ? " (" + esc(S.plan.toLowerCase()) + ")" : ""}</li>`).join("")}</ul>`
+        : `<span class="k">${esc(S.searchK)}</span><h3>${esc(S.none.replace("{q}", q))}</h3>`;
+    });
+  }
   document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
     document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
     map.classList.remove("mode-ok", "mode-plan"); if (b.dataset.m !== "all") map.classList.add("mode-" + b.dataset.m);
