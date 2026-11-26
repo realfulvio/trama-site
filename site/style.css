@@ -95,6 +95,12 @@ p { margin: 0; }
 .langs a:hover { color: var(--on-navy); background: var(--navy-3); }
 .langs .on { background: var(--on-navy); color: var(--navy); }
 .top .btn { min-height: var(--target); padding: 0 var(--s4); font-size: var(--fs-s); }
+/* logo GitHub: porta al codice sorgente */
+.gh { display: inline-flex; align-items: center; gap: var(--s2); min-height: var(--target); padding: 0 var(--s3); border: 1px solid var(--navy-line); border-radius: 999px; color: var(--on-navy); text-decoration: none; font: 700 var(--fs-s)/1 var(--display); transition: background-color .15s, border-color .15s; }
+.gh:hover { background: var(--navy-3); border-color: var(--mint); color: var(--on-navy); }
+.gh svg { width: 22px; height: 22px; flex: none; }
+.gh-foot { gap: var(--s2); }
+.gh-foot svg { width: 18px; height: 18px; flex: none; }
 
 footer { margin-top: var(--s9); background: var(--navy); color: var(--on-navy-muted); padding-block: var(--s7); font-size: var(--fs-s); }
 footer a { color: var(--mint); }
@@ -114,15 +120,20 @@ footer .brand { margin-bottom: var(--s3); }
   .top nav { order: 5; flex: 0 0 100%; margin: 0 calc(-1 * var(--s2)); overflow-x: auto; scrollbar-width: none; border-top: 1px solid var(--navy-line); }
   .top nav a { white-space: nowrap; }
 }
+@media (max-width: 720px) {
+  .gh { padding: 0; width: var(--target); justify-content: center; }
+  .gh span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+}
 @media (max-width: 480px) {
   .top .wrap { column-gap: var(--s2); }
-  .top .btn { padding-inline: var(--s3); }
+  /* sul telefono il pulsante di scarico in barra resta solo icona: il nome rimane per i lettori di schermo */
+  .top .btn { width: var(--target); padding: 0; gap: 0; font-size: 0; }
+  .top .btn svg { width: 20px; height: 20px; }
 }
 @media (max-width: 380px) {
   .top .wrap { gap: 0 var(--s2); padding-block: var(--s1) 0; }
   .top .brand { gap: var(--s1); font-size: 1.2rem; }
   .top .brand img { width: 30px; height: 30px; }
   .top .langs { padding: 2px; }
-  .top .btn { gap: var(--s1); padding-inline: var(--s2); }
 }
 @media print { .top, .skip { display: none; } }
