@@ -70,7 +70,6 @@
 .flegend i.plan { background: none; border: 2px dashed var(--coral); }
 
 .ffmt { margin-top: var(--s5); padding: var(--s5); }
-.release-news { scroll-margin-block-start: calc(var(--target) + var(--s6)); }
 .ffmt h2 { font-size: var(--fs-xl); }
 .ffmt > p { color: var(--muted); font-size: var(--fs-s); margin-top: 4px; }
 .flow { position: relative; display: grid; grid-template-columns: 1fr 120px 1fr; align-items: center; margin-top: var(--s4); }
