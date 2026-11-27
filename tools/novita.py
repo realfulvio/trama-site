@@ -166,7 +166,7 @@ def page(code, rels):
 <meta property="og:url" content="{t["url"]}">
 <meta property="og:title" content="{t["title"]}">
 <meta property="og:description" content="{t["desc"]}">
-<meta property="og:image" content="https://tramastat.org/media/workflows-112/workspace-{code}.png">
+<meta property="og:image" content="https://tramastat.org/media/workflows-117/workspace-{code}.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#08232f">
 </head>
